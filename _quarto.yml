@@ -5,7 +5,7 @@ project:
     - .nojekyll
     - R-lecture-01-repl.pdf
     - R-lecture-01-repl.pptx
-    - Untitled/Untitled.001.png
+    - logo.png
   render:
     - index.qmd
     - installation.qmd

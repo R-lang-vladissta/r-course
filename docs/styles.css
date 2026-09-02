@@ -58,10 +58,10 @@ body {
 
 .course-logo {
   display: block;
-  width: 6rem;
-  height: 3.2rem;
-  object-fit: cover;
-  object-position: center;
+  width: 4.75rem;
+  height: 4.75rem;
+  object-fit: contain;
+  border-radius: 0.65rem;
 }
 
 .mini-toc {

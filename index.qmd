@@ -1,7 +1,7 @@
 ::: course-title-row
 # Язык R
 
-![](Untitled/Untitled.001.png){.course-logo fig-alt="Логотип курса «Язык R»"}
+![](logo.png){.course-logo fig-alt="Логотип курса «Язык R»"}
 :::
 
 ## О курсе
