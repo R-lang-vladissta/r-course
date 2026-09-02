@@ -1,0 +1,227 @@
+:root {
+  --r-blue: #276dc3;
+  --r-blue-dark: #174d91;
+  --ink: #15181d;
+  --muted: #5e6670;
+  --line: #dfe5ec;
+  --soft-blue: #eef5fd;
+  --surface: #ffffff;
+}
+
+body {
+  color: var(--ink);
+}
+
+.page-layout-full #title-block-header {
+  display: none;
+}
+
+.navbar {
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar-brand {
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.course-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.5fr);
+  align-items: center;
+  min-height: 500px;
+  gap: 3rem;
+  padding: 5rem max(1.25rem, calc((100vw - 1180px) / 2));
+  margin: -1rem calc(50% - 50vw) 0;
+  background:
+    radial-gradient(circle at 78% 35%, rgba(39, 109, 195, 0.14), transparent 27rem),
+    linear-gradient(135deg, #fff 0%, #f7faff 100%);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-copy h1 {
+  margin: 0 0 1.2rem;
+  font-size: clamp(3.8rem, 9vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.07em;
+}
+
+.hero-copy > p:not(.eyebrow) {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  line-height: 1.5;
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+  color: var(--r-blue);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-mark {
+  display: grid;
+  place-items: center;
+  width: min(24vw, 260px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  color: #fff;
+  background: var(--r-blue);
+  border-radius: 50%;
+  font-size: clamp(6rem, 13vw, 10rem);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.12em;
+  box-shadow: 0 30px 70px rgba(39, 109, 195, 0.22);
+}
+
+.course-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 960px;
+  margin: 2.5rem auto 4.5rem;
+  border-block: 1px solid var(--line);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.6rem;
+  text-align: center;
+}
+
+.fact + .fact {
+  border-left: 1px solid var(--line);
+}
+
+.fact-value {
+  color: var(--r-blue);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.fact-label {
+  margin-top: 0.3rem;
+  color: var(--muted);
+}
+
+.course-pillars {
+  margin-block: 1.5rem 4rem;
+}
+
+.course-pillars > div {
+  padding: 1.4rem 1.5rem;
+  border-top: 3px solid var(--r-blue);
+  background: var(--soft-blue);
+}
+
+.course-pillars h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.lesson-grid {
+  margin-top: 1.5rem;
+}
+
+.lesson-card {
+  height: 100%;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: var(--surface);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.lesson-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(23, 77, 145, 0.10);
+}
+
+.lesson-number {
+  color: var(--r-blue);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.lesson-card h3 {
+  margin: 0.7rem 0;
+}
+
+.lesson-card h3 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.lesson-link {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.next-step {
+  margin: 4rem 0 1rem;
+  padding: 2.5rem;
+  color: #fff;
+  background: var(--r-blue-dark);
+  border-radius: 0.8rem;
+}
+
+.next-step h3 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.next-step .btn {
+  color: var(--r-blue-dark);
+  font-weight: 700;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .course-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-block: 4rem;
+  }
+
+  .hero-mark {
+    display: none;
+  }
+
+  .course-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .fact + .fact {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+}
+
+[data-bs-theme="dark"] {
+  --ink: #f4f6f8;
+  --muted: #b9c1ca;
+  --line: #37404a;
+  --soft-blue: #172b43;
+  --surface: #20262d;
+}
+
+[data-bs-theme="dark"] .course-hero {
+  background:
+    radial-gradient(circle at 78% 35%, rgba(80, 151, 237, 0.22), transparent 27rem),
+    linear-gradient(135deg, #171b20 0%, #111820 100%);
+}

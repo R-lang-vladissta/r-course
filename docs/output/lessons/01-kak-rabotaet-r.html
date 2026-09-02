@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="R, RStudio, консоль, скрипт, рабочая сессия и проект">
+
+<title>Занятие 1. Как работает R – Язык R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../presentation/assets/quarto-logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Занятие 1. Как работает R – Язык R">
+<meta property="og:description" content="R, RStudio, консоль, скрипт, рабочая сессия и проект">
+<meta property="og:site_name" content="Язык R">
+<meta name="twitter:title" content="Занятие 1. Как работает R – Язык R">
+<meta name="twitter:description" content="R, RStudio, консоль, скрипт, рабочая сессия и проект">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Язык R</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Главная</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../program.html"> 
+<span class="menu-text">Программа</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../materials.html"> 
+<span class="menu-text">Материалы</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/R-lang-vladissta/r-course"> <i class="bi bi-github" role="img" aria-label="Репозиторий курса">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">На этой странице</h2>
+   
+  <ul>
+  <li><a href="#паспорт-занятия" id="toc-паспорт-занятия" class="nav-link active" data-scroll-target="#паспорт-занятия">Паспорт занятия</a></li>
+  <li><a href="#результаты-обучения" id="toc-результаты-обучения" class="nav-link" data-scroll-target="#результаты-обучения">Результаты обучения</a></li>
+  <li><a href="#подготовка-преподавателя" id="toc-подготовка-преподавателя" class="nav-link" data-scroll-target="#подготовка-преподавателя">Подготовка преподавателя</a></li>
+  <li><a href="#лекция-90-минут" id="toc-лекция-90-минут" class="nav-link" data-scroll-target="#лекция-90-минут">Лекция: 90 минут</a>
+  <ul class="collapse">
+  <li><a href="#минут.-вход-в-курс" id="toc-минут.-вход-в-курс" class="nav-link" data-scroll-target="#минут.-вход-в-курс">0–7 минут. Вход в курс</a>
+  <ul class="collapse">
+  <li><a href="#текст-преподавателя" id="toc-текст-преподавателя" class="nav-link" data-scroll-target="#текст-преподавателя">Текст преподавателя</a></li>
+  <li><a href="#вопрос-аудитории" id="toc-вопрос-аудитории" class="nav-link" data-scroll-target="#вопрос-аудитории">Вопрос аудитории</a></li>
+  </ul></li>
+  <li><a href="#минут.-что-такое-r" id="toc-минут.-что-такое-r" class="nav-link" data-scroll-target="#минут.-что-такое-r">7–18 минут. Что такое R</a>
+  <ul class="collapse">
+  <li><a href="#текст-преподавателя-1" id="toc-текст-преподавателя-1" class="nav-link" data-scroll-target="#текст-преподавателя-1">Текст преподавателя</a></li>
+  <li><a href="#быстрая-проверка-понимания" id="toc-быстрая-проверка-понимания" class="nav-link" data-scroll-target="#быстрая-проверка-понимания">Быстрая проверка понимания</a></li>
+  </ul></li>
+  <li><a href="#минут.-консоль-скрипт-и-ide" id="toc-минут.-консоль-скрипт-и-ide" class="nav-link" data-scroll-target="#минут.-консоль-скрипт-и-ide">18–30 минут. Консоль, скрипт и IDE</a>
+  <ul class="collapse">
+  <li><a href="#демонстрация" id="toc-демонстрация" class="nav-link" data-scroll-target="#демонстрация">Демонстрация</a></li>
+  <li><a href="#текст-преподавателя-2" id="toc-текст-преподавателя-2" class="nav-link" data-scroll-target="#текст-преподавателя-2">Текст преподавателя</a></li>
+  <li><a href="#первая-демонстрация-кода" id="toc-первая-демонстрация-кода" class="nav-link" data-scroll-target="#первая-демонстрация-кода">Первая демонстрация кода</a></li>
+  <li><a href="#акцент" id="toc-акцент" class="nav-link" data-scroll-target="#акцент">Акцент</a></li>
+  </ul></li>
+  <li><a href="#минуты.-первый-анализ-как-последовательность-действий" id="toc-минуты.-первый-анализ-как-последовательность-действий" class="nav-link" data-scroll-target="#минуты.-первый-анализ-как-последовательность-действий">30–42 минуты. Первый анализ как последовательность действий</a>
+  <ul class="collapse">
+  <li><a href="#текст-преподавателя-3" id="toc-текст-преподавателя-3" class="nav-link" data-scroll-target="#текст-преподавателя-3">Текст преподавателя</a></li>
+  <li><a href="#пояснение" id="toc-пояснение" class="nav-link" data-scroll-target="#пояснение">Пояснение</a></li>
+  </ul></li>
+  <li><a href="#минуты.-небольшая-активность-предскажите-результат" id="toc-минуты.-небольшая-активность-предскажите-результат" class="nav-link" data-scroll-target="#минуты.-небольшая-активность-предскажите-результат">42–52 минуты. Небольшая активность: предскажите результат</a>
+  <ul class="collapse">
+  <li><a href="#текст-преподавателя-4" id="toc-текст-преподавателя-4" class="nav-link" data-scroll-target="#текст-преподавателя-4">Текст преподавателя</a></li>
+  </ul></li>
+  <li><a href="#минут.-сессия-и-проект" id="toc-минут.-сессия-и-проект" class="nav-link" data-scroll-target="#минут.-сессия-и-проект">52–65 минут. Сессия и проект</a>
+  <ul class="collapse">
+  <li><a href="#текст-преподавателя-5" id="toc-текст-преподавателя-5" class="nav-link" data-scroll-target="#текст-преподавателя-5">Текст преподавателя</a></li>
+  <li><a href="#правила-проекта" id="toc-правила-проекта" class="nav-link" data-scroll-target="#правила-проекта">Правила проекта</a></li>
+  <li><a href="#демонстрация-перезапуска" id="toc-демонстрация-перезапуска" class="nav-link" data-scroll-target="#демонстрация-перезапуска">Демонстрация перезапуска</a></li>
+  <li><a href="#формулировка-для-студентов" id="toc-формулировка-для-студентов" class="nav-link" data-scroll-target="#формулировка-для-студентов">Формулировка для студентов</a></li>
+  </ul></li>
+  <li><a href="#минут.-функции-и-пакеты-предварительное-знакомство" id="toc-минут.-функции-и-пакеты-предварительное-знакомство" class="nav-link" data-scroll-target="#минут.-функции-и-пакеты-предварительное-знакомство">65–76 минут. Функции и пакеты: предварительное знакомство</a>
+  <ul class="collapse">
+  <li><a href="#текст-преподавателя-6" id="toc-текст-преподавателя-6" class="nav-link" data-scroll-target="#текст-преподавателя-6">Текст преподавателя</a></li>
+  </ul></li>
+  <li><a href="#минуты.-справка-как-часть-языка" id="toc-минуты.-справка-как-часть-языка" class="nav-link" data-scroll-target="#минуты.-справка-как-часть-языка">76–84 минуты. Справка как часть языка</a>
+  <ul class="collapse">
+  <li><a href="#демонстрация-1" id="toc-демонстрация-1" class="nav-link" data-scroll-target="#демонстрация-1">Демонстрация</a></li>
+  <li><a href="#текст-преподавателя-7" id="toc-текст-преподавателя-7" class="nav-link" data-scroll-target="#текст-преподавателя-7">Текст преподавателя</a></li>
+  </ul></li>
+  <li><a href="#минут.-итог-и-exit-ticket" id="toc-минут.-итог-и-exit-ticket" class="nav-link" data-scroll-target="#минут.-итог-и-exit-ticket">84–90 минут. Итог и exit ticket</a>
+  <ul class="collapse">
+  <li><a href="#итоговая-формулировка" id="toc-итоговая-формулировка" class="nav-link" data-scroll-target="#итоговая-формулировка">Итоговая формулировка</a></li>
+  <li><a href="#exit-ticket" id="toc-exit-ticket" class="nav-link" data-scroll-target="#exit-ticket">Exit ticket</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#практика-90-минут" id="toc-практика-90-минут" class="nav-link" data-scroll-target="#практика-90-минут">Практика: 90 минут</a>
+  <ul class="collapse">
+  <li><a href="#цель-практики" id="toc-цель-практики" class="nav-link" data-scroll-target="#цель-практики">Цель практики</a></li>
+  <li><a href="#организация" id="toc-организация" class="nav-link" data-scroll-target="#организация">Организация</a></li>
+  <li><a href="#минут.-разминка" id="toc-минут.-разминка" class="nav-link" data-scroll-target="#минут.-разминка">0–10 минут. Разминка</a></li>
+  <li><a href="#минут.-создание-проекта" id="toc-минут.-создание-проекта" class="nav-link" data-scroll-target="#минут.-создание-проекта">10–25 минут. Создание проекта</a>
+  <ul class="collapse">
+  <li><a href="#задание" id="toc-задание" class="nav-link" data-scroll-target="#задание">Задание</a></li>
+  <li><a href="#контрольная-точка" id="toc-контрольная-точка" class="nav-link" data-scroll-target="#контрольная-точка">Контрольная точка</a></li>
+  </ul></li>
+  <li><a href="#минут.-первый-воспроизводимый-скрипт" id="toc-минут.-первый-воспроизводимый-скрипт" class="nav-link" data-scroll-target="#минут.-первый-воспроизводимый-скрипт">25–50 минут. Первый воспроизводимый скрипт</a>
+  <ul class="collapse">
+  <li><a href="#задания" id="toc-задания" class="nav-link" data-scroll-target="#задания">Задания</a></li>
+  <li><a href="#ожидаемые-исходные-результаты" id="toc-ожидаемые-исходные-результаты" class="nav-link" data-scroll-target="#ожидаемые-исходные-результаты">Ожидаемые исходные результаты</a></li>
+  </ul></li>
+  <li><a href="#минут.-проверка-воспроизводимости" id="toc-минут.-проверка-воспроизводимости" class="nav-link" data-scroll-target="#минут.-проверка-воспроизводимости">50–65 минут. Проверка воспроизводимости</a>
+  <ul class="collapse">
+  <li><a href="#задание-1" id="toc-задание-1" class="nav-link" data-scroll-target="#задание-1">Задание</a></li>
+  <li><a href="#критерий-выполнения" id="toc-критерий-выполнения" class="nav-link" data-scroll-target="#критерий-выполнения">Критерий выполнения</a></li>
+  </ul></li>
+  <li><a href="#минут.-работа-со-справкой" id="toc-минут.-работа-со-справкой" class="nav-link" data-scroll-target="#минут.-работа-со-справкой">65–75 минут. Работа со справкой</a>
+  <ul class="collapse">
+  <li><a href="#задание-2" id="toc-задание-2" class="nav-link" data-scroll-target="#задание-2">Задание</a></li>
+  <li><a href="#вопросы" id="toc-вопросы" class="nav-link" data-scroll-target="#вопросы">Вопросы</a></li>
+  </ul></li>
+  <li><a href="#минут.-дополнительные-задания" id="toc-минут.-дополнительные-задания" class="nav-link" data-scroll-target="#минут.-дополнительные-задания">75–85 минут. Дополнительные задания</a>
+  <ul class="collapse">
+  <li><a href="#уровень-a" id="toc-уровень-a" class="nav-link" data-scroll-target="#уровень-a">Уровень A</a></li>
+  <li><a href="#уровень-b" id="toc-уровень-b" class="nav-link" data-scroll-target="#уровень-b">Уровень B</a></li>
+  <li><a href="#уровень-c" id="toc-уровень-c" class="nav-link" data-scroll-target="#уровень-c">Уровень C</a></li>
+  </ul></li>
+  <li><a href="#минут.-взаимная-проверка" id="toc-минут.-взаимная-проверка" class="nav-link" data-scroll-target="#минут.-взаимная-проверка">85–90 минут. Взаимная проверка</a></li>
+  </ul></li>
+  <li><a href="#решения-и-подсказки-для-преподавателя" id="toc-решения-и-подсказки-для-преподавателя" class="nav-link" data-scroll-target="#решения-и-подсказки-для-преподавателя">Решения и подсказки для преподавателя</a>
+  <ul class="collapse">
+  <li><a href="#типичные-затруднения" id="toc-типичные-затруднения" class="nav-link" data-scroll-target="#типичные-затруднения">Типичные затруднения</a>
+  <ul class="collapse">
+  <li><a href="#в-консоли-появляется-знак-плюс" id="toc-в-консоли-появляется-знак-плюс" class="nav-link" data-scroll-target="#в-консоли-появляется-знак-плюс">В консоли появляется знак плюс</a></li>
+  <li><a href="#объект-не-найден-после-перезапуска" id="toc-объект-не-найден-после-перезапуска" class="nav-link" data-scroll-target="#объект-не-найден-после-перезапуска">Объект не найден после перезапуска</a></li>
+  <li><a href="#график-не-изменился" id="toc-график-не-изменился" class="nav-link" data-scroll-target="#график-не-изменился">График не изменился</a></li>
+  <li><a href="#скрипт-работает-только-снизу-вверх-или-после-ручных-действий" id="toc-скрипт-работает-только-снизу-вверх-или-после-ручных-действий" class="nav-link" data-scroll-target="#скрипт-работает-только-снизу-вверх-или-после-ручных-действий">Скрипт работает только снизу вверх или после ручных действий</a></li>
+  <li><a href="#студент-хочет-сохранить-workspace" id="toc-студент-хочет-сохранить-workspace" class="nav-link" data-scroll-target="#студент-хочет-сохранить-workspace">Студент хочет сохранить Workspace</a></li>
+  </ul></li>
+  <li><a href="#минимальный-итог-занятия" id="toc-минимальный-итог-занятия" class="nav-link" data-scroll-target="#минимальный-итог-занятия">Минимальный итог занятия</a></li>
+  <li><a href="#домашнее-задание" id="toc-домашнее-задание" class="nav-link" data-scroll-target="#домашнее-задание">Домашнее задание</a></li>
+  <li><a href="#источники-для-подготовки" id="toc-источники-для-подготовки" class="nav-link" data-scroll-target="#источники-для-подготовки">Источники для подготовки</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Занятие 1. Как работает R</h1>
+</div>
+
+<div>
+  <div class="description">
+    R, RStudio, консоль, скрипт, рабочая сессия и проект
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="паспорт-занятия" class="level2">
+<h2 class="anchored" data-anchor-id="паспорт-занятия">Паспорт занятия</h2>
+<ul>
+<li>Формат: лекция 90 минут + практика 90 минут.</li>
+<li>Уровень: студенты без опыта программирования.</li>
+<li>Место в курсе: первое занятие.</li>
+<li>Главная идея: R — одновременно язык, программа и экосистема; надёжная работа ведётся в проекте и сохраняется в скрипте.</li>
+<li>Презентация: <a href="../presentations/intro-to-r-ru.pptx">intro-to-r-ru.pptx</a>.</li>
+</ul>
+</section>
+<section id="результаты-обучения" class="level2">
+<h2 class="anchored" data-anchor-id="результаты-обучения">Результаты обучения</h2>
+<p>После занятия студент сможет:</p>
+<ol type="1">
+<li>объяснить различие между R, IDE и пакетом;</li>
+<li>различить консоль, скрипт, рабочую сессию и проект;</li>
+<li>создать проект и R-скрипт;</li>
+<li>выполнить команды из консоли и из скрипта;</li>
+<li>сохранить ход анализа в коде и повторно выполнить его после перезапуска R;</li>
+<li>открыть справку по функции и найти в ней пример использования.</li>
+</ol>
+<p>На первом занятии не требуется запоминать синтаксис всех команд. Примеры кода используются как управляемое знакомство. Подробно выражения, присваивание и функции разбираются на занятии 2.</p>
+</section>
+<section id="подготовка-преподавателя" class="level2">
+<h2 class="anchored" data-anchor-id="подготовка-преподавателя">Подготовка преподавателя</h2>
+<p>До занятия желательно проверить:</p>
+<ul>
+<li>R и RStudio установлены на компьютерах;</li>
+<li>R запускается и показывает приглашение командной строки;</li>
+<li>студенты могут создавать файлы в выбранной папке;</li>
+<li>презентация открывается;</li>
+<li>доступен встроенный набор данных iris;</li>
+<li>для практики подготовлена пустая папка, в которой студент может создать проект.</li>
+</ul>
+<p>Если используется другая IDE, термин «RStudio» в тексте можно заменить на название этой среды. Содержательно важны консоль, редактор скрипта, файловая панель и панель графиков.</p>
+<hr>
+</section>
+<section id="лекция-90-минут" class="level1">
+<h1>Лекция: 90 минут</h1>
+<section id="минут.-вход-в-курс" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-вход-в-курс">0–7 минут. Вход в курс</h2>
+<section id="текст-преподавателя" class="level3">
+<h3 class="anchored" data-anchor-id="текст-преподавателя">Текст преподавателя</h3>
+<p>«Сегодня мы начинаем изучать R. На первом занятии наша задача не выучить набор команд. Сначала нужно понять, что именно происходит, когда мы работаем в R, где находится наш код, где находятся данные и почему результат анализа можно либо воспроизвести через месяц, либо потерять через пять минут.</p>
+<p>Представьте, что вы получили таблицу, посчитали среднее, исключили несколько наблюдений, построили график и получили вывод. Через месяц вас спрашивают: какие именно строки были исключены и почему среднее получилось таким? Если действия выполнялись мышкой в разных окнах, восстановить точный путь бывает трудно. Если действия записаны как код, анализ превращается в последовательность инструкций, которую можно проверить и повторить.</p>
+<p>Поэтому главный результат сегодняшнего занятия — не красивый график. Главный результат — проект, который можно закрыть, открыть снова и получить тот же ответ».</p>
+</section>
+<section id="вопрос-аудитории" class="level3">
+<h3 class="anchored" data-anchor-id="вопрос-аудитории">Вопрос аудитории</h3>
+<p>Попросите студентов за одну минуту обсудить в парах:</p>
+<blockquote class="blockquote">
+<p>Что должно сохраниться после анализа, чтобы другой человек смог его повторить?</p>
+</blockquote>
+<p>Соберите ответы на доске. Обычно появляются данные, формулы, настройки, программа, версия файла, графики. Подведите к четырём компонентам:</p>
+<ol type="1">
+<li>исходные данные;</li>
+<li>код;</li>
+<li>программная среда и пакеты;</li>
+<li>результаты и пояснения.</li>
+</ol>
+</section>
+</section>
+<section id="минут.-что-такое-r" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-что-такое-r">7–18 минут. Что такое R</h2>
+<section id="текст-преподавателя-1" class="level3">
+<h3 class="anchored" data-anchor-id="текст-преподавателя-1">Текст преподавателя</h3>
+<p>«Слово R используется сразу в нескольких смыслах.</p>
+<p>Во-первых, R — это язык. У языка есть правила записи выражений, имена, функции, условия, циклы и структуры данных. Мы будем изучать эти правила примерно так же, как изучают грамматику естественного языка.</p>
+<p>Во-вторых, R — это программа, которая читает написанные нами выражения, вычисляет их и возвращает результат.</p>
+<p>В-третьих, R — это экосистема. В неё входят дополнительные пакеты, документация, учебные материалы и сообщество пользователей.</p>
+<p>RStudio — не сам язык R. Это рабочая среда, которая помогает писать и запускать код. Полезная аналогия: R — двигатель, а RStudio — удобная кабина управления. Кабина помогает работать с двигателем, но не заменяет его».</p>
+</section>
+<section id="быстрая-проверка-понимания" class="level3">
+<h3 class="anchored" data-anchor-id="быстрая-проверка-понимания">Быстрая проверка понимания</h3>
+<p>Покажите три утверждения и попросите голосованием определить, верны ли они:</p>
+<ol type="1">
+<li>«Если удалить RStudio, язык R перестанет существовать». Ответ: нет.</li>
+<li>«Один и тот же R-код можно выполнять из разных редакторов». Ответ: да.</li>
+<li>«Пакет расширяет возможности R». Ответ: да.</li>
+</ol>
+</section>
+</section>
+<section id="минут.-консоль-скрипт-и-ide" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-консоль-скрипт-и-ide">18–30 минут. Консоль, скрипт и IDE</h2>
+<section id="демонстрация" class="level3">
+<h3 class="anchored" data-anchor-id="демонстрация">Демонстрация</h3>
+<p>Покажите основные области RStudio:</p>
+<ul>
+<li>редактор скрипта;</li>
+<li>консоль;</li>
+<li>Environment;</li>
+<li>Files;</li>
+<li>Plots;</li>
+<li>Help.</li>
+</ul>
+</section>
+<section id="текст-преподавателя-2" class="level3">
+<h3 class="anchored" data-anchor-id="текст-преподавателя-2">Текст преподавателя</h3>
+<p>«Консоль — место непосредственного диалога с R. Мы отправляем выражение и сразу получаем результат. Это удобно для короткой проверки, но история в консоли не является хорошим документом анализа.</p>
+<p>Скрипт — обычный текстовый файл с расширением .R. В нём сохраняются инструкции. Скрипт можно читать сверху вниз, исправлять, пересылать и выполнять повторно.</p>
+<p>Правило курса: исследовать можно в консоли, но всё важное должно попасть в скрипт.</p>
+<p>Панель Environment показывает объекты текущей сессии. Важно понимать, что это временное состояние. Если объект существует только в Environment, но код его создания не записан, работа не воспроизводима».</p>
+</section>
+<section id="первая-демонстрация-кода" class="level3">
+<h3 class="anchored" data-anchor-id="первая-демонстрация-кода">Первая демонстрация кода</h3>
+<p>Введите в консоль:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Затем:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"R работает"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Создайте новый скрипт и поместите туда:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"R работает"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Выполните строки из скрипта.</p>
+</section>
+<section id="акцент" class="level3">
+<h3 class="anchored" data-anchor-id="акцент">Акцент</h3>
+<p>Объясните разницу:</p>
+<ul>
+<li>код находится в скрипте;</li>
+<li>команда выполняется в текущей сессии R;</li>
+<li>результат появляется в консоли;</li>
+<li>график появляется в панели Plots;</li>
+<li>объект после создания появляется в Environment.</li>
+</ul>
+</section>
+</section>
+<section id="минуты.-первый-анализ-как-последовательность-действий" class="level2">
+<h2 class="anchored" data-anchor-id="минуты.-первый-анализ-как-последовательность-действий">30–42 минуты. Первый анализ как последовательность действий</h2>
+<section id="текст-преподавателя-3" class="level3">
+<h3 class="anchored" data-anchor-id="текст-преподавателя-3">Текст преподавателя</h3>
+<p>«Посмотрим на небольшой анализ. Сейчас не нужно запоминать все символы. Нас интересует логика: создать данные, сохранить их под именем, вызвать функцию и построить график».</p>
+<p>Покажите код по одной строке:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>, <span class="dv">84</span>, <span class="dv">91</span>, <span class="dv">67</span>, <span class="dv">88</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mean_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(scores)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mean_score</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(scores, <span class="at">type =</span> <span class="st">"b"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>После каждой строки задавайте вопрос:</p>
+<ul>
+<li>Что появилось в Environment?</li>
+<li>Какая строка создаёт данные?</li>
+<li>Какая строка вычисляет результат?</li>
+<li>Какая строка только показывает уже вычисленный объект?</li>
+<li>Где появился график?</li>
+</ul>
+</section>
+<section id="пояснение" class="level3">
+<h3 class="anchored" data-anchor-id="пояснение">Пояснение</h3>
+<p>«Имя scores позволяет дальше обращаться ко всему набору значений. Имя mean_score хранит результат вычисления. Если заменить одно число в scores и выполнить скрипт заново, зависимые результаты пересчитаются.</p>
+<p>Это важное отличие программы от готовой таблицы с вручную введёнными итогами: код хранит не только ответ, но и способ его получения».</p>
+</section>
+</section>
+<section id="минуты.-небольшая-активность-предскажите-результат" class="level2">
+<h2 class="anchored" data-anchor-id="минуты.-небольшая-активность-предскажите-результат">42–52 минуты. Небольшая активность: предскажите результат</h2>
+<p>Покажите код, но не запускайте:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">21</span>, <span class="dv">20</span>, <span class="dv">24</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>average_temperature <span class="ot">&lt;-</span> <span class="fu">mean</span>(temperature)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>average_temperature</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Попросите студентов записать:</p>
+<ol type="1">
+<li>сколько объектов появится;</li>
+<li>как они будут называться;</li>
+<li>какое значение будет напечатано;</li>
+<li>изменится ли результат, если после вычисления average_temperature изменить temperature.</li>
+</ol>
+<p>После обсуждения покажите:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">21</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>average_temperature</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="текст-преподавателя-4" class="level3">
+<h3 class="anchored" data-anchor-id="текст-преподавателя-4">Текст преподавателя</h3>
+<p>«Объект average_temperature не хранит живую формулу. Он хранит результат, вычисленный в тот момент. Чтобы получить новое среднее, нужно снова выполнить строку:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>average_temperature <span class="ot">&lt;-</span> <span class="fu">mean</span>(temperature)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>R выполняет инструкции, а не угадывает наши намерения».</p>
+</section>
+</section>
+<section id="минут.-сессия-и-проект" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-сессия-и-проект">52–65 минут. Сессия и проект</h2>
+<section id="текст-преподавателя-5" class="level3">
+<h3 class="anchored" data-anchor-id="текст-преподавателя-5">Текст преподавателя</h3>
+<p>«Сессия R — это один запущенный процесс R со своими объектами и подключёнными пакетами. Сессию можно представить как рабочий стол. На нём могут лежать временные объекты, но после перезапуска чистый стол должен восстанавливаться из скриптов.</p>
+<p>Проект — это папка, объединяющая код, данные и результаты одной работы. Проект помогает использовать относительные пути и не смешивать файлы разных исследований.</p>
+<p>Хорошая начальная структура выглядит так:</p>
+<p>course-project/</p>
+<ul>
+<li>course-project.Rproj</li>
+<li>R/</li>
+<li>data/</li>
+<li>output/</li>
+<li>README.md</li>
+</ul>
+<p>На первом занятии мы не будем программно создавать все эти папки. Важно понять принцип: исходные данные хранятся отдельно от кода, а созданные результаты — отдельно от исходных данных».</p>
+</section>
+<section id="правила-проекта" class="level3">
+<h3 class="anchored" data-anchor-id="правила-проекта">Правила проекта</h3>
+<ol type="1">
+<li>Не хранить весь курс в одном бесконечном скрипте.</li>
+<li>Не полагаться на объекты, созданные вчера в консоли.</li>
+<li>Не изменять исходный файл данных вручную во время анализа.</li>
+<li>Строить пути от папки проекта.</li>
+<li>Давать файлам осмысленные имена.</li>
+</ol>
+</section>
+<section id="демонстрация-перезапуска" class="level3">
+<h3 class="anchored" data-anchor-id="демонстрация-перезапуска">Демонстрация перезапуска</h3>
+<ol type="1">
+<li>Сохраните скрипт.</li>
+<li>Перезапустите сессию через меню Session → Restart R.</li>
+<li>Покажите, что Environment стал пустым.</li>
+<li>Выполните весь скрипт сверху вниз.</li>
+<li>Покажите, что объекты и график восстановились.</li>
+</ol>
+</section>
+<section id="формулировка-для-студентов" class="level3">
+<h3 class="anchored" data-anchor-id="формулировка-для-студентов">Формулировка для студентов</h3>
+<p>«Если после перезапуска R ваш проект можно восстановить одним последовательным запуском кода, вы движетесь к воспроизводимому анализу».</p>
+</section>
+</section>
+<section id="минут.-функции-и-пакеты-предварительное-знакомство" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-функции-и-пакеты-предварительное-знакомство">65–76 минут. Функции и пакеты: предварительное знакомство</h2>
+<section id="текст-преподавателя-6" class="level3">
+<h3 class="anchored" data-anchor-id="текст-преподавателя-6">Текст преподавателя</h3>
+<p>«Большая часть работы в R выполняется функциями. Функция получает входные значения, выполняет действия и возвращает результат. Например, mean вычисляет среднее, а plot строит график.</p>
+<p>Базовая установка R содержит много функций. Дополнительные функции распространяются в пакетах. Пакет нужно один раз установить на компьютер, а затем подключать в новой сессии, когда он нужен.</p>
+<p>Мы пока не будем устанавливать пакеты. Важно различать два действия:</p>
+<ul>
+<li>установка изменяет программное окружение компьютера;</li>
+<li>подключение делает функции уже установленного пакета доступными в сессии.</li>
+</ul>
+<p>Код установки обычно не запускают при каждом выполнении анализа».</p>
+<p>Покажите, но не просите выполнять:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Выполняется один раз на компьютере</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"package_name"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Выполняется в сессии, где пакет нужен</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(package_name)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Подчеркните, что package_name здесь условное обозначение, а не предложение установить несуществующий пакет.</p>
+</section>
+</section>
+<section id="минуты.-справка-как-часть-языка" class="level2">
+<h2 class="anchored" data-anchor-id="минуты.-справка-как-часть-языка">76–84 минуты. Справка как часть языка</h2>
+<section id="демонстрация-1" class="level3">
+<h3 class="anchored" data-anchor-id="демонстрация-1">Демонстрация</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>?mean</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">"mean"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">example</span>(<span class="st">"mean"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="текст-преподавателя-7" class="level3">
+<h3 class="anchored" data-anchor-id="текст-преподавателя-7">Текст преподавателя</h3>
+<p>«Профессиональная работа не предполагает запоминания всех функций и аргументов. Важнее уметь читать справку.</p>
+<p>В справке особенно полезны разделы:</p>
+<ul>
+<li>Description — что делает функция;</li>
+<li>Usage — как выглядит вызов;</li>
+<li>Arguments — что означают аргументы;</li>
+<li>Value — что возвращается;</li>
+<li>Examples — примеры.</li>
+</ul>
+<p>Если вы открыли справку и поняли хотя бы Usage, Arguments и Examples, обычно этого достаточно для начала».</p>
+<p>Попросите студентов найти в справке mean аргумент na.rm и предположить, зачем он нужен. Подробное обсуждение пропусков будет позже.</p>
+</section>
+</section>
+<section id="минут.-итог-и-exit-ticket" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-итог-и-exit-ticket">84–90 минут. Итог и exit ticket</h2>
+<section id="итоговая-формулировка" class="level3">
+<h3 class="anchored" data-anchor-id="итоговая-формулировка">Итоговая формулировка</h3>
+<p>«Сегодня важно унести четыре различия:</p>
+<ol type="1">
+<li>R — язык и вычислительная система, IDE — инструмент работы с ним.</li>
+<li>Консоль удобна для диалога, скрипт хранит анализ.</li>
+<li>Environment содержит временное состояние, проект содержит долговременную структуру работы.</li>
+<li>Воспроизводимость означает, что результат можно получить снова из данных и кода».</li>
+</ol>
+</section>
+<section id="exit-ticket" class="level3">
+<h3 class="anchored" data-anchor-id="exit-ticket">Exit ticket</h3>
+<p>Студенты письменно отвечают на три вопроса:</p>
+<ol type="1">
+<li>Чем скрипт отличается от консоли?</li>
+<li>Что должно произойти после перезапуска R и повторного запуска хорошего скрипта?</li>
+<li>Где искать описание аргументов функции?</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="практика-90-минут" class="level1">
+<h1>Практика: 90 минут</h1>
+<section id="цель-практики" class="level2">
+<h2 class="anchored" data-anchor-id="цель-практики">Цель практики</h2>
+<p>Создать первый R-проект, написать скрипт, получить вычисление и график, а затем доказать воспроизводимость работы перезапуском сессии.</p>
+</section>
+<section id="организация" class="level2">
+<h2 class="anchored" data-anchor-id="организация">Организация</h2>
+<p>Студенты работают индивидуально. На последних 15 минутах они сравнивают проекты в парах.</p>
+</section>
+<section id="минут.-разминка" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-разминка">0–10 минут. Разминка</h2>
+<p>Попросите студентов без запуска R распределить понятия по двум группам:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Долговременное</th>
+<th>Временное</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>скрипт, исходный файл, README, файл результата</td>
+<td>объекты текущей сессии, история случайных действий в консоли</td>
+</tr>
+</tbody>
+</table>
+<p>Обсудите спорные ответы. Например, график в панели Plots временный, но сохранённый файл графика долговременный.</p>
+</section>
+<section id="минут.-создание-проекта" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-создание-проекта">10–25 минут. Создание проекта</h2>
+<section id="задание" class="level3">
+<h3 class="anchored" data-anchor-id="задание">Задание</h3>
+<ol type="1">
+<li>Создайте новый проект с именем first-r-project.</li>
+<li>Создайте в проекте папки R, data и output.</li>
+<li>Создайте скрипт R/01_first_steps.R.</li>
+<li>В начале скрипта добавьте комментарий с именем автора и назначением файла.</li>
+</ol>
+<p>Пример:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Автор: Имя Фамилия</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Первый воспроизводимый скрипт на R</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="контрольная-точка" class="level3">
+<h3 class="anchored" data-anchor-id="контрольная-точка">Контрольная точка</h3>
+<p>У студента должны быть:</p>
+<ul>
+<li>файл проекта;</li>
+<li>три папки;</li>
+<li>сохранённый скрипт;</li>
+<li>пустой Environment после запуска новой сессии.</li>
+</ul>
+</section>
+</section>
+<section id="минут.-первый-воспроизводимый-скрипт" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-первый-воспроизводимый-скрипт">25–50 минут. Первый воспроизводимый скрипт</h2>
+<p>Добавьте в скрипт:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Результаты пяти участников</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>, <span class="dv">84</span>, <span class="dv">91</span>, <span class="dv">67</span>, <span class="dv">88</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Основные показатели</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>mean_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(scores)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>min_score <span class="ot">&lt;-</span> <span class="fu">min</span>(scores)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>max_score <span class="ot">&lt;-</span> <span class="fu">max</span>(scores)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Печать результатов</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>mean_score</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>min_score</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>max_score</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Простой график</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  scores,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"b"</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Результаты участников"</span>,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Номер участника"</span>,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Результат"</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="задания" class="level3">
+<h3 class="anchored" data-anchor-id="задания">Задания</h3>
+<ol type="1">
+<li>Выполните код по одной строке.</li>
+<li>После каждой строки проверяйте, появился ли новый объект.</li>
+<li>Выполните весь скрипт сверху вниз.</li>
+<li>Измените последнее значение с 88 на 95.</li>
+<li>Выполните только строку scores. Изменились ли mean_score, min_score и max_score?</li>
+<li>Выполните весь блок вычислений повторно.</li>
+<li>Объясните разницу между изменением исходного объекта и пересчётом зависимых результатов.</li>
+</ol>
+</section>
+<section id="ожидаемые-исходные-результаты" class="level3">
+<h3 class="anchored" data-anchor-id="ожидаемые-исходные-результаты">Ожидаемые исходные результаты</h3>
+<p>До изменения значения:</p>
+<ul>
+<li>среднее: 80.4;</li>
+<li>минимум: 67;</li>
+<li>максимум: 91.</li>
+</ul>
+<p>После замены 88 на 95:</p>
+<ul>
+<li>среднее: 81.8;</li>
+<li>минимум: 67;</li>
+<li>максимум: 95.</li>
+</ul>
+</section>
+</section>
+<section id="минут.-проверка-воспроизводимости" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-проверка-воспроизводимости">50–65 минут. Проверка воспроизводимости</h2>
+<section id="задание-1" class="level3">
+<h3 class="anchored" data-anchor-id="задание-1">Задание</h3>
+<ol type="1">
+<li>Сохраните скрипт.</li>
+<li>Перезапустите R через Session → Restart R.</li>
+<li>Убедитесь, что Environment пуст.</li>
+<li>Запустите скрипт сверху вниз.</li>
+<li>Убедитесь, что все объекты, значения и график восстановились.</li>
+<li>Добавьте в конец скрипта:</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Объясните своими словами, зачем может понадобиться информация о версии R и подключённых пакетах.</p>
+</section>
+<section id="критерий-выполнения" class="level3">
+<h3 class="anchored" data-anchor-id="критерий-выполнения">Критерий выполнения</h3>
+<p>Работа считается воспроизводимой на текущем компьютере, если после чистого перезапуска весь скрипт выполняется без ручного создания объектов в консоли.</p>
+</section>
+</section>
+<section id="минут.-работа-со-справкой" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-работа-со-справкой">65–75 минут. Работа со справкой</h2>
+<section id="задание-2" class="level3">
+<h3 class="anchored" data-anchor-id="задание-2">Задание</h3>
+<ol type="1">
+<li>Откройте справку по функции mean.</li>
+<li>Найдите раздел Usage.</li>
+<li>Найдите описание аргумента na.rm.</li>
+<li>Запустите один пример из раздела Examples.</li>
+<li>Откройте справку по функции plot.</li>
+<li>Найдите аргументы main, xlab и ylab.</li>
+</ol>
+</section>
+<section id="вопросы" class="level3">
+<h3 class="anchored" data-anchor-id="вопросы">Вопросы</h3>
+<ul>
+<li>Почему справка по plot выглядит сложнее справки по mean?</li>
+<li>Что означает раздел Value?</li>
+<li>Почему примеры полезнее попытки запомнить все аргументы?</li>
+</ul>
+</section>
+</section>
+<section id="минут.-дополнительные-задания" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-дополнительные-задания">75–85 минут. Дополнительные задания</h2>
+<p>Студенты, завершившие обязательную часть, выполняют одно или несколько заданий.</p>
+<section id="уровень-a" class="level3">
+<h3 class="anchored" data-anchor-id="уровень-a">Уровень A</h3>
+<p>Добавьте медиану:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>median_score <span class="ot">&lt;-</span> <span class="fu">median</span>(scores)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>median_score</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="уровень-b" class="level3">
+<h3 class="anchored" data-anchor-id="уровень-b">Уровень B</h3>
+<p>Добавьте горизонтальную линию среднего:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> mean_score, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Пока не нужно запоминать аргументы. Найдите их смысл через справку.</p>
+</section>
+<section id="уровень-c" class="level3">
+<h3 class="anchored" data-anchor-id="уровень-c">Уровень C</h3>
+<p>Создайте новый вектор attendance с количеством посещённых занятий пятью студентами. Вычислите среднее и постройте график.</p>
+</section>
+</section>
+<section id="минут.-взаимная-проверка" class="level2">
+<h2 class="anchored" data-anchor-id="минут.-взаимная-проверка">85–90 минут. Взаимная проверка</h2>
+<p>Студенты обмениваются местами или показывают проекты соседу. Проверяющий отвечает:</p>
+<ol type="1">
+<li>Понятно ли по комментариям, что делает файл?</li>
+<li>Можно ли выполнить скрипт сверху вниз?</li>
+<li>Создаются ли все используемые объекты?</li>
+<li>Есть ли в скрипте действия, которые были выполнены только вручную?</li>
+<li>Понятны ли имена объектов?</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="решения-и-подсказки-для-преподавателя" class="level1">
+<h1>Решения и подсказки для преподавателя</h1>
+<section id="типичные-затруднения" class="level2">
+<h2 class="anchored" data-anchor-id="типичные-затруднения">Типичные затруднения</h2>
+<section id="в-консоли-появляется-знак-плюс" class="level3">
+<h3 class="anchored" data-anchor-id="в-консоли-появляется-знак-плюс">В консоли появляется знак плюс</h3>
+<p>R ожидает продолжения незавершённого выражения. Частая причина — незакрытая скобка или кавычка. Нужно завершить выражение либо нажать Escape.</p>
+</section>
+<section id="объект-не-найден-после-перезапуска" class="level3">
+<h3 class="anchored" data-anchor-id="объект-не-найден-после-перезапуска">Объект не найден после перезапуска</h3>
+<p>Студент выполнил строку создания объекта только в консоли, но не сохранил её в скрипте.</p>
+</section>
+<section id="график-не-изменился" class="level3">
+<h3 class="anchored" data-anchor-id="график-не-изменился">График не изменился</h3>
+<p>Изменён объект scores, но строка plot не выполнена повторно.</p>
+</section>
+<section id="скрипт-работает-только-снизу-вверх-или-после-ручных-действий" class="level3">
+<h3 class="anchored" data-anchor-id="скрипт-работает-только-снизу-вверх-или-после-ручных-действий">Скрипт работает только снизу вверх или после ручных действий</h3>
+<p>Нарушен порядок зависимостей. Строка, создающая объект, должна располагаться раньше строки, использующей его.</p>
+</section>
+<section id="студент-хочет-сохранить-workspace" class="level3">
+<h3 class="anchored" data-anchor-id="студент-хочет-сохранить-workspace">Студент хочет сохранить Workspace</h3>
+<p>Объясните, что в рамках курса основной способ восстановления состояния — повторное выполнение кода. Автоматическое восстановление старого Workspace может скрывать отсутствующие строки и затруднять воспроизводимость.</p>
+</section>
+</section>
+<section id="минимальный-итог-занятия" class="level2">
+<h2 class="anchored" data-anchor-id="минимальный-итог-занятия">Минимальный итог занятия</h2>
+<p>К концу практики у каждого студента есть проект и R-скрипт, который после чистого перезапуска:</p>
+<ol type="1">
+<li>создаёт данные;</li>
+<li>вычисляет показатели;</li>
+<li>печатает результаты;</li>
+<li>строит график;</li>
+<li>показывает информацию о сессии.</li>
+</ol>
+</section>
+<section id="домашнее-задание" class="level2">
+<h2 class="anchored" data-anchor-id="домашнее-задание">Домашнее задание</h2>
+<p>Создать в том же проекте скрипт R/01_homework.R:</p>
+<ol type="1">
+<li>записать результаты не менее чем десяти наблюдений;</li>
+<li>вычислить среднее, минимум, максимум и медиану;</li>
+<li>построить график;</li>
+<li>написать не менее трёх содержательных комментариев;</li>
+<li>проверить выполнение после перезапуска R.</li>
+</ol>
+<p>На следующем занятии студент должен уметь показать, какие строки создают объекты, какие вызывают функции и какие только выводят результат.</p>
+</section>
+<section id="источники-для-подготовки" class="level2">
+<h2 class="anchored" data-anchor-id="источники-для-подготовки">Источники для подготовки</h2>
+<ul>
+<li>Pedro J. Aphalo. Learn R: As a Language, 2nd edition, главы 1–2.</li>
+<li>An Introduction to R, главы 1–2: https://intro2r.com/</li>
+<li>R for Data Science, глава Workflow: basics: https://r4ds.hadley.nz/workflow-basics.html</li>
+<li>Официальная справка R: https://www.r-project.org/</li>
+</ul>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Наверх</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/r-lang-vladissta\.github\.io\/r-course\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Курс «Язык R»</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Сайт собран с помощью <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
