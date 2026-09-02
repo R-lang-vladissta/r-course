@@ -1,100 +1,26 @@
 ---
 title: "Язык R"
-page-layout: full
-toc: false
-title-block-banner: false
 ---
-
-::: {.course-hero}
-::: {.hero-copy}
-<p class="eyebrow">Курс для магистрантов</p>
-
-# Язык R
-
-От первых выражений до анализа данных, воспроизводимых отчётов и интерактивных приложений.
-
-[Начать обучение](output/lessons/01-kak-rabotaet-r.md){.btn .btn-primary .btn-lg}
-[Посмотреть программу](program.qmd){.btn .btn-outline-primary .btn-lg}
-:::
-
-::: {.hero-mark aria-hidden="true"}
-R
-:::
-:::
-
-::: {.course-facts}
-::: {.fact}
-<span class="fact-value">18</span>
-<span class="fact-label">тем</span>
-:::
-::: {.fact}
-<span class="fact-value">5</span>
-<span class="fact-label">модулей</span>
-:::
-::: {.fact}
-<span class="fact-value">2 + 2</span>
-<span class="fact-label">академических часа на тему</span>
-:::
-:::
-
-## О курсе
-
-Курс помогает освоить R как язык программирования и рабочий инструмент исследователя. Мы последовательно разберём устройство языка, обработку и визуализацию данных, основы статистического анализа и публикацию результатов.
-
-Главный принцип курса — **учимся на практике**. Код сохраняется в проектах и скриптах, анализ можно повторить, а результаты — объяснить и проверить.
-
-::: {.grid .course-pillars}
-::: {.g-col-12 .g-col-md-4}
-### Понимать язык
-
-Выражения, объекты, типы данных, функции и структуры управления — без магии и заучивания рецептов.
-:::
-
-::: {.g-col-12 .g-col-md-4}
-### Работать с данными
-
-Импорт, преобразование, объединение таблиц и визуализация с tidyverse и ggplot2.
-:::
-
-::: {.g-col-12 .g-col-md-4}
-### Делать результат воспроизводимым
-
-Проекты, аккуратные скрипты, отчёты Quarto и интерактивные приложения Shiny.
-:::
-:::
 
 ## Материалы занятий
 
-::: {.grid .lesson-grid}
-::: {.g-col-12 .g-col-lg-6}
-::: {.lesson-card}
-<span class="lesson-number">01</span>
+### Лекции
 
-### [Как работает R](output/lessons/01-kak-rabotaet-r.md)
+1. [Как работает R](output/lessons/01-kak-rabotaet-r.md#лекция-90-минут)
+   - [Презентация «Введение в R»](output/presentations/intro-to-r-ru.pptx)
+2. [Синтаксис и вычисление выражений](output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.md#лекция-90-минут)
 
-R, RStudio, консоль, скрипт, рабочая сессия и проект. Первый воспроизводимый анализ.
+### Практики
 
-[Открыть занятие →](output/lessons/01-kak-rabotaet-r.md){.lesson-link}
-:::
-:::
+1. [Первый проект и воспроизводимый скрипт](output/lessons/01-kak-rabotaet-r.md#практика-90-минут)
+2. [Выражения, объекты и функции](output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.md#практика-90-минут)
 
-::: {.g-col-12 .g-col-lg-6}
-::: {.lesson-card}
-<span class="lesson-number">02</span>
+## О курсе
 
-### [Синтаксис и выражения](output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.md)
+Курс посвящён R как языку программирования и рабочему инструменту исследователя. Мы будем разбирать устройство языка, работу с данными, визуализацию и воспроизводимую публикацию результатов.
 
-Значения, объекты, присваивание, вызовы функций, ошибки и единый стиль кода.
-
-[Открыть занятие →](output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.md){.lesson-link}
-:::
-:::
-:::
-
-::: {.next-step}
-### Что понадобится
+## Что понадобится
 
 Установите **R**, затем **RStudio Desktop**. На первом занятии дополнительные пакеты не нужны.
 
-[Инструкции и ссылки](materials.qmd){.btn .btn-light}
-:::
+[Инструкции и полезные ссылки](materials.qmd)

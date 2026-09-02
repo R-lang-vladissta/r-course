@@ -2,22 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://r-lang-vladissta.github.io/r-course/materials.html</loc>
-    <lastmod>2026-09-01T15:00:56.725Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r-lang-vladissta.github.io/r-course/index.html</loc>
-    <lastmod>2026-09-01T15:00:56.605Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r-lang-vladissta.github.io/r-course/output/lessons/01-kak-rabotaet-r.html</loc>
-    <lastmod>2026-09-01T15:00:56.902Z</lastmod>
+    <lastmod>2026-09-02T12:50:34.310Z</lastmod>
   </url>
   <url>
     <loc>https://r-lang-vladissta.github.io/r-course/output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.html</loc>
     <lastmod>2026-09-01T15:00:56.961Z</lastmod>
   </url>
   <url>
-    <loc>https://r-lang-vladissta.github.io/r-course/program.html</loc>
-    <lastmod>2026-09-01T15:00:56.666Z</lastmod>
+    <loc>https://r-lang-vladissta.github.io/r-course/output/lessons/01-kak-rabotaet-r.html</loc>
+    <lastmod>2026-09-01T15:00:56.902Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r-lang-vladissta.github.io/r-course/index.html</loc>
+    <lastmod>2026-09-02T12:50:23.795Z</lastmod>
   </url>
 </urlset>

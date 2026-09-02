@@ -5,7 +5,6 @@ project:
     - .nojekyll
   render:
     - index.qmd
-    - program.qmd
     - materials.qmd
     - output/lessons/*.md
 
@@ -16,12 +15,9 @@ website:
   repo-url: "https://github.com/R-lang-vladissta/r-course"
   favicon: presentation/assets/quarto-logo.png
   navbar:
-    pinned: true
     left:
       - href: index.qmd
         text: Главная
-      - href: program.qmd
-        text: Программа
       - href: materials.qmd
         text: Материалы
     right:
@@ -41,9 +37,7 @@ website:
 format:
   html:
     lang: ru
-    theme:
-      light: flatly
-      dark: darkly
+    theme: readable
     css: styles.css
     toc: true
     toc-title: "На этой странице"

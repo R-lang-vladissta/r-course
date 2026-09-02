@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -35,12 +36,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,10 +100,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Главная</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./program.html"> 
-<span class="menu-text">Программа</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./materials.html"> 
 <span class="menu-text">Материалы</span></a>
   </li>  
@@ -118,18 +113,31 @@ ul.task-list li input[type="checkbox"] {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">На этой странице</h2>
+   
+  <ul>
+  <li><a href="#материалы-занятий" id="toc-материалы-занятий" class="nav-link active" data-scroll-target="#материалы-занятий">Материалы занятий</a>
+  <ul class="collapse">
+  <li><a href="#лекции" id="toc-лекции" class="nav-link" data-scroll-target="#лекции">Лекции</a></li>
+  <li><a href="#практики" id="toc-практики" class="nav-link" data-scroll-target="#практики">Практики</a></li>
+  </ul></li>
+  <li><a href="#о-курсе" id="toc-о-курсе" class="nav-link" data-scroll-target="#о-курсе">О курсе</a></li>
+  <li><a href="#что-понадобится" id="toc-что-понадобится" class="nav-link" data-scroll-target="#что-понадобится">Что понадобится</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -138,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta">
 
     
   
@@ -150,80 +158,34 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="course-hero">
-<div class="hero-copy">
-<p class="eyebrow">
-Курс для магистрантов
-</p>
-<section id="язык-r" class="level1">
-<h1>Язык R</h1>
-<p>От первых выражений до анализа данных, воспроизводимых отчётов и интерактивных приложений.</p>
-<p><a href="./output/lessons/01-kak-rabotaet-r.html" class="btn btn-primary btn-lg">Начать обучение</a> <a href="./program.html" class="btn btn-outline-primary btn-lg">Посмотреть программу</a></p>
-</section>
-</div>
-<div class="hero-mark" aria-hidden="true">
-<p>R</p>
-</div>
-</div>
-<div class="course-facts">
-<div class="fact">
-<p><span class="fact-value">18</span> <span class="fact-label">тем</span></p>
-</div>
-<div class="fact">
-<p><span class="fact-value">5</span> <span class="fact-label">модулей</span></p>
-</div>
-<div class="fact">
-<p><span class="fact-value">2 + 2</span> <span class="fact-label">академических часа на тему</span></p>
-</div>
-</div>
-<section id="о-курсе" class="level2">
-<h2 class="anchored" data-anchor-id="о-курсе">О курсе</h2>
-<p>Курс помогает освоить R как язык программирования и рабочий инструмент исследователя. Мы последовательно разберём устройство языка, обработку и визуализацию данных, основы статистического анализа и публикацию результатов.</p>
-<p>Главный принцип курса — <strong>учимся на практике</strong>. Код сохраняется в проектах и скриптах, анализ можно повторить, а результаты — объяснить и проверить.</p>
-<div class="grid course-pillars">
-<section id="понимать-язык" class="level3 g-col-12 g-col-md-4">
-<h3 class="anchored" data-anchor-id="понимать-язык">Понимать язык</h3>
-<p>Выражения, объекты, типы данных, функции и структуры управления — без магии и заучивания рецептов.</p>
-</section>
-<section id="работать-с-данными" class="level3 g-col-12 g-col-md-4">
-<h3 class="anchored" data-anchor-id="работать-с-данными">Работать с данными</h3>
-<p>Импорт, преобразование, объединение таблиц и визуализация с tidyverse и ggplot2.</p>
-</section>
-<section id="делать-результат-воспроизводимым" class="level3 g-col-12 g-col-md-4">
-<h3 class="anchored" data-anchor-id="делать-результат-воспроизводимым">Делать результат воспроизводимым</h3>
-<p>Проекты, аккуратные скрипты, отчёты Quarto и интерактивные приложения Shiny.</p>
-</section>
-</div>
-</section>
 <section id="материалы-занятий" class="level2">
 <h2 class="anchored" data-anchor-id="материалы-занятий">Материалы занятий</h2>
-<div class="grid lesson-grid">
-<div class="g-col-12 g-col-lg-6">
-<div class="lesson-card">
-<p><span class="lesson-number">01</span></p>
-<section id="как-работает-r" class="level3">
-<h3 class="anchored" data-anchor-id="как-работает-r"><a href="./output/lessons/01-kak-rabotaet-r.html">Как работает R</a></h3>
-<p>R, RStudio, консоль, скрипт, рабочая сессия и проект. Первый воспроизводимый анализ.</p>
-<p><a href="./output/lessons/01-kak-rabotaet-r.html" class="lesson-link">Открыть занятие →</a></p>
+<section id="лекции" class="level3">
+<h3 class="anchored" data-anchor-id="лекции">Лекции</h3>
+<ol type="1">
+<li><a href="./output/lessons/01-kak-rabotaet-r.html#лекция-90-минут">Как работает R</a>
+<ul>
+<li><a href="output/presentations/intro-to-r-ru.pptx">Презентация «Введение в R»</a></li>
+</ul></li>
+<li><a href="./output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.html#лекция-90-минут">Синтаксис и вычисление выражений</a></li>
+</ol>
 </section>
-</div>
-</div>
-<div class="g-col-12 g-col-lg-6">
-<div class="lesson-card">
-<p><span class="lesson-number">02</span></p>
-<section id="синтаксис-и-выражения" class="level3">
-<h3 class="anchored" data-anchor-id="синтаксис-и-выражения"><a href="./output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.html">Синтаксис и выражения</a></h3>
-<p>Значения, объекты, присваивание, вызовы функций, ошибки и единый стиль кода.</p>
-<p><a href="./output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.html" class="lesson-link">Открыть занятие →</a></p>
+<section id="практики" class="level3">
+<h3 class="anchored" data-anchor-id="практики">Практики</h3>
+<ol type="1">
+<li><a href="./output/lessons/01-kak-rabotaet-r.html#практика-90-минут">Первый проект и воспроизводимый скрипт</a></li>
+<li><a href="./output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.html#практика-90-минут">Выражения, объекты и функции</a></li>
+</ol>
 </section>
-</div>
-</div>
-</div>
-<section id="что-понадобится" class="level3 next-step">
-<h3 class="anchored" data-anchor-id="что-понадобится">Что понадобится</h3>
+</section>
+<section id="о-курсе" class="level2">
+<h2 class="anchored" data-anchor-id="о-курсе">О курсе</h2>
+<p>Курс посвящён R как языку программирования и рабочему инструменту исследователя. Мы будем разбирать устройство языка, работу с данными, визуализацию и воспроизводимую публикацию результатов.</p>
+</section>
+<section id="что-понадобится" class="level2">
+<h2 class="anchored" data-anchor-id="что-понадобится">Что понадобится</h2>
 <p>Установите <strong>R</strong>, затем <strong>RStudio Desktop</strong>. На первом занятии дополнительные пакеты не нужны.</p>
-<p><a href="./materials.html" class="btn btn-light">Инструкции и ссылки</a></p>
-</section>
+<p><a href="./materials.html">Инструкции и полезные ссылки</a></p>
 
 
 </section>
@@ -249,150 +211,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
