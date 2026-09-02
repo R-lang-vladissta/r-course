@@ -14,12 +14,53 @@ body {
   color: var(--course-ink);
 }
 
+.navbar {
+  background: var(--course-accent-dark);
+  box-shadow: 0 1px 0 rgba(20, 56, 49, 0.16);
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: #ffffff;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .course-intro {
   max-width: 46rem;
   margin: -0.25rem 0 2.75rem;
   color: var(--course-muted);
   font-size: 1.12rem;
   line-height: 1.65;
+}
+
+.course-logo {
+  display: block;
+  width: 9rem;
+  max-width: 38vw;
+  margin: -1.75rem 0 1.4rem;
+}
+
+.mini-toc {
+  margin-bottom: 2.5rem;
+  color: var(--course-muted);
+  font-size: 0.92rem;
+}
+
+.mini-toc a {
+  color: var(--course-accent-dark);
+  text-decoration: none;
+}
+
+.mini-toc a:hover,
+.mini-toc a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 main.content h2 {

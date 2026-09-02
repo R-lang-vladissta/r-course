@@ -5,6 +5,7 @@ project:
     - .nojekyll
     - R-lecture-01-repl.pdf
     - R-lecture-01-repl.pptx
+    - Untitled/Untitled.001.png
   render:
     - index.qmd
     - installation.qmd
@@ -12,7 +13,10 @@ project:
 website:
   title: "Язык R"
   site-url: "https://r-lang-vladissta.github.io/r-course/"
-  navbar: false
+  navbar:
+    left:
+      - href: index.qmd
+        text: Главная
   open-graph: true
 
 format:
