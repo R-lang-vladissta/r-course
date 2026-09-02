@@ -64,23 +64,6 @@ body {
   border-radius: 0.65rem;
 }
 
-.mini-toc {
-  margin-bottom: 1.5rem;
-  color: var(--course-muted);
-  font-size: 0.92rem;
-}
-
-.mini-toc a {
-  color: var(--course-accent-dark);
-  text-decoration: none;
-}
-
-.mini-toc a:hover,
-.mini-toc a:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-
 main.content h2 {
   margin-top: 1.8rem;
   margin-bottom: 0.35rem;
