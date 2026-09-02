@@ -24,13 +24,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./presentation/assets/quarto-logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -41,17 +39,18 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Поиск не дал результатов",
     "search-matching-documents-text": "Результаты поиска",
@@ -66,76 +65,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Поиск"
   }
 }</script>
-<style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Язык R">
-<meta property="og:description" content="Учебные материалы курса по языку R, анализу данных и воспроизводимым исследованиям">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="Язык R">
-<meta name="twitter:title" content="Язык R">
-<meta name="twitter:description" content="Учебные материалы курса по языку R, анализу данных и воспроизводимым исследованиям">
-<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed">
+<body class="fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Язык R</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Поиск"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Главная</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./materials.html"> 
-<span class="menu-text">Материалы</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/R-lang-vladissta/r-course"> <i class="bi bi-github" role="img" aria-label="Репозиторий курса">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">На этой странице</h2>
-   
-  <ul>
-  <li><a href="#материалы-занятий" id="toc-материалы-занятий" class="nav-link active" data-scroll-target="#материалы-занятий">Материалы занятий</a>
-  <ul class="collapse">
-  <li><a href="#лекции" id="toc-лекции" class="nav-link" data-scroll-target="#лекции">Лекции</a></li>
-  <li><a href="#практики" id="toc-практики" class="nav-link" data-scroll-target="#практики">Практики</a></li>
-  </ul></li>
-  <li><a href="#о-курсе" id="toc-о-курсе" class="nav-link" data-scroll-target="#о-курсе">О курсе</a></li>
-  <li><a href="#что-понадобится" id="toc-что-понадобится" class="nav-link" data-scroll-target="#что-понадобится">Что понадобится</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -158,39 +102,32 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="материалы-занятий" class="level2">
-<h2 class="anchored" data-anchor-id="материалы-занятий">Материалы занятий</h2>
-<section id="лекции" class="level3">
-<h3 class="anchored" data-anchor-id="лекции">Лекции</h3>
-<ol type="1">
-<li><a href="./output/lessons/01-kak-rabotaet-r.html#лекция-90-минут">Как работает R</a>
-<ul>
-<li><a href="output/presentations/intro-to-r-ru.pptx">Презентация «Введение в R»</a></li>
-</ul></li>
-<li><a href="./output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.html#лекция-90-минут">Синтаксис и вычисление выражений</a></li>
-</ol>
-</section>
-<section id="практики" class="level3">
-<h3 class="anchored" data-anchor-id="практики">Практики</h3>
-<ol type="1">
-<li><a href="./output/lessons/01-kak-rabotaet-r.html#практика-90-минут">Первый проект и воспроизводимый скрипт</a></li>
-<li><a href="./output/lessons/02-sintaksis-i-vychislenie-vyrazheniy.html#практика-90-минут">Выражения, объекты и функции</a></li>
-</ol>
-</section>
-</section>
 <section id="о-курсе" class="level2">
 <h2 class="anchored" data-anchor-id="о-курсе">О курсе</h2>
-<p>Курс посвящён R как языку программирования и рабочему инструменту исследователя. Мы будем разбирать устройство языка, работу с данными, визуализацию и воспроизводимую публикацию результатов.</p>
+<p>Материалы курса по языку R.</p>
 </section>
-<section id="что-понадобится" class="level2">
-<h2 class="anchored" data-anchor-id="что-понадобится">Что понадобится</h2>
-<p>Установите <strong>R</strong>, затем <strong>RStudio Desktop</strong>. На первом занятии дополнительные пакеты не нужны.</p>
-<p><a href="./materials.html">Инструкции и полезные ссылки</a></p>
+<section id="лекции" class="level2">
+<h2 class="anchored" data-anchor-id="лекции">Лекции</h2>
+<ol type="1">
+<li>Введение в R — <a href="R-lecture-01-repl.pptx">презентация</a></li>
+</ol>
+</section>
+<section id="практики" class="level2">
+<h2 class="anchored" data-anchor-id="практики">Практики</h2>
+<ul>
+<li>Пока нет материалов.</li>
+</ul>
+</section>
+<section id="домашние-задания" class="level2">
+<h2 class="anchored" data-anchor-id="домашние-задания">Домашние задания</h2>
+<ul>
+<li>Пока нет материалов.</li>
+</ul>
 
 
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Наверх</a></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -612,22 +549,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
-    <div class="nav-footer-left">
-<p>Курс «Язык R»</p>
-</div>   
-    <div class="nav-footer-center">
-      &nbsp;
-    </div>
-    <div class="nav-footer-right">
-<p>Сайт собран с помощью <a href="https://quarto.org/">Quarto</a></p>
-</div>
-  </div>
-</footer>
 
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

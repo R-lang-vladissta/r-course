@@ -3,49 +3,20 @@ project:
   output-dir: docs
   resources:
     - .nojekyll
+    - R-lecture-01-repl.pptx
   render:
     - index.qmd
-    - materials.qmd
-    - output/lessons/*.md
 
 website:
   title: "Язык R"
-  description: "Учебные материалы курса по языку R, анализу данных и воспроизводимым исследованиям"
   site-url: "https://r-lang-vladissta.github.io/r-course/"
-  repo-url: "https://github.com/R-lang-vladissta/r-course"
-  favicon: presentation/assets/quarto-logo.png
-  navbar:
-    left:
-      - href: index.qmd
-        text: Главная
-      - href: materials.qmd
-        text: Материалы
-    right:
-      - icon: github
-        href: "https://github.com/R-lang-vladissta/r-course"
-        aria-label: "Репозиторий курса"
-  page-footer:
-    left: "Курс «Язык R»"
-    right: "Сайт собран с помощью [Quarto](https://quarto.org/)"
-  search:
-    location: navbar
-    type: overlay
-  back-to-top-navigation: true
+  navbar: false
   open-graph: true
-  twitter-card: true
 
 format:
   html:
     lang: ru
     theme: readable
-    css: styles.css
-    toc: true
-    toc-title: "На этой странице"
-    code-copy: true
-    code-overflow: wrap
-    smooth-scroll: true
-
-execute:
-  freeze: auto
+    toc: false
 
 editor: visual
