@@ -4,16 +4,62 @@ title: "Язык R"
 
 ## О курсе
 
-Материалы курса по языку R.
+::: course-intro
+Лекции, практические занятия и домашние задания курса по языку R.
+:::
 
 ## Лекции
 
-1. Введение в R — [презентация](R-lecture-01-repl.pptx)
+::: section-lead
+Материалы лекционных занятий.
+:::
+
+::::: resource-list
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[01]{.resource-number}
+
+::: resource-copy
+[Введение в R](R-lecture-01-repl.pptx){.resource-title}
+
+[Презентация]{.resource-meta}
+:::
+:::
+::::
+:::::
 
 ## Практики
 
-- Пока нет материалов.
+::: section-lead
+Материалы практических занятий.
+:::
+
+::::: resource-list
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[—]{.resource-number}
+
+::: resource-copy
+[Материалы будут добавлены]{.resource-title .resource-title-muted}
+:::
+:::
+::::
+:::::
 
 ## Домашние задания
 
-- Пока нет материалов.
+::: section-lead
+Задания для самостоятельной работы.
+:::
+
+::::: resource-list
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[—]{.resource-number}
+
+::: resource-copy
+[Материалы будут добавлены]{.resource-title .resource-title-muted}
+:::
+:::
+::::
+:::::

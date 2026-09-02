@@ -1,0 +1,144 @@
+:root {
+  --course-ink: #1c2926;
+  --course-muted: #66746f;
+  --course-accent: #2c7467;
+  --course-accent-dark: #20574d;
+  --course-accent-soft: #e7f2ef;
+  --course-border: #d8e4e0;
+  --course-surface: #ffffff;
+  --course-background: #f6f9f8;
+}
+
+body {
+  background: var(--course-background);
+  color: var(--course-ink);
+}
+
+.course-intro {
+  max-width: 46rem;
+  margin: -0.25rem 0 2.75rem;
+  color: var(--course-muted);
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+main.content h2 {
+  margin-top: 2.8rem;
+  margin-bottom: 0.35rem;
+  color: var(--course-ink);
+  font-size: clamp(1.45rem, 2vw, 1.8rem);
+  letter-spacing: -0.015em;
+}
+
+.section-lead {
+  margin-bottom: 1.1rem;
+  color: var(--course-muted);
+}
+
+.resource-list {
+  overflow: hidden;
+  margin-bottom: 2.75rem;
+  border: 1px solid var(--course-border);
+  border-radius: 0.8rem;
+  background: var(--course-surface);
+  box-shadow: 0 0.35rem 1.25rem rgba(32, 87, 77, 0.05);
+}
+
+.resource-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  min-height: 5.25rem;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--course-border);
+  transition: background-color 150ms ease;
+}
+
+.resource-row:last-child {
+  border-bottom: 0;
+}
+
+.resource-row:hover {
+  background: #f9fcfb;
+}
+
+.resource-row > p,
+.resource-info > p,
+.resource-copy > p {
+  margin: 0;
+}
+
+.resource-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.resource-number {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.6rem;
+  background: var(--course-accent-soft);
+  color: var(--course-accent-dark);
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.resource-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.resource-title {
+  color: var(--course-ink);
+  font-size: 1.03rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.resource-title:hover,
+.resource-title:focus-visible {
+  color: var(--course-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.resource-title-muted {
+  color: var(--course-muted);
+  pointer-events: none;
+}
+
+.resource-meta {
+  color: var(--course-muted);
+  font-size: 0.88rem;
+}
+
+.resource-title:focus-visible {
+  outline: 3px solid rgba(44, 116, 103, 0.25);
+  outline-offset: 3px;
+}
+
+@media (max-width: 575.98px) {
+  .course-intro {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+
+  .resource-row {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .resource-info {
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}

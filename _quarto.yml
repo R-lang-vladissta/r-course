@@ -17,6 +17,7 @@ format:
   html:
     lang: ru
     theme: readable
+    css: styles.css
     toc: false
 
 editor: visual
