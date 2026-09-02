@@ -20,9 +20,9 @@ title: "Язык R"
 [01]{.resource-number}
 
 ::: resource-copy
-[Введение в R](R-lecture-01-repl.pptx){.resource-title}
+[Введение в R](R-lecture-01-repl.pdf){.resource-title target="_blank"}
 
-[Презентация]{.resource-meta}
+[PDF для просмотра · [PPTX скачать](R-lecture-01-repl.pptx)]{.resource-meta}
 :::
 :::
 ::::
