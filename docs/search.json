@@ -1,5 +1,33 @@
 [
   {
+    "objectID": "installation.html",
+    "href": "installation.html",
+    "title": "Установка R и RStudio",
+    "section": "",
+    "text": "Сначала установите R, затем RStudio Desktop."
+  },
+  {
+    "objectID": "installation.html#установите-r",
+    "href": "installation.html#установите-r",
+    "title": "Установка R и RStudio",
+    "section": "1. Установите R",
+    "text": "1. Установите R\n\nОткройте официальную страницу CRAN.\nВыберите свою операционную систему: Windows, macOS или Linux.\nСкачайте рекомендуемую версию R и установите её с настройками по умолчанию."
+  },
+  {
+    "objectID": "installation.html#установите-rstudio-desktop",
+    "href": "installation.html#установите-rstudio-desktop",
+    "title": "Установка R и RStudio",
+    "section": "2. Установите RStudio Desktop",
+    "text": "2. Установите RStudio Desktop\n\nОткройте страницу загрузки RStudio Desktop.\nСкачайте бесплатную версию для своей операционной системы.\nУстановите программу и запустите RStudio."
+  },
+  {
+    "objectID": "installation.html#проверьте-установку",
+    "href": "installation.html#проверьте-установку",
+    "title": "Установка R и RStudio",
+    "section": "3. Проверьте установку",
+    "text": "3. Проверьте установку\nВведите в консоли RStudio:\n1 + 1\nЕсли в консоли появился результат 2, всё работает.\n← Вернуться на главную"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Язык R",
@@ -12,6 +40,13 @@
     "title": "Язык R",
     "section": "",
     "text": "Лекции, практические занятия и домашние задания курса по языку R."
+  },
+  {
+    "objectID": "index.html#инструкции",
+    "href": "index.html#инструкции",
+    "title": "Язык R",
+    "section": "Инструкции",
+    "text": "Инструкции\n\n\n\n→\n\nУстановка R и RStudio\nКороткая инструкция для начала работы"
   },
   {
     "objectID": "index.html#лекции",

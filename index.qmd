@@ -8,6 +8,22 @@ title: "Язык R"
 Лекции, практические занятия и домашние задания курса по языку R.
 :::
 
+## Инструкции
+
+::::: resource-list
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[→]{.resource-number}
+
+::: resource-copy
+[Установка R и RStudio](installation.qmd){.resource-title}
+
+[Короткая инструкция для начала работы]{.resource-meta}
+:::
+:::
+::::
+:::::
+
 ## Лекции
 
 ::: section-lead
