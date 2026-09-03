@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Конспект практической лекции об интерфейсе RStudio, консоли, проектах и основных форматах файлов">
+
+<title>Практика 1. Знакомство с RStudio – Язык R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Практика 1. Знакомство с RStudio – Язык R">
+<meta property="og:description" content="Конспект практической лекции об интерфейсе RStudio, консоли, проектах и основных форматах файлов">
+<meta property="og:site_name" content="Язык R">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Язык R</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Главная</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#rstudio-как-рабочая-среда" id="toc-rstudio-как-рабочая-среда" class="nav-link active" data-scroll-target="#rstudio-как-рабочая-среда">RStudio как рабочая среда</a></li>
+  <li><a href="#окно-rstudio" id="toc-окно-rstudio" class="nav-link" data-scroll-target="#окно-rstudio">Окно RStudio</a></li>
+  <li><a href="#настройки-rstudio" id="toc-настройки-rstudio" class="nav-link" data-scroll-target="#настройки-rstudio">Настройки RStudio</a>
+  <ul class="collapse">
+  <li><a href="#как-открыть-общие-настройки" id="toc-как-открыть-общие-настройки" class="nav-link" data-scroll-target="#как-открыть-общие-настройки">Как открыть общие настройки</a></li>
+  </ul></li>
+  <li><a href="#консоль-и-первая-команда" id="toc-консоль-и-первая-команда" class="nav-link" data-scroll-target="#консоль-и-первая-команда">Консоль и первая команда</a></li>
+  <li><a href="#проект-rstudio" id="toc-проект-rstudio" class="nav-link" data-scroll-target="#проект-rstudio">Проект RStudio</a>
+  <ul class="collapse">
+  <li><a href="#файлы-внутри-проекта" id="toc-файлы-внутри-проекта" class="nav-link" data-scroll-target="#файлы-внутри-проекта">Файлы внутри проекта</a></li>
+  </ul></li>
+  <li><a href="#скрипт-и-область-source" id="toc-скрипт-и-область-source" class="nav-link" data-scroll-target="#скрипт-и-область-source">Скрипт и область Source</a>
+  <ul class="collapse">
+  <li><a href="#комментарии" id="toc-комментарии" class="nav-link" data-scroll-target="#комментарии">Комментарии</a></li>
+  </ul></li>
+  <li><a href="#сессия-r-объекты-и-история-команд" id="toc-сессия-r-объекты-и-история-команд" class="nav-link" data-scroll-target="#сессия-r-объекты-и-история-команд">Сессия R: объекты и история команд</a>
+  <ul class="collapse">
+  <li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment">Environment</a></li>
+  <li><a href="#history" id="toc-history" class="nav-link" data-scroll-target="#history">History</a></li>
+  <li><a href="#session-files" id="toc-session-files" class="nav-link" data-scroll-target="#session-files"><code>.RData</code> и <code>.Rhistory</code></a></li>
+  </ul></li>
+  <li><a href="#r-markdown-quarto" id="toc-r-markdown-quarto" class="nav-link" data-scroll-target="#r-markdown-quarto">R Markdown и Quarto</a></li>
+  <li><a href="#памятка-по-сочетаниям-клавиш" id="toc-памятка-по-сочетаниям-клавиш" class="nav-link" data-scroll-target="#памятка-по-сочетаниям-клавиш">Памятка по сочетаниям клавиш</a>
+  <ul class="collapse">
+  <li><a href="#основные-сочетания" id="toc-основные-сочетания" class="nav-link" data-scroll-target="#основные-сочетания">Основные сочетания</a></li>
+  </ul></li>
+  <li><a href="#типичные-ситуации-что-делать" id="toc-типичные-ситуации-что-делать" class="nav-link" data-scroll-target="#типичные-ситуации-что-делать">Типичные ситуации (ЧТО ДЕЛАТЬ?)</a>
+  <ul class="collapse">
+  <li><a href="#в-консоли-вместо-отображается" id="toc-в-консоли-вместо-отображается" class="nav-link" data-scroll-target="#в-консоли-вместо-отображается">В консоли вместо <code>&gt;</code> отображается <code>+</code></a></li>
+  <li><a href="#объект-есть-в-environment-но-его-нет-в-скрипте" id="toc-объект-есть-в-environment-но-его-нет-в-скрипте" class="nav-link" data-scroll-target="#объект-есть-в-environment-но-его-нет-в-скрипте">Объект есть в <code>Environment</code>, но его нет в скрипте</a></li>
+  <li><a href="#возникла-ошибка-object-not-found" id="toc-возникла-ошибка-object-not-found" class="nav-link" data-scroll-target="#возникла-ошибка-object-not-found">Возникла ошибка <code>object not found</code></a></li>
+  <li><a href="#код-записан-в-скрипте-но-ничего-не-происходит" id="toc-код-записан-в-скрипте-но-ничего-не-происходит" class="nav-link" data-scroll-target="#код-записан-в-скрипте-но-ничего-не-происходит">Код записан в скрипте, но ничего не происходит</a></li>
+  <li><a href="#команда-есть-в-скрипте-но-отсутствует-в-history" id="toc-команда-есть-в-скрипте-но-отсутствует-в-history" class="nav-link" data-scroll-target="#команда-есть-в-скрипте-но-отсутствует-в-history">Команда есть в скрипте, но отсутствует в <code>History</code></a></li>
+  <li><a href="#файл-не-отображается-на-вкладке-files" id="toc-файл-не-отображается-на-вкладке-files" class="nav-link" data-scroll-target="#файл-не-отображается-на-вкладке-files">Файл не отображается на вкладке <code>Files</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Практика 1. Знакомство с RStudio</h1>
+</div>
+
+<div>
+  <div class="description">
+    Конспект практической лекции об интерфейсе RStudio, консоли, проектах и основных форматах файлов
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Первая практика посвящена не столько синтаксису R, сколько рабочей среде: <strong>где выполняется код, где сохраняются команды и как RStudio организует работу над отдельным проектом</strong>.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Всё идёт по плану!">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Всё идёт по плану!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если что-то окажется сложным для понимания и запоминания, то это нормально! Во-первых, только когда нам сложно, мы учимся. Во-вторых, на следующих практиках мы будем пользоваться многим из того, что описано здесь, а значит вам будет легче вспомнить!</p>
+</div>
+</div>
+<section id="rstudio-как-рабочая-среда" class="level2">
+<h2 class="anchored" data-anchor-id="rstudio-как-рабочая-среда">RStudio как рабочая среда</h2>
+<p><strong>RStudio</strong> – это среда разработки: приложение, в котором удобно писать и запускать код, работать с проектами, просматривать объекты и графики, читать справку и управлять файлами.</p>
+<p>При этом R и RStudio – не одно и то же. <strong>R</strong> – это язык программирования и программа, выполняющая написанный на этом языке код. RStudio предоставляет интерфейс для работы с R.</p>
+<p>Можно представить, что R – двигатель, а RStudio – кабина управления. Кабина помогает работать с двигателем, но не заменяет его.</p>
+<p>Возможности RStudio не ограничиваются R-кодом. В программе также встречаются инструменты, связанные с Python, терминалом, Git, публикацией документов и другими видами работы.</p>
+</section>
+<section id="окно-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="окно-rstudio">Окно RStudio</h2>
+<p>Рабочее окно RStudio обычно разделено на четыре области. Внутри каждой области может находиться несколько вкладок.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/rstudio-panes-screenshot.png" class="img-fluid figure-img"></p>
+<figcaption>Основные области окна RStudio</figcaption>
+</figure>
+</div>
+<p><em>Окно RStudio с четырьмя основными областями. На снимке редактор расположен слева сверху, консоль – слева снизу, рабочее окружение – справа сверху, а вкладки с файлами, графиками и справкой – справа снизу.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Область</th>
+<th>Что в ней находится</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Source</strong></td>
+<td>Открытые скрипты и документы. Здесь пишут и сохраняют код</td>
+</tr>
+<tr class="even">
+<td><strong>Console</strong></td>
+<td>Выполняемые команды, сообщения, ошибки и текстовые результаты</td>
+</tr>
+<tr class="odd">
+<td><strong>Environment</strong></td>
+<td>Объекты, созданные во время текущей работы в R</td>
+</tr>
+<tr class="even">
+<td><strong>History</strong></td>
+<td>История выполняемых команд</td>
+</tr>
+<tr class="odd">
+<td><strong>Files</strong></td>
+<td>Файлы и папки текущего проекта</td>
+</tr>
+<tr class="even">
+<td><strong>Plots</strong></td>
+<td>Построенные графики</td>
+</tr>
+<tr class="odd">
+<td><strong>Help</strong></td>
+<td>Справка по функциям и пакетам</td>
+</tr>
+<tr class="even">
+<td><strong>Viewer</strong></td>
+<td>HTML-документы и другое веб-содержимое</td>
+</tr>
+</tbody>
+</table>
+<p>Когда ни один скрипт не открыт, область <code>Source</code> может быть не видна. Она появляется после создания или открытия файла с кодом.</p>
+<p><strong>Каждую область мы рассмотрим в том или ином примере далее.</strong></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Расположение областей и вкладок">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Расположение областей и вкладок
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>RStudio позволяет переставлять области и выбирать, какие вкладки находятся в каждой из них.</strong> Эта настройка находится в <strong>Tools → Global Options → Pane Layout</strong> и также открывается через <strong>View → Panes → Pane Layout</strong>.</p>
+</div>
+</div>
+</section>
+<section id="настройки-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="настройки-rstudio">Настройки RStudio</h2>
+<p>Глобальные настройки действуют для RStudio и всех проектов, над которыми вы работаете.</p>
+<section id="как-открыть-общие-настройки" class="level3">
+<h3 class="anchored" data-anchor-id="как-открыть-общие-настройки">Как открыть общие настройки</h3>
+<ul>
+<li>Через меню: <strong>Tools → Global Options</strong>.</li>
+<li>Горячая клавиша в macOS: <code>Cmd + ,</code>.</li>
+</ul>
+<p>На этом этапе уже понятны настройки, которые относятся к внешнему виду самого окна:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Что требуется найти</th>
+<th>Путь в окне <code>Global Options</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Тема RStudio, тема редактора и размер шрифта</td>
+<td><strong>Appearance</strong></td>
+</tr>
+<tr class="even">
+<td>Расположение вкладок по областям окна</td>
+<td><strong>Pane Layout</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Внешний вид и расположение областей можно настроить под привычный способ работы. <strong>Остальные параметры будут появляться далее, когда станут понятны связанные с ними элементы RStudio.</strong></p>
+</section>
+</section>
+<section id="консоль-и-первая-команда" class="level2">
+<h2 class="anchored" data-anchor-id="консоль-и-первая-команда">Консоль и первая команда</h2>
+<p>После открытия RStudio можно сразу начать работать с консолью. На свободной строке находится приглашение <code>&gt;</code>: оно означает, что R готов принять новую команду.</p>
+<p>Первой командой может стать простое выражение:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>После нажатия <code>Enter</code> R печатает результат:</p>
+<pre class="text"><code>[1] 4</code></pre>
+<p><code>[1]</code> показывает номер первого напечатанного элемента в этой строке. Сам результат вычисления здесь – <code>4</code>.</p>
+<p>На этом примере виден основной цикл интерактивной работы:</p>
+<ol type="1">
+<li>R получает фрагмент кода</li>
+<li>Разбирает его запись</li>
+<li>Выполняет команду</li>
+<li>Возвращает результат, сообщение или ошибку.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Что такое сессия R">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Что такое сессия R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Сессия R – это период работы запущенной программы R: от запуска или перезапуска до закрытия. В течение сессии R хранит созданные объекты, историю команд и некоторые результаты.</p>
+</div>
+</div>
+<p>В обычной интерактивной работе консоль связывает пользователя с текущей сессией R. Команду можно напечатать непосредственно в консоли, позднее – отправить из скрипта или запустить из блока кода в документе. Вычисления выполняет R, а консоль показывает ход этого диалога.</p>
+<p>Если передать незавершённый фрагмент (<em>например с незакрытой скобкой</em>), то приглашение <code>&gt;</code> может смениться на <code>+</code>: так R показывает, что ожидает продолжения.</p>
+<p>Консоль можно визуально очистить сочетанием <code>Ctrl + L</code>. Очистка окна не отменяет выполненные вычисления и не удаляет созданные объекты. Незавершённую команду (<em>если она долго вычисляется</em>) можно отменить клавишей <code>Esc</code>.</p>
+</section>
+<section id="проект-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="проект-rstudio">Проект RStudio</h2>
+<p>Когда работа перестаёт быть “одноразовой”, а анализ предвещает быть большим и независимым, то такую работу удобно оформить как <strong>проект</strong>.</p>
+<p>Проект – это папка, в которой собраны связанные файлы одной работы: код, данные, результаты и другие материалы. Файл с расширением <code>.Rproj</code> сообщает RStudio, какая папка является началом проекта и содержит его настройки.</p>
+<p>Проект и сессия – не одно и то же. Проект объединяет файлы на диске, а сессия описывает текущее состояние работающей R.</p>
+<p>Создание проекта начинается с <strong>File → New Project</strong>. RStudio предлагает создать для него новую папку или превратить в проект уже существующую.</p>
+<p>Позднее проект можно открыть двойным щелчком по файлу <code>*.Rproj</code> или через меню RStudio <strong>File → Open Project…</strong> или <strong>File → Recent Projects</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Настройки текущего проекта">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Настройки текущего проекта
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Настройки открытого проекта находятся в меню <strong>Project → Project Options</strong>. Они относятся только к текущему проекту и могут переопределять часть глобальных параметров. Горячая клавиша в macOS: <code>Shift + Cmd + ,</code>.</p>
+</div>
+</div>
+<p>Проекты помогают:</p>
+<ul>
+<li>Не смешивать файлы разных работ</li>
+<li>Быстро переключаться между задачами</li>
+<li>Переносить связанную работу целиком</li>
+<li>Восстанавливать удобный рабочий контекст</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="Воспроизводимость анализа в проекте">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Воспроизводимость анализа в проекте
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>.Rproj</code> не учитывает и не записывает используемые данные, а также не фиксирует версии использованных пакетов. Для воспроизводимости анализа в папке проекта должны находиться необходимые файлы, в том числе код.</p>
+</div>
+</div>
+<section id="файлы-внутри-проекта" class="level3">
+<h3 class="anchored" data-anchor-id="файлы-внутри-проекта">Файлы внутри проекта</h3>
+<p>RStudio работает не только с R-скриптами. В одной папке проекта могут находиться файлы нескольких типов.</p>
+<ul>
+<li>Файл проекта
+<ul>
+<li><code>.Rproj</code> – настройки и точка входа проекта RStudio.</li>
+</ul></li>
+<li>Код
+<ul>
+<li><code>.R</code> – обычный скрипт с кодом R</li>
+<li><code>.cpp</code>, <code>.py</code> и другие расширения – исходный код на других языках, с которыми также может работать редактор RStudio.</li>
+</ul></li>
+<li>Документы с текстом (markdown) и кодом (Подробнее в разделе <a href="#r-markdown-quarto">«R Markdown и Quarto»</a>)
+<ul>
+<li><code>.Rmd</code> – документ R Markdown</li>
+<li><code>.qmd</code> – документ Quarto.</li>
+</ul></li>
+<li>Готовые документы (<code>.html</code>, <code>.docx</code>, <code>.pdf</code>)</li>
+<li>Данные и изображения (<code>.csv</code>, <code>.tsv</code>, <code>.xlsx</code>, <code>.png</code>, <code>.jpg</code> и другие)</li>
+<li>Состояние сессии (Подробнее в подразделе <a href="#session-files"><code>.RData</code> и <code>.Rhistory</code></a>)
+<ul>
+<li><code>.RData</code> – сохранённые объекты (<em>в т.ч. переменные</em>)</li>
+<li><code>.Rhistory</code> – история выполненных команд.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Расширение указывает на тип файла">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Расширение указывает на тип файла
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Расширение – часть имени после последней точки. Оно помогает RStudio и другим программам определить назначение файла и способ его обработки.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Кодировка текстовых файлов">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Кодировка текстовых файлов
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Параметры кодировки находятся в <strong>Tools → Global Options → Code → Saving</strong>. Обычно менять их специально не требуется, но этот раздел может понадобиться, <strong>если текст на русском языке отображается неправильно</strong>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="скрипт-и-область-source" class="level2">
+<h2 class="anchored" data-anchor-id="скрипт-и-область-source">Скрипт и область Source</h2>
+<p>Команды можно вводить в консоли, но последовательность действий удобнее сохранять в скрипте – обычном текстовом файле с расширением <code>.R</code>.</p>
+<p>Новый пустой скрипт сначала существует только как открытая вкладка. После сохранения он получает имя и появляется в папке проекта на вкладке <code>Files</code>. <strong>Пока файл не сохранён, его название во вкладке окрашено и рядом с ним отображается звёздочка <code>*</code>.</strong></p>
+<p>Выделенный код из скрипта выполняется сочетанием <code>Ctrl(Cmd) + Enter</code>. Если ничего не выделено, то RStudio отправляет в консоль текущую строку (<em>где находится ваш курсор</em>). Можно выполнить целую строку, несколько строк или часть выражения: выделенный фрагмент выполняется отдельно от остального кода.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Настройки редактора">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Настройки редактора
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Параметры редактора находятся в <strong>Tools → Global Options → Code</strong>. Разделы <strong>Editing</strong>, <strong>Display</strong> и <strong>Completion</strong> отвечают за поведение редактора, отображение кода и автодополнение.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Скрипт и консоль выполняют разные роли">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Скрипт и консоль выполняют разные роли
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Консоль удобна для быстрых экспериментов и показывает ход текущей работы. Скрипт сохраняет последовательность команд, которую можно прочитать, изменить и выполнить повторно.</p>
+</div>
+</div>
+<section id="комментарии" class="level3">
+<h3 class="anchored" data-anchor-id="комментарии">Комментарии</h3>
+<p>В R всё после символа <code>#</code> до конца строки считается комментарием и не выполняется:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Это комментарий</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Комментарии объясняют назначение фрагмента кода. Ими также можно временно отключить несколько строк. Выделенные строки комментируются и раскомментируются сочетанием <code>Ctrl(Cmd) + Shift + C</code>.</p>
+</section>
+</section>
+<section id="сессия-r-объекты-и-история-команд" class="level2">
+<h2 class="anchored" data-anchor-id="сессия-r-объекты-и-история-команд">Сессия R: объекты и история команд</h2>
+<p>После выполнения команды результат может появиться в разных областях RStudio:</p>
+<ul>
+<li><code>2 + 2</code> – число печатается в <code>Console</code></li>
+<li><code>x = 2</code> – объект <code>x</code> появляется в <code>Environment</code></li>
+<li><code>View(iris)</code> – таблица открывается в отдельной вкладке просмотра</li>
+<li><code>plot(iris)</code> – график появляется во вкладке <code>Plots</code></li>
+<li><code>?plot</code> – документация открывается во вкладке <code>Help</code>.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Код и результат могут находиться в разных областях">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Код и результат могут находиться в разных областях
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Код остаётся в редакторе <code>Source</code>, выполняется в текущей сессии R через консоль, а результат отображается там, где его удобнее рассматривать: в <code>Console</code>, <code>Environment</code>, <code>Plots</code>, <code>Help</code> или отдельной вкладке просмотра данных.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Демонстрация: данные, график и справка (разверни)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Для первых экспериментов не обязательно загружать собственный файл. В R есть встроенные наборы данных, например <code>iris</code>.</p>
+<p>Если выполнить имя объекта:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>iris</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>R напечатает таблицу в консоли. Для большой таблицы такой способ неудобен, поэтому её можно открыть в отдельной вкладке:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(iris)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Тот же набор данных можно передать функции построения графика:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>График появляется на вкладке <code>Plots</code>. В данном случае R выбирает способ отображения, подходящий для таблицы с несколькими переменными. Содержимое <code>Plots</code> относится к текущей сессии, а сохранённая строка <code>plot(iris)</code> позволяет построить изображение заново.</p>
+<p>Описание функции во вкладке <code>Help</code> открывается знаком вопроса:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>?plot</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Два вопросительных знака выполняют более широкий поиск по установленной справке:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>??scatterplot</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<section id="environment" class="level3">
+<h3 class="anchored" data-anchor-id="environment">Environment</h3>
+<p>Следующий код создаёт объекты <code>x</code> и <code>y</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>После выполнения кода имена <code>x</code> и <code>y</code> появляются в <code>Environment</code> вместе с их значениями.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Знак присваивания">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Знак присваивания
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>R допускает присваивание с помощью знака <code>=</code>. Другие варианты записи присваивания будут рассмотрены позднее.</p>
+</div>
+</div>
+<p>К сохранённому объекту можно обратиться по имени:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>[1] 2</code></pre>
+<p>Пока <code>x</code> существует в текущей сессии, R понимает это имя даже в другом открытом файле. Это удобно, <strong>но может стать источником ошибки</strong>. Если скрипт использует <code>x</code>, но нигде его не создаёт, он работает только благодаря старому объекту в <code>Environment</code>. После чистого перезапуска R или на другом компьютере появится сообщение <code>object 'x' not found</code>.</p>
+<p>Ненужные объекты можно удалить по одному или очистить всё окружение кнопкой с изображением метлы. Очистка <code>Environment</code> не изменяет сохранённый скрипт.</p>
+</section>
+<section id="history" class="level3">
+<h3 class="anchored" data-anchor-id="history">History</h3>
+<p>Вкладка <code>History</code> содержит команды, отправляемые в R.</p>
+<p>Сохранение строки в скрипте не добавляет её в историю: команда появляется там только после выполнения. Команда, введённая непосредственно в консоли, тоже попадает в историю, хотя её может не быть ни в одном скрипте.</p>
+<p>История помогает найти недавний эксперимент, но не заменяет упорядоченный код. В ней подряд сохраняются удачные команды, ошибки и случайные проверки. <strong>В консоли можно использовать стрелку вверх, чтобы листать предыдущие команды.</strong></p>
+</section>
+<section id="session-files" class="level3">
+<h3 class="anchored" data-anchor-id="session-files"><code>.RData</code> и <code>.Rhistory</code></h3>
+<p>При закрытии сессии RStudio может предложить сохранить рабочее пространство. <code>.RData</code> и <code>.Rhistory</code> – это файлы на диске:</p>
+<ul>
+<li><code>.RData</code> хранит объекты из <code>Environment</code>;</li>
+<li><code>.Rhistory</code> хранит последовательность выполненных команд.</li>
+</ul>
+<p>Если восстановление рабочей сессии включено, при повторном открытии проекта объекты из <code>.RData</code> загружаются в память R, а команды из <code>.Rhistory</code> появляются в истории.</p>
+<p>Автоматическое восстановление может быть удобным для продолжения работы, но большой файл <code>.RData</code> способен замедлить запуск и вернуть объекты, происхождение которых не видно из текущего скрипта. Начало работы с пустым <code>Environment</code> помогает проверить, что все необходимые объекты создаются сохранённым кодом.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Сохранение и восстановление сессии">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Сохранение и восстановление сессии
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Параметры восстановления <code>.RData</code>, сохранения workspace и истории при завершении работы находятся в <strong>Tools → Global Options → General → Basic</strong>. Для отдельного проекта часть этого поведения можно изменить через <strong>Project → Project Options</strong>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Проверка воспроизводимости (разверни)">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Проверка воспроизводимости (разверни)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Связь между сессией и скриптом хорошо видна в последовательности <strong>Restart R → Run All</strong>. Перезапуск начинает новую сессию с пустым <code>Environment</code>, а выполнение всего сохранённого скрипта заново создаёт описанные в нём объекты. Если необходимые объекты появляются снова, их создание зафиксировано в коде и не зависит от состояния предыдущей сессии.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="r-markdown-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="r-markdown-quarto">R Markdown и Quarto</h2>
+<p>R Markdown (<code>.Rmd</code>) и Quarto (<code>.qmd</code>) нужны для создания воспроизводимых документов, в которых поясняющий текст, код и его результаты находятся вместе. По этой идее они похожи на Jupyter Notebook: вычисления можно сопровождать комментариями, таблицами и графиками.</p>
+<p>Файл R Markdown создаётся через <strong>File → New File → R Markdown…</strong>, а файл Quarto – через <strong>File → New File → Quarto Document…</strong>.</p>
+<p>Кнопка <strong>Knit</strong> в R Markdown и кнопка <strong>Render</strong> в Quarto запускают код, вставляют полученные результаты в документ и создают готовый файл, например <code>.html</code>, <code>.docx</code> или <code>.pdf</code>. Если код или данные изменились, документ можно собрать заново.</p>
+</section>
+<section id="памятка-по-сочетаниям-клавиш" class="level2">
+<h2 class="anchored" data-anchor-id="памятка-по-сочетаниям-клавиш">Памятка по сочетаниям клавиш</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Просмотр и изменение горячих клавиш">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Просмотр и изменение горячих клавиш
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Список назначенных сочетаний клавиш открывается через <strong>Help → Keyboard Shortcut Help</strong> или <code>Alt(Option) + Shift + K</code>. Изменить сочетания можно через <strong>Tools → Modify Keyboard Shortcuts</strong>. Все сочетания сразу запоминать не требуется.</p>
+</div>
+</div>
+<section id="основные-сочетания" class="level3">
+<h3 class="anchored" data-anchor-id="основные-сочетания">Основные сочетания</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Действие</th>
+<th>Сочетание</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Сохранить активный документ</td>
+<td><code>Ctrl(Cmd) + S</code></td>
+</tr>
+<tr class="even">
+<td>Выполнить текущую строку или выделение</td>
+<td><code>Ctrl(Cmd) + Enter</code></td>
+</tr>
+<tr class="odd">
+<td>Перейти в <code>Source</code></td>
+<td><code>Ctrl + 1</code></td>
+</tr>
+<tr class="even">
+<td>Перейти в <code>Console</code></td>
+<td><code>Ctrl + 2</code></td>
+</tr>
+<tr class="odd">
+<td>Прервать вычисление или отменить незавершённую команду</td>
+<td><code>Esc</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled" title="Если неизвестно, в каком меню находится команда">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Если неизвестно, в каком меню находится команда
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Палитра команд открывается сочетанием <code>Ctrl(Cmd) + Shift + P</code>. В ней можно начать вводить название действия или настройки, например <code>pane layout</code>, <code>new script</code> или <code>keyboard shortcuts</code>, а затем выбрать найденную команду.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="типичные-ситуации-что-делать" class="level2">
+<h2 class="anchored" data-anchor-id="типичные-ситуации-что-делать">Типичные ситуации (ЧТО ДЕЛАТЬ?)</h2>
+<section id="в-консоли-вместо-отображается" class="level3">
+<h3 class="anchored" data-anchor-id="в-консоли-вместо-отображается">В консоли вместо <code>&gt;</code> отображается <code>+</code></h3>
+<p>R считает выражение незавершённым. Обычно не закрыта скобка или кавычка. Выражение можно завершить либо отменить клавишей <code>Esc</code>.</p>
+</section>
+<section id="объект-есть-в-environment-но-его-нет-в-скрипте" class="level3">
+<h3 class="anchored" data-anchor-id="объект-есть-в-environment-но-его-нет-в-скрипте">Объект есть в <code>Environment</code>, но его нет в скрипте</h3>
+<p>Объект создаётся вручную в консоли или восстанавливается из <code>.RData</code>. Для воспроизводимости код создания такого объекта должен находиться в скрипте.</p>
+</section>
+<section id="возникла-ошибка-object-not-found" class="level3">
+<h3 class="anchored" data-anchor-id="возникла-ошибка-object-not-found">Возникла ошибка <code>object not found</code></h3>
+<p>R не знает указанного имени в текущей сессии. Причиной может быть опечатка, другой регистр букв или отсутствие более ранней команды, создающей объект.</p>
+</section>
+<section id="код-записан-в-скрипте-но-ничего-не-происходит" class="level3">
+<h3 class="anchored" data-anchor-id="код-записан-в-скрипте-но-ничего-не-происходит">Код записан в скрипте, но ничего не происходит</h3>
+<p>Текст в редакторе не выполняется автоматически. Для выполнения текущая строка или выделенный фрагмент должны быть отправлены в R.</p>
+</section>
+<section id="команда-есть-в-скрипте-но-отсутствует-в-history" class="level3">
+<h3 class="anchored" data-anchor-id="команда-есть-в-скрипте-но-отсутствует-в-history">Команда есть в скрипте, но отсутствует в <code>History</code></h3>
+<p>Запись команды в файл не добавляет её в историю. <code>History</code> фиксирует выполненные действия сессии, а не содержимое файлов.</p>
+</section>
+<section id="файл-не-отображается-на-вкладке-files" class="level3">
+<h3 class="anchored" data-anchor-id="файл-не-отображается-на-вкладке-files">Файл не отображается на вкладке <code>Files</code></h3>
+<p>Скорее всего, новый документ ещё не сохранён или сохранён вне папки проекта.</p>
+<!-- ## Основные тезисы -->
+<!-- 1.  RStudio предоставляет рабочую среду для взаимодействия с R. -->
+<!-- 2.  Окно RStudio объединяет редактор, консоль, состояние сессии, файлы и разные виды результатов. -->
+<!-- 3.  Глобальные настройки определяют общее поведение RStudio, а проектные -- поведение отдельной работы. -->
+<!-- 4.  Консоль показывает команды и результаты текущей интерактивной сессии. -->
+<!-- 5.  Проект объединяет файлы одной работы и задаёт её начальную папку. -->
+<!-- 6.  Скрипт сохраняет последовательность команд, которую можно выполнить повторно. -->
+<!-- 7.  `Environment`, `History`, `.RData` и `.Rhistory` описывают состояние и историю сессии, но не заменяют сохранённый код. -->
+<!-- 8.  R Markdown и Quarto объединяют текст, код и результаты в одном исходном документе. -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/r-lang-vladissta\.github\.io\/r-course\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

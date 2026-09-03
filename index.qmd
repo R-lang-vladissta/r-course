@@ -60,10 +60,12 @@ toc-title: "На странице"
 ::::: resource-list
 :::: {.resource-row .resource-row-simple}
 ::: resource-info
-[—]{.resource-number}
+[01]{.resource-number}
 
 ::: resource-copy
-[Материалы будут добавлены]{.resource-title .resource-title-muted}
+[Знакомство с RStudio](practices/01-rstudio-project/rstudio-lecture.qmd){.resource-title}
+
+[Интерфейс, консоль, проекты, скрипты и сессия R]{.resource-meta}
 :::
 :::
 ::::
