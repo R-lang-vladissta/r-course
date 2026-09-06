@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Занятие 2. Синтаксис и вычисление в R – Язык R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Занятие 2. Синтаксис и вычисление в R – Язык R">
+<meta property="og:description" content="Выражения, объекты, функции и ошибки">
+<meta property="og:site_name" content="Язык R">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Язык R</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Главная</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#sec-calculator" id="toc-sec-calculator" class="nav-link active" data-scroll-target="#sec-calculator"><span class="header-section-number">1</span> R как калькулятор</a>
+  <ul class="collapse">
+  <li><a href="#арифметические-операторы" id="toc-арифметические-операторы" class="nav-link" data-scroll-target="#арифметические-операторы"><span class="header-section-number">1.1</span> Арифметические операторы</a></li>
+  <li><a href="#порядок-вычислений" id="toc-порядок-вычислений" class="nav-link" data-scroll-target="#порядок-вычислений"><span class="header-section-number">1.2</span> Порядок вычислений</a></li>
+  <li><a href="#запись-чисел-и-оформление-выражений" id="toc-запись-чисел-и-оформление-выражений" class="nav-link" data-scroll-target="#запись-чисел-и-оформление-выражений"><span class="header-section-number">1.3</span> Запись чисел и оформление выражений</a></li>
+  </ul></li>
+  <li><a href="#sec-assignment" id="toc-sec-assignment" class="nav-link" data-scroll-target="#sec-assignment"><span class="header-section-number">2</span> Присваивание и имена объектов</a>
+  <ul class="collapse">
+  <li><a href="#три-способа-присваивания" id="toc-три-способа-присваивания" class="nav-link" data-scroll-target="#три-способа-присваивания"><span class="header-section-number">2.1</span> Три способа присваивания</a></li>
+  <li><a href="#как-называть-объекты" id="toc-как-называть-объекты" class="nav-link" data-scroll-target="#как-называть-объекты"><span class="header-section-number">2.2</span> Как называть объекты</a></li>
+  </ul></li>
+  <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">3</span> Встроенные функции</a>
+  <ul class="collapse">
+  <li><a href="#математические-функции" id="toc-математические-функции" class="nav-link" data-scroll-target="#математические-функции"><span class="header-section-number">3.1</span> Математические функции</a></li>
+  <li><a href="#аргументы-функций" id="toc-аргументы-функций" class="nav-link" data-scroll-target="#аргументы-функций"><span class="header-section-number">3.2</span> Аргументы функций</a></li>
+  </ul></li>
+  <li><a href="#sec-types" id="toc-sec-types" class="nav-link" data-scroll-target="#sec-types"><span class="header-section-number">4</span> Основные типы и специальные значения</a>
+  <ul class="collapse">
+  <li><a href="#числовые-типы" id="toc-числовые-типы" class="nav-link" data-scroll-target="#числовые-типы"><span class="header-section-number">4.1</span> Числовые типы</a>
+  <ul class="collapse">
+  <li><a href="#double" id="toc-double" class="nav-link" data-scroll-target="#double"><span class="header-section-number">4.1.1</span> <code>double</code></a></li>
+  <li><a href="#integer" id="toc-integer" class="nav-link" data-scroll-target="#integer"><span class="header-section-number">4.1.2</span> <code>integer</code></a></li>
+  <li><a href="#complex" id="toc-complex" class="nav-link" data-scroll-target="#complex"><span class="header-section-number">4.1.3</span> <code>complex</code></a></li>
+  </ul></li>
+  <li><a href="#логический-тип" id="toc-логический-тип" class="nav-link" data-scroll-target="#логический-тип"><span class="header-section-number">4.2</span> Логический тип</a></li>
+  <li><a href="#текстовый-тип" id="toc-текстовый-тип" class="nav-link" data-scroll-target="#текстовый-тип"><span class="header-section-number">4.3</span> Текстовый тип</a></li>
+  <li><a href="#тип-raw" id="toc-тип-raw" class="nav-link" data-scroll-target="#тип-raw"><span class="header-section-number">4.4</span> Тип <code>raw</code></a></li>
+  <li><a href="#проверка-и-преобразование-типов" id="toc-проверка-и-преобразование-типов" class="nav-link" data-scroll-target="#проверка-и-преобразование-типов"><span class="header-section-number">4.5</span> Проверка и преобразование типов</a></li>
+  <li><a href="#sec-special-values" id="toc-sec-special-values" class="nav-link" data-scroll-target="#sec-special-values"><span class="header-section-number">4.6</span> Специальные значения</a>
+  <ul class="collapse">
+  <li><a href="#na-неизвестное-значение" id="toc-na-неизвестное-значение" class="nav-link" data-scroll-target="#na-неизвестное-значение"><span class="header-section-number">4.6.1</span> <code>NA</code>: неизвестное значение</a></li>
+  <li><a href="#nan-неопределённый-числовой-результат" id="toc-nan-неопределённый-числовой-результат" class="nav-link" data-scroll-target="#nan-неопределённый-числовой-результат"><span class="header-section-number">4.6.2</span> <code>NaN</code>: неопределённый числовой результат</a></li>
+  <li><a href="#inf-и--inf-бесконечные-числа" id="toc-inf-и--inf-бесконечные-числа" class="nav-link" data-scroll-target="#inf-и--inf-бесконечные-числа"><span class="header-section-number">4.6.3</span> <code>Inf</code> и <code>-Inf</code>: бесконечные числа</a></li>
+  <li><a href="#null-отсутствие-значения" id="toc-null-отсутствие-значения" class="nav-link" data-scroll-target="#null-отсутствие-значения"><span class="header-section-number">4.6.4</span> <code>NULL</code>: отсутствие значения</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-logical" id="toc-sec-logical" class="nav-link" data-scroll-target="#sec-logical"><span class="header-section-number">5</span> Сравнения и логические выражения</a>
+  <ul class="collapse">
+  <li><a href="#логические-операторы" id="toc-логические-операторы" class="nav-link" data-scroll-target="#логические-операторы"><span class="header-section-number">5.1</span> Логические операторы</a></li>
+  <li><a href="#приоритет-в-составных-логических-выражениях" id="toc-приоритет-в-составных-логических-выражениях" class="nav-link" data-scroll-target="#приоритет-в-составных-логических-выражениях"><span class="header-section-number">5.2</span> Приоритет в составных логических выражениях</a></li>
+  </ul></li>
+  <li><a href="#sec-service-syntax" id="toc-sec-service-syntax" class="nav-link" data-scroll-target="#sec-service-syntax"><span class="header-section-number">6</span> Служебный синтаксис</a>
+  <ul class="collapse">
+  <li><a href="#конец-выражения-и-точка-с-запятой" id="toc-конец-выражения-и-точка-с-запятой" class="nav-link" data-scroll-target="#конец-выражения-и-точка-с-запятой"><span class="header-section-number">6.1</span> Конец выражения и точка с запятой</a></li>
+  <li><a href="#фигурные-скобки" id="toc-фигурные-скобки" class="nav-link" data-scroll-target="#фигурные-скобки"><span class="header-section-number">6.2</span> Фигурные скобки</a></li>
+  <li><a href="#ошибки-и-предупреждения" id="toc-ошибки-и-предупреждения" class="nav-link" data-scroll-target="#ошибки-и-предупреждения"><span class="header-section-number">6.3</span> Ошибки и предупреждения</a></li>
+  <li><a href="#зарезервированные-слова" id="toc-зарезервированные-слова" class="nav-link" data-scroll-target="#зарезервированные-слова"><span class="header-section-number">6.4</span> Зарезервированные слова</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Занятие 2. Синтаксис и вычисление в R</h1>
+<p class="subtitle lead">Выражения, объекты, функции и ошибки</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-calculator" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> R как калькулятор</h1>
+<p>В R можно выполнять математические операции – почти как на обычном калькуляторе:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">*</span> <span class="dv">5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p>Каждая строка здесь представляет собой <strong>выражение</strong> – фрагмент кода, который R может вычислить и превратить в значение.</p>
+<section id="арифметические-операторы" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="арифметические-операторы"><span class="header-section-number">1.1</span> Арифметические операторы</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 50%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Оператор</th>
+<th>Операция</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td>сложение</td>
+<td><code>10 + 3</code></td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td>вычитание</td>
+<td><code>10 - 3</code></td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>умножение</td>
+<td><code>10 * 3</code></td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td>деление</td>
+<td><code>10 / 3</code></td>
+</tr>
+<tr class="odd">
+<td><code>^</code></td>
+<td>возведение в степень</td>
+<td><code>10 ^ 3</code></td>
+</tr>
+<tr class="even">
+<td><code>%/%</code></td>
+<td>целочисленное деление; частное округляется вниз</td>
+<td><code>17 %/% 5</code></td>
+</tr>
+<tr class="odd">
+<td><code>%%</code></td>
+<td>остаток от деления</td>
+<td><code>17 %% 5</code></td>
+</tr>
+</tbody>
+</table>
+<p>Для положительных чисел <code>%/%</code> совпадает с привычным выделением целой части. Для отрицательных чисел важно именно округление вниз: <code>-17 %/% 5</code> возвращает <code>-4</code>.</p>
+</section>
+<section id="задание-штативы-для-пробирок" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="задание-штативы-для-пробирок">Задание: штативы для пробирок</h2>
+<p>В один штатив помещается 8 пробирок. В лабораторию поступило 53 пробирки.</p>
+<ol type="1">
+<li>Сколько полных штативов можно заполнить?</li>
+<li>Сколько пробирок останется?</li>
+</ol>
+<p>Запишите два выражения.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Полные штативы</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Оставшиеся пробирки</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="порядок-вычислений" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="порядок-вычислений"><span class="header-section-number">1.2</span> Порядок вычислений</h2>
+<p>Порядок операций влияет на результат. R следует привычным арифметическим правилам: умножение и деление выполняются раньше сложения и вычитания, а выражение в скобках – раньше операции за скобками.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Приоритет арифметических операторов">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Приоритет арифметических операторов
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>R вычисляет изученные операции в следующем порядке:</p>
+<ol type="1">
+<li>выражения в круглых скобках</li>
+<li>возведение в степень <code>^</code></li>
+<li>унарные <code>+</code> и <code>-</code></li>
+<li>целочисленное деление <code>%/%</code> и остаток <code>%%</code></li>
+<li>умножение <code>*</code> и деление <code>/</code></li>
+<li>сложение <code>+</code> и вычитание <code>-</code></li>
+</ol>
+<p>Если порядок трудно увидеть сразу, используйте скобки, чтобы указать явно.</p>
+</div>
+</div>
+<p>Сначала предположите результат каждого выражения и определите первую операцию. Затем выполните строки по очереди и проверьте себя.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">/</span> <span class="dv">5</span> <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>(<span class="dv">100</span> <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> (<span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Неочевидный случай">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Неочевидный случай
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Возведение в степень имеет более высокий приоритет, чем унарный минус:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="dv">2</span> <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="sc">-</span><span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>В первом выражении R сначала вычисляет <code>2 ^ 2</code>, а затем меняет знак. Во втором отрицательное число заключено в скобки и возводится в степень целиком.</p>
+</div>
+</div>
+</section>
+<section id="запись-чисел-и-оформление-выражений" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="запись-чисел-и-оформление-выражений"><span class="header-section-number">1.3</span> Запись чисел и оформление выражений</h2>
+<ol type="1">
+<li><strong>В R дробная часть числа отделяется точкой:</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3.14</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+</div>
+<p>Запись с запятой не обозначает десятичную дробь и приводит к синтаксической ошибке:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>,<span class="dv">14</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Пробелы вокруг арифметических операторов не меняют результат:</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Как принято">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Как принято
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В R принято ставить пробелы вокруг бинарных операторов. Выделенный фрагмент кода можно автоматически привести в порядок командой <strong>Code → Reformat Code</strong>: <code>Ctrl + Shift + A</code> в Windows и Linux или <code>Cmd + Shift + A</code> в macOS.</p>
+</div>
+</div>
+</section>
+<section id="задание-приготовление-реакционной-смеси" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="задание-приготовление-реакционной-смеси">Задание: приготовление реакционной смеси</h2>
+<p>Для одного образца требуется 20 мкл реакционной смеси. Планируется обработать 24 образца. Смесь готовят с дополнительным объёмом 10%, а затем делят поровну между четырьмя пробирками.</p>
+<p>Вычислите:</p>
+<ol type="1">
+<li>объём смеси без запаса</li>
+<li>объём смеси с запасом 10%</li>
+<li>объём смеси в каждой из четырёх пробирок.</li>
+</ol>
+<p><em>Не забудьте учесть порядок вычислений!</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Объём без запаса</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Объём с запасом 10%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Объём в одной пробирке</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-assignment" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Присваивание и имена объектов</h1>
+<p>Значения можно один раз сохранить под понятными именами, а затем использовать эти имена в формулах:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sample_count <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>volume_per_sample <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>volume_without_reserve <span class="ot">&lt;-</span> sample_count <span class="sc">*</span> volume_per_sample</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>volume_without_reserve</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 480</code></pre>
+</div>
+</div>
+<p>Оператор <code>&lt;-</code> связывает имя слева со значением, вычисленным справа. Присваивание само по себе обычно не печатает результат. Проще всего увидеть сохранённое значение, выполнив имя объекта отдельной строкой.</p>
+<section id="три-способа-присваивания" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="три-способа-присваивания"><span class="header-section-number">2.1</span> Три способа присваивания</h2>
+<p>В R работают три обычные формы присваивания:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span> <span class="ot">-&gt;</span> z</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Запись</th>
+<th>Как её читать</th>
+<th>Использование</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x &lt;- 10</code></td>
+<td>значение справа присвоить имени слева</td>
+<td>общепринятая запись для создания объектов</td>
+</tr>
+<tr class="even">
+<td><code>x = 10</code></td>
+<td>значение справа присвоить имени слева</td>
+<td>работает, но <code>=</code> обычно используют для аргументов функций</td>
+</tr>
+<tr class="odd">
+<td><code>10 -&gt; x</code></td>
+<td>значение слева присвоить имени справа</td>
+<td>допустимо, но встречается редко</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled" title="Как принято">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Как принято
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Для присваивания объектов обычно используют <code>&lt;-</code>. Знак <code>=</code> оставляют прежде всего для именованных аргументов функций. Такое различие помогает не запутаться и разделять два разных действия.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="<-">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+&lt;-
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В RStudio стрелку <code>&lt;-</code> можно вставить сочетанием <code>Alt(Option) + -</code>.</p>
+</div>
+</div>
+<p>Имя связывается с уже вычисленным значением. Изменение одного объекта не изменяет автоматически другие объекты:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p><code>b</code> остаётся равным <code>5</code>: новое присваивание изменило связь имени <code>a</code>, но не пересчитало <code>b</code>. По той же причине ранее рассчитанная формула не обновится сама после изменения исходных данных – <strong>строку с расчётом нужно выполнить заново</strong>.</p>
+</section>
+<section id="как-называть-объекты" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="как-называть-объекты"><span class="header-section-number">2.2</span> Как называть объекты</h2>
+<p>Имя должно кратко и понятно описывать сохранённое значение. Для имён из нескольких слов обычно используют стиль <code>snake_case</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sample_count <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>volume_per_sample <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>reserve_fraction <span class="ot">&lt;-</span> <span class="fl">0.10</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Основные правила:</p>
+<ul>
+<li>R <strong>различает регистр</strong>: <code>sample_count</code> и <code>Sample_count</code> – разные имена</li>
+<li>Обычное синтаксическое имя <strong>может</strong> содержать буквы, цифры, точки и знаки подчёркивания</li>
+<li>Имя <strong>не может</strong> начинаться с цифры или <code>_</code></li>
+<li>Точка в начале допустима, если сразу после неё не стоит цифра: <code>.sample</code> допустимо, а <code>.2sample</code> – нет</li>
+<li>Пробел и дефис нельзя использовать внутри обычного синтаксического имени</li>
+<li>Лучше не использовать имена распространённых функций, например <code>mean</code> или <code>sum</code>: такой код труднее читать.</li>
+</ul>
+<p>Такие записи некорректны:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>samples <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>sample count <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>sample<span class="sc">-</span>mean <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>_sample <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>.<span class="dv">2</span>sample <span class="ot">&lt;-</span> <span class="dv">24</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="задание-перепишем-расчёт-с-именами" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="задание-перепишем-расчёт-с-именами">Задание: перепишем расчёт с именами</h2>
+<p>Для одного образца требуется 20 мкл реакционной смеси. Нужно обработать 24 образца, приготовить дополнительно 10% смеси и разделить итоговый объём поровну между четырьмя пробирками.</p>
+<p>Сохраните исходные данные под следующими именами:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Имя объекта</th>
+<th>Что оно обозначает</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>volume_per_sample</code></td>
+<td>объём смеси для одного образца, мкл</td>
+<td><code>20</code></td>
+</tr>
+<tr class="even">
+<td><code>sample_count</code></td>
+<td>количество образцов</td>
+<td><code>24</code></td>
+</tr>
+<tr class="odd">
+<td><code>reserve_fraction</code></td>
+<td>дополнительная доля смеси: 10% = 0,10</td>
+<td><code>0.10</code></td>
+</tr>
+<tr class="even">
+<td><code>tube_count</code></td>
+<td>количество пробирок, между которыми делят смесь</td>
+<td><code>4</code></td>
+</tr>
+</tbody>
+</table>
+<p>Затем создайте два новых объекта:</p>
+<ul>
+<li><code>total_volume</code> — общий объём смеси для всех образцов с учётом запаса 10%;</li>
+<li><code>volume_per_tube</code> — объём смеси в одной пробирке после деления <code>total_volume</code> на четыре равные части.</li>
+</ul>
+<p>После первого расчёта измените только <code>sample_count</code> на <code>30</code>. Сначала предположите, какие рассчитанные объекты должны измениться, а затем повторно выполните только необходимые строки. Когда исходные данные хранятся отдельно от формул, каждое значение достаточно изменить в одном месте.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Исходные данные</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Расчёты</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-functions" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Встроенные функции</h1>
+<p>Функция – это готовая команда с именем, которая получает входные значения, выполняет действие и возвращает результат. Чтобы вызвать функцию, после её имени ставят круглые скобки <code>()</code>, а внутри записывают аргументы.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">81</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<p>Здесь <code>sqrt</code> – имя функции, <code>81</code> – её аргумент, а <code>9</code> – возвращаемое значение. Результат можно сразу использовать или присвоить имени:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>square_root <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">81</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>square_root</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<section id="математические-функции" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="математические-функции"><span class="header-section-number">3.1</span> Математические функции</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 57%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Функция</th>
+<th>Что делает</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sqrt()</code></td>
+<td>вычисляет квадратный корень</td>
+<td><code>sqrt(144)</code></td>
+</tr>
+<tr class="even">
+<td><code>abs()</code></td>
+<td>возвращает модуль числа</td>
+<td><code>abs(-7)</code></td>
+</tr>
+<tr class="odd">
+<td><code>log()</code></td>
+<td>вычисляет натуральный логарифм</td>
+<td><code>log(10)</code></td>
+</tr>
+<tr class="even">
+<td><code>log10()</code></td>
+<td>вычисляет десятичный логарифм</td>
+<td><code>log10(1000)</code></td>
+</tr>
+<tr class="odd">
+<td><code>exp()</code></td>
+<td>возводит число <span class="math inline">\(e\)</span> в указанную степень</td>
+<td><code>exp(1)</code></td>
+</tr>
+<tr class="even">
+<td><code>round()</code></td>
+<td>округляет до заданного числа знаков после десятичной точки</td>
+<td><code>round(3.7)</code></td>
+</tr>
+<tr class="odd">
+<td><code>floor()</code></td>
+<td>возвращает ближайшее целое, не больше исходного числа</td>
+<td><code>floor(3.7)</code></td>
+</tr>
+<tr class="even">
+<td><code>ceiling()</code></td>
+<td>возвращает ближайшее целое, не меньше исходного числа</td>
+<td><code>ceiling(3.1)</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">144</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="sc">-</span><span class="dv">7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="dv">1000</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.718282</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(<span class="fl">3.7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="fl">3.7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Как R округляет значения ровно посередине">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Как R округляет значения ровно посередине
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>В случаях вида <code>x.5</code> R округляет к ближайшему чётному числу: <code>round(0.5)</code> возвращает <code>0</code>, а <code>round(1.5)</code> – <code>2</code>. Поэтому не следует рассчитывать на правило «пять всегда округляется вверх».</p>
+</div>
+</div>
+</div>
+</section>
+<section id="аргументы-функций" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="аргументы-функций"><span class="header-section-number">3.2</span> Аргументы функций</h2>
+<p><strong>Аргумент</strong> — это значение, которое мы передаём функции внутри круглых скобок. Если аргументов несколько и их имена не указаны, R сопоставляет значения по позиции: первое значение относится к первому аргументу, второе — ко второму.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">x =</span> <span class="dv">8</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>В обоих вызовах функция вычисляет логарифм 8 по основанию 2. В первой строке значения переданы по позиции, во второй их назначение явно указано именами <code>x</code> и <code>base</code>. Именованные аргументы можно переставлять местами.</p>
+<p>Некоторые аргументы имеют <strong>значение по умолчанию</strong>, которое используется, если аргумент пропущен:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(round)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, digits = 0, ...) 
+NULL</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>, <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="at">x =</span> <span class="fl">3.14159</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+</div>
+<p>В выводе <code>args(round)</code> аргумент <code>x</code> указан без значения, поэтому он обязателен. Для <code>digits</code> задано <code>0</code> по умолчанию. Поэтому первый вызов округляет число до 0 знаков после десятичной точки, а следующие два – до двух знаков. Тип результата при этом остаётся <code>double</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Знак = внутри функции">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Знак = внутри функции
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В записи <code>round(x = 3.14159, digits = 2)</code> знак <code>=</code> связывает значения с именами аргументов внутри вызова. Объекты <code>x</code> и <code>digits</code> в рабочем окружении не создаются.</p>
+</div>
+</div>
+<p><strong>Результат одной функции можно передать в другую функцию</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="dv">250</span>), <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.81</code></pre>
+</div>
+</div>
+<p>В выражении <code>round(sqrt(250), digits = 2)</code> сначала выполняется <code>sqrt(250)</code>, а полученное число передаётся в <code>round()</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Операторы -- тоже функции (разверни)">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Операторы – тоже функции (разверни)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Арифметические операторы в R можно вызвать как обычные функции. Обратные кавычки позволяют записать необычное имя функции:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">^</span><span class="st">`</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p>Обе формы в каждой паре дают одинаковый результат. В повседневном коде операторная запись проще, но функциональная форма показывает единый принцип устройства языка R.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="практика-используем-функции" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="практика-используем-функции">Практика: используем функции</h2>
+<ol type="1">
+<li>Округлите концентрацию <code>23.7846</code> до двух знаков.</li>
+<li>Вычислите <code>log10(5000)</code> и округлите результат до одного знака тремя способами:
+<ul>
+<li>сохраните логарифм в промежуточный объект и передайте его в <code>round()</code></li>
+<li>используйте вложенный вызов и передайте второй аргумент по позиции</li>
+<li>используйте вложенный вызов и укажите аргументы <code>x</code> и <code>digits</code> по именам.</li>
+</ul></li>
+<li>Температура вместо ожидаемых 37 °C составила 35.8 °C. Найдите абсолютное отклонение.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Концентрация</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Логарифм через промежуточный объект</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Вложенный вызов с позиционным аргументом</span></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Вложенный вызов с именованными аргументами</span></span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Абсолютное отклонение температуры</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><em>Напоминание: справка по известной функции открывается командами <code>?round</code> и <code>help(round)</code>.</em></p>
+</section>
+</section>
+<section id="sec-types" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Основные типы и специальные значения</h1>
+<p>В этом разделе рассмотрим шесть <strong>атомарных типов</strong> R: <code>logical</code>, <code>integer</code>, <code>double</code>, <code>complex</code>, <code>character</code> и <code>raw</code>. Атомарными их называют потому, что это основные однородные типы хранения.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Тип</th>
+<th>Что хранит</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>double</code></td>
+<td>вещественные числа двойной точности</td>
+<td><code>42</code>, <code>3.14</code></td>
+</tr>
+<tr class="even">
+<td><code>integer</code></td>
+<td>целые числа</td>
+<td><code>42L</code></td>
+</tr>
+<tr class="odd">
+<td><code>complex</code></td>
+<td>комплексные числа</td>
+<td><code>2 + 3i</code></td>
+</tr>
+<tr class="even">
+<td><code>logical</code></td>
+<td>логические значения</td>
+<td><code>TRUE</code>, <code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td><code>character</code></td>
+<td>текст</td>
+<td><code>"образец 42"</code></td>
+</tr>
+<tr class="even">
+<td><code>raw</code></td>
+<td>отдельные байты</td>
+<td><code>charToRaw("R")</code></td>
+</tr>
+</tbody>
+</table>
+<p>Функция <code>typeof()</code> показывает внутренний тип объекта. Она особенно полезна, когда одинаково выглядящие значения ведут себя по-разному.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">42</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">42</span>L)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="st">"42"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>i)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "complex"</code></pre>
+</div>
+</div>
+<section id="числовые-типы" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="числовые-типы"><span class="header-section-number">4.1</span> Числовые типы</h2>
+<section id="double" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="double"><span class="header-section-number">4.1.1</span> <code>double</code></h3>
+<p>Обычная запись числа создаёт значение типа <code>double</code>, даже если у него нет дробной части:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">42</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fl">42.0</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<p>R по умолчанию использует числа двойной точности для обычных вычислений, поэтому наличие точки в записи не определяет тип: и <code>42</code>, и <code>42.0</code> являются <code>double</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Что означает двойная точность">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Что означает двойная точность
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Число типа <code>double</code> обычно занимает 64 бита — вдвое больше, чем 32-битное число одинарной точности. Такое представление позволяет хранить примерно 15–17 значащих десятичных цифр. При этом некоторые десятичные дроби всё равно представляются только приближённо.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Десятичные числа хранятся приближённо">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Десятичные числа хранятся приближённо
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Некоторые десятичные дроби невозможно точно представить в двоичной памяти компьютера:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> <span class="sc">+</span> <span class="fl">0.2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.1</span> <span class="sc">+</span> <span class="fl">0.2</span>) <span class="sc">==</span> <span class="fl">0.3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fl">0.1</span> <span class="sc">+</span> <span class="fl">0.2</span>, <span class="at">digits =</span> <span class="dv">17</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.30000000000000004</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fl">0.1</span> <span class="sc">+</span> <span class="fl">0.2</span>, <span class="fl">0.3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Поэтому результаты вычислений с <code>double</code> иногда сравнивают с небольшой допустимой погрешностью. Функция <code>all.equal()</code> выполняет такое приближённое сравнение.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Как форматировать численный вывод (разверни)">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Как форматировать численный вывод (разверни)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>По умолчанию R печатает число компактно. Чтобы увидеть больше хранящихся значащих цифр, можно изменить параметр <code>digits</code> у функции <code>print()</code> или использовать <code>sprintf</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="fl">0.1</span> <span class="sc">+</span> <span class="fl">0.2</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(value, <span class="at">digits =</span> <span class="dv">17</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.30000000000000004</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.17f"</span>, value)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0.30000000000000004"</code></pre>
+</div>
+</div>
+<p><code>print()</code> только меняет подробность вывода. <code>sprintf()</code> задаёт точный формат отображения, но <strong>возвращает текст, а не число</strong>.</p>
+<p>Числа в коде можно записывать в обычной или экспоненциальной форме:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fl">123.45</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 123.45</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.2345e2</span>  <span class="co"># 1.2345 × 10² = 123.45</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 123.45</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fl">5e-4</span>      <span class="co"># 5 × 10⁻⁴ = 0.0005</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5e-04</code></pre>
+</div>
+</div>
+<p>Для оформления результатов <code>format()</code> позволяет управлять способом представления числа и количеством значащих цифр. <code>sprintf()</code> задаёт формат более явно, например фиксированное число знаков после десятичной точки:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fl">12345.6789</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">digits =</span> <span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "12345.679"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fl">12345.6789</span>, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1.235e+04"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, <span class="fl">3.14159</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "3.14"</code></pre>
+</div>
+</div>
+<p>Результаты <code>format()</code> и <code>sprintf()</code> имеют тип <code>character</code>: они предназначены для красивого вывода и не изменяют внутреннюю точность исходного числа.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="integer" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="integer"><span class="header-section-number">4.1.2</span> <code>integer</code></h3>
+<p>Чтобы явно создать целое значение типа <code>integer</code>, после числа ставят суффикс <code>L</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">42</span>L)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+</div>
+<p>Буква <code>L</code> исторически означает <em>long integer</em>. В современном R она сообщает интерпретатору, что литерал нужно хранить именно как целое число. Обычно вручную создавать <code>integer</code> не требуется, но такая запись часто встречается в документации и выводе функций.</p>
+</section>
+<section id="complex" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="complex"><span class="header-section-number">4.1.3</span> <code>complex</code></h3>
+<p>Комплексное число содержит действительную и мнимую части. Мнимая единица обозначается буквой <code>i</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>i</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(z)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "complex"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>z <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -5+12i</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="логический-тип" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="логический-тип"><span class="header-section-number">4.2</span> Логический тип</h2>
+<p>Тип <code>logical</code> содержит два обычных значения: <code>TRUE</code> и <code>FALSE</code>. Они возникают, например, при сравнении чисел:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>is_valid <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">&gt;</span> <span class="dv">3</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>is_valid</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(is_valid)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Сравнения рассмотрим ниже">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Сравнения рассмотрим ниже
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В примере оператор <code>&gt;</code> сравнивает два числа и возвращает <code>TRUE</code>. Пока достаточно обратить внимание на тип результата. Сами операторы сравнения подробно разобраны в разделе <a href="#sec-logical">«Сравнения и логические выражения»</a>.</p>
+</div>
+</div>
+</section>
+<section id="текстовый-тип" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="текстовый-тип"><span class="header-section-number">4.3</span> Текстовый тип</h2>
+<p>Тип <code>character</code> хранит текст. Кавычки сообщают R, где текст начинается и заканчивается:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>sample_name <span class="ot">&lt;-</span> <span class="st">"control_1"</span></span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(sample_name)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>Одинарные и двойные кавычки создают одинаковые текстовые значения:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="st">"контрольный образец"</span></span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="st">'контрольный образец'</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Матрёшка из кавычек">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Матрёшка из кавычек
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Кавычки одного вида можно поместить внутрь кавычек другого вида:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="st">'Ген "BRCA1" обнаружен'</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Ген \"BRCA1\" обнаружен"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Ген 'BRCA1' обнаружен"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Ген 'BRCA1' обнаружен"</code></pre>
+</div>
+</div>
+<p>Если нужны одинаковые внешние и внутренние кавычки, перед внутренней ставят обратную косую черту:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Прибор сообщил: </span><span class="sc">\"</span><span class="st">готово</span><span class="sc">\"</span><span class="st">"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Прибор сообщил: \"готово\""</code></pre>
+</div>
+</div>
+<p>Вне кавычек символ <code>#</code> начинает комментарий, который продолжается до конца строки. Внутри кавычек это часть текста:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>sample_count <span class="ot">&lt;-</span> <span class="dv">24</span>  <span class="co"># число биологических образцов</span></span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>sample_label <span class="ot">&lt;-</span> <span class="st">"образец #12"</span></span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>sample_label</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "образец #12"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Не путайте число и текст">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Не путайте число и текст
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>42</code> – число, а <code>"42"</code> – текст. Они выглядят похоже, но имеют разные типы и допускают разные операции.</p>
+</div>
+</div>
+</section>
+<section id="тип-raw" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="тип-raw"><span class="header-section-number">4.4</span> Тип <code>raw</code></h2>
+<p>Тип <code>raw</code> хранит отдельные байты и встречается при работе с файлами, изображениями и сетевыми данными. Пока достаточно знать, что такой тип существует:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">charToRaw</span>(<span class="st">"R"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "raw"</code></pre>
+</div>
+</div>
+</section>
+<section id="проверка-и-преобразование-типов" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="проверка-и-преобразование-типов"><span class="header-section-number">4.5</span> Проверка и преобразование типов</h2>
+<p>Если нужно получить название внутреннего типа, используют <code>typeof()</code>. Конкретные атомарные типы из этого раздела можно проверить функциями, перечисленными в таблице:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Тип</th>
+<th>Проверка типа</th>
+<th>Преобразование</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>double</code></td>
+<td><code>is.double(x)</code></td>
+<td><code>as.double(x)</code>, <code>as.numeric(x)</code></td>
+</tr>
+<tr class="even">
+<td><code>integer</code></td>
+<td><code>is.integer(x)</code></td>
+<td><code>as.integer(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>complex</code></td>
+<td><code>is.complex(x)</code></td>
+<td><code>as.complex(x)</code></td>
+</tr>
+<tr class="even">
+<td><code>logical</code></td>
+<td><code>is.logical(x)</code></td>
+<td><code>as.logical(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>character</code></td>
+<td><code>is.character(x)</code></td>
+<td><code>as.character(x)</code></td>
+</tr>
+<tr class="even">
+<td><code>raw</code></td>
+<td><code>is.raw(x)</code></td>
+<td><code>as.raw(x)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Для проверки конкретных атомарных типов существуют функции <code>is.double()</code>, <code>is.integer()</code>, <code>is.logical()</code> и другие функции из таблицы. Они возвращают <code>TRUE</code> или <code>FALSE</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(x)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(x)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>Функции <code>as.*()</code> пытаются преобразовать значение в другой тип:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(<span class="dv">42</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "42"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.double</span>(<span class="st">"3.14"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">"3.14"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(<span class="fl">3.9</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.logical</span>(<span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.complex</span>(<span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2+0i</code></pre>
+</div>
+</div>
+<p><code>as.numeric()</code> обычно используют, когда число после импорта оказалось текстом. В базовом R <code>as.numeric()</code> и <code>as.double()</code> – два имени одной и той же функции: обе преобразуют значение в тип <code>double</code>. Первое имя подчёркивает цель «получить число», второе – конкретный внутренний тип результата.</p>
+<p>Преобразование возвращает новое значение и само по себе не изменяет исходный объект. Чтобы сохранить результат, его нужно присвоить имени:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="st">"42"</span></span>
+<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a>numeric_value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(value)</span>
+<span id="cb156-3"><a href="#cb156-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-4"><a href="#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(value)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(numeric_value)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Преобразование не всегда возможно">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Преобразование не всегда возможно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>as.integer(3.9)</code> возвращает <code>3</code>, а не округляет число. Для округления сначала используют <code>round()</code>. Если текст нельзя превратить в число, например <code>as.double("три")</code>, R возвращает специальное значение пропуска <a href="#sec-special-values"><code>NA</code></a> и предупреждение.</p>
+</div>
+</div>
+<section id="практика-определяем-тип" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="практика-определяем-тип">Практика: определяем тип</h3>
+<p>Сначала предположите тип каждого результата. Затем проверьте ответы с помощью <code>typeof()</code>.</p>
+<p>В последней строке появится предупреждение: это ожидаемо, потому что текст <code>"i"</code> нельзя преобразовать в число.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">10</span>L <span class="sc">/</span> <span class="dv">2</span>L)</span>
+<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">10</span>)</span>
+<span id="cb160-3"><a href="#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="st">"10L"</span>)</span>
+<span id="cb160-4"><a href="#cb160-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">FALSE</span> <span class="sc">+</span> <span class="cn">TRUE</span>)</span>
+<span id="cb160-5"><a href="#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">as.numeric</span>(<span class="st">"i"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-special-values" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="sec-special-values"><span class="header-section-number">4.6</span> Специальные значения</h2>
+<p>Некоторые значения обозначают отсутствие данных или особый результат числового вычисления.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Значение</th>
+<th>Смысл</th>
+<th>Пример</th>
+<th>Проверка</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>NA</code></td>
+<td>значение предполагается, но неизвестно</td>
+<td>пропущенное измерение</td>
+<td><code>is.na(x)</code></td>
+</tr>
+<tr class="even">
+<td><code>NaN</code></td>
+<td>числовой результат не определён</td>
+<td><code>0 / 0</code></td>
+<td><code>is.nan(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>Inf</code>, <code>-Inf</code></td>
+<td>положительная или отрицательная бесконечность</td>
+<td><code>1 / 0</code>, <code>-1 / 0</code></td>
+<td><code>is.infinite(x)</code></td>
+</tr>
+<tr class="even">
+<td><code>NULL</code></td>
+<td>значения в этом месте нет</td>
+<td>отсутствующий результат</td>
+<td><code>is.null(x)</code></td>
+</tr>
+</tbody>
+</table>
+<section id="na-неизвестное-значение" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="na-неизвестное-значение"><span class="header-section-number">4.6.1</span> <code>NA</code>: неизвестное значение</h3>
+<p><code>NA</code> используют, когда наблюдение существует по смыслу, но его значение неизвестно: например, прибор не сохранил результат измерения.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>concentration <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(concentration)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">+</span> <span class="dv">10</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">&gt;</span> <span class="dv">0</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="NA нельзя проверять с помощью ==">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+NA нельзя проверять с помощью ==
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>NA == NA</code> возвращает <code>NA</code>: если оба значения неизвестны, нельзя установить, равны ли они. Для проверки используйте <code>is.na()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">==</span> <span class="cn">NA</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="nan-неопределённый-числовой-результат" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="nan-неопределённый-числовой-результат"><span class="header-section-number">4.6.2</span> <code>NaN</code>: неопределённый числовой результат</h3>
+<p><code>NaN</code> расшифровывается как <em>Not a Number</em> и возникает в числовой операции, для которой невозможно определить результат:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>undefined_result <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">/</span> <span class="dv">0</span></span>
+<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a>undefined_result</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NaN</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(undefined_result)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><code>NaN</code> считается разновидностью пропущенного числового значения, поэтому <code>is.na(NaN)</code> тоже возвращает <code>TRUE</code>. Функция <code>is.nan()</code> позволяет отличить <code>NaN</code> от обычного <code>NA</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NaN</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="cn">NA</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb181"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="cn">NaN</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="inf-и--inf-бесконечные-числа" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="inf-и--inf-бесконечные-числа"><span class="header-section-number">4.6.3</span> <code>Inf</code> и <code>-Inf</code>: бесконечные числа</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb183"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a>positive_infinity <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">0</span></span>
+<span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a>negative_infinity <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">0</span></span>
+<span id="cb183-3"><a href="#cb183-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-4"><a href="#cb183-4" aria-hidden="true" tabindex="-1"></a>positive_infinity</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Inf</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb185"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb185-1"><a href="#cb185-1" aria-hidden="true" tabindex="-1"></a>negative_infinity</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -Inf</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb187"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb187-1"><a href="#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.infinite</span>(positive_infinity)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Бесконечность является числовым значением, а не пропуском:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb189"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb189-1"><a href="#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">Inf</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb191"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Inf</span> <span class="sc">&gt;</span> <span class="fl">1e100</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="null-отсутствие-значения" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="null-отсутствие-значения"><span class="header-section-number">4.6.4</span> <code>NULL</code>: отсутствие значения</h3>
+<p><code>NULL</code> означает, что значения в этом месте нет:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb193"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a>absent_result <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb193-2"><a href="#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(absent_result)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb195"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.null</span>(absent_result)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb197"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(absent_result)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="NA и NULL отвечают на разные вопросы">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+NA и NULL отвечают на разные вопросы
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>NA</code>: «значение здесь предполагается, но оно неизвестно»</li>
+<li><code>NULL</code>: «значения здесь нет».</li>
+</ul>
+<p>Различие станет особенно заметно при работе с векторами, списками и таблицами.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Даты и время: доп.материал
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Для дат и времени в R используются специальные классы. Класс <code>Date</code> представляет календарную дату, а <code>POSIXct</code> – конкретный момент времени.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb199"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb199-1"><a href="#cb199-1" aria-hidden="true" tabindex="-1"></a>experiment_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2026-09-06"</span>)</span>
+<span id="cb199-2"><a href="#cb199-2" aria-hidden="true" tabindex="-1"></a>experiment_time <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(</span>
+<span id="cb199-3"><a href="#cb199-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2026-09-06 10:30:00"</span>,</span>
+<span id="cb199-4"><a href="#cb199-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">tz =</span> <span class="st">"Europe/Moscow"</span></span>
+<span id="cb199-5"><a href="#cb199-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb199-6"><a href="#cb199-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-7"><a href="#cb199-7" aria-hidden="true" tabindex="-1"></a>experiment_date</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2026-09-06"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb201"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb201-1"><a href="#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(experiment_date)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb203"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb203-1"><a href="#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(experiment_date)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb205"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb205-1"><a href="#cb205-1" aria-hidden="true" tabindex="-1"></a>experiment_time</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2026-09-06 10:30:00 MSK"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb207"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb207-1"><a href="#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(experiment_time)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "POSIXct" "POSIXt" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb209"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(experiment_time)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<p>На базовом уровне эти объекты хранятся как числа. Класс сообщает R, что их нужно показывать и обрабатывать как даты или моменты времени. Подробная работа с датами и временем остаётся отдельной темой.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-logical" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Сравнения и логические выражения</h1>
+<p>Сравнение известных значений возвращает <code>TRUE</code> или <code>FALSE</code>. Если в сравнении участвует <code>NA</code>, результат обычно тоже будет <code>NA</code>: по неизвестному значению нельзя решить, истинно условие или ложно.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Оператор</th>
+<th>Проверка</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>равно</td>
+<td><code>5 == 5</code></td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>не равно</td>
+<td><code>5 != 3</code></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>меньше</td>
+<td><code>3 &lt; 5</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>больше</td>
+<td><code>5 &gt; 3</code></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;=</code></td>
+<td>меньше или равно</td>
+<td><code>5 &lt;= 5</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>больше или равно</td>
+<td><code>5 &gt;= 5</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb211"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">==</span> <span class="dv">5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb213"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb213-1"><a href="#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">!=</span> <span class="dv">3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb215"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&lt;</span> <span class="dv">5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb217"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;=</span> <span class="dv">5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Не забудьте второй знак равенства">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Не забудьте второй знак равенства
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Для сравнения используют <code>==</code>. Один знак <code>=</code> связан с присваиванием и именованными аргументами функций.</p>
+</div>
+</div>
+<section id="логические-операторы" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="логические-операторы"><span class="header-section-number">5.1</span> Логические операторы</h2>
+<p>Логические операторы соединяют или изменяют условия.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Оператор</th>
+<th>Смысл</th>
+<th>Когда результат <code>TRUE</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>!x</code></td>
+<td>НЕ</td>
+<td>когда <code>x</code> равно <code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td><code>x &amp; y</code></td>
+<td>И</td>
+<td>когда оба условия истинны</td>
+</tr>
+<tr class="odd">
+<td><code>x | y</code></td>
+<td>ИЛИ</td>
+<td>когда истинно хотя бы одно условие</td>
+</tr>
+<tr class="even">
+<td><code>x &amp;&amp; y</code></td>
+<td>короткое И</td>
+<td>когда оба одиночных условия истинны</td>
+</tr>
+<tr class="odd">
+<td><code>x || y</code></td>
+<td>короткое ИЛИ</td>
+<td>когда истинно хотя бы одно одиночное условие</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb219"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb219-1"><a href="#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="cn">TRUE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb221"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb221-1"><a href="#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">&amp;</span> <span class="cn">FALSE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb223"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb225"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">&amp;</span> (<span class="dv">10</span> <span class="sc">&lt;</span> <span class="dv">20</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb227"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|</span> (<span class="dv">10</span> <span class="sc">&lt;</span> <span class="dv">20</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Чем отличаются &amp; от &amp;&amp; и | от ||">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Чем отличаются &amp; от &amp;&amp; и | от ||
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>&amp;</code> и <code>|</code> вычисляют обе стороны и используются в том числе для поэлементной работы с наборами значений. <code>&amp;&amp;</code> и <code>||</code> предназначены для одиночных условий и останавливают вычисление, когда ответ уже известен.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb229"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="cn">FALSE</span> <span class="sc">&amp;&amp;</span> unknown_value</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb231"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">||</span> unknown_value</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Обе строки выполняются без ошибки: в первой ответ уже определён левым <code>FALSE</code>, а во второй – левым <code>TRUE</code>. Если заменить <code>&amp;&amp;</code> на <code>&amp;</code> или <code>||</code> на <code>|</code>, R попытается вычислить <code>unknown_value</code> и сообщит об ошибке. Поэлементную работу рассмотрим вместе с векторами.</p>
+<p>В примерах этого занятия используем <code>&amp;</code> и <code>|</code>. Операторы <code>&amp;&amp;</code> и <code>||</code> чаще понадобятся позже, в условиях <code>if</code> и <code>while</code>.</p>
+</div>
+</div>
+</section>
+<section id="приоритет-в-составных-логических-выражениях" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="приоритет-в-составных-логических-выражениях"><span class="header-section-number">5.2</span> Приоритет в составных логических выражениях</h2>
+<p>В выражениях с несколькими группами операторов R соблюдает следующий порядок:</p>
+<ol type="1">
+<li>круглые скобки</li>
+<li>арифметические операции</li>
+<li>сравнения <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code></li>
+<li>логическое отрицание <code>!</code></li>
+<li>логическое И: <code>&amp;</code>, <code>&amp;&amp;</code></li>
+<li>логическое ИЛИ: <code>|</code>, <code>||</code></li>
+<li>присваивание.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb233"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb233-1"><a href="#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">10</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb235"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb235-1"><a href="#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="dv">4</span> <span class="sc">==</span> <span class="dv">14</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb237"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb237-1"><a href="#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">&amp;</span> <span class="dv">10</span> <span class="sc">/</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Сначала выполняется арифметика, а уже затем сравнение. Поэтому первое выражение можно прочитать так:</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb239-1"><a href="#cb239-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> (<span class="dv">3</span> <span class="sc">*</span> <span class="dv">4</span>)) <span class="sc">&gt;</span> <span class="dv">10</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Диапазон нельзя записать как двойное математическое неравенство:</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb240-1"><a href="#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="dv">18</span> <span class="sc">&lt;=</span> age <span class="sc">&lt;=</span> <span class="dv">65</span>  <span class="co"># синтаксическая ошибка</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Каждое сравнение нужно записать отдельно и соединить логическим И:</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb241-1"><a href="#cb241-1" aria-hidden="true" tabindex="-1"></a>(age <span class="sc">&gt;=</span> <span class="dv">18</span>) <span class="sc">&amp;</span> (age <span class="sc">&lt;=</span> <span class="dv">65</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Оператор <code>&amp;</code> выполняется раньше <code>|</code>, поэтому следующие выражения дают разные результаты:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb242"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href="#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span> <span class="sc">&amp;</span> <span class="cn">FALSE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb244"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" aria-hidden="true" tabindex="-1"></a>(<span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span>) <span class="sc">&amp;</span> <span class="cn">FALSE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>Особенно внимательно нужно ставить скобки при отрицании составного условия:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb246-1"><a href="#cb246-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="dv">38</span></span>
+<span id="cb246-2"><a href="#cb246-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb246-3"><a href="#cb246-3" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>temperature <span class="sc">&gt;=</span> <span class="dv">36</span> <span class="sc">&amp;</span> temperature <span class="sc">&lt;=</span> <span class="dv">37</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>R сможет прочитать эту запись, но по виду трудно понять, к какой части относится <code>!</code>. Явные скобки показывают два разных смысла:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb247"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb247-1"><a href="#cb247-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="dv">38</span></span>
+<span id="cb247-2"><a href="#cb247-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb247-3"><a href="#cb247-3" aria-hidden="true" tabindex="-1"></a>(<span class="sc">!</span>(temperature <span class="sc">&gt;=</span> <span class="dv">36</span>)) <span class="sc">&amp;</span> (temperature <span class="sc">&lt;=</span> <span class="dv">37</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb249"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb249-1"><a href="#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(temperature <span class="sc">&gt;=</span> <span class="dv">36</span> <span class="sc">&amp;</span> temperature <span class="sc">&lt;=</span> <span class="dv">37</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>В первой проверке <code>!</code> относится только к условию <code>temperature &gt;= 36</code>. Во второй строке скобки сначала объединяют весь допустимый диапазон, и <code>!</code> отрицает результат целиком.</p>
+<p>Даже когда скобки не обязательны, ими удобно отделять самостоятельные условия:</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb251-1"><a href="#cb251-1" aria-hidden="true" tabindex="-1"></a>(age <span class="sc">&gt;=</span> <span class="dv">18</span>) <span class="sc">&amp;</span> (age <span class="sc">&lt;=</span> <span class="dv">65</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="практика-критерии-включения-в-исследование" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="практика-критерии-включения-в-исследование">Практика: критерии включения в исследование</h2>
+<p>Участника можно включить в исследование, если его возраст находится в диапазоне от 18 до 65 лет включительно, информированное согласие получено и исключающих состояний нет.</p>
+<p>Для объединения критериев используйте <code>&amp;</code>: такая запись останется пригодной, когда позднее мы применим условие сразу к нескольким участникам.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb252"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb252-1"><a href="#cb252-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">42</span></span>
+<span id="cb252-2"><a href="#cb252-2" aria-hidden="true" tabindex="-1"></a>has_consent <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb252-3"><a href="#cb252-3" aria-hidden="true" tabindex="-1"></a>has_exclusion_condition <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Создайте объект <code>age_is_valid</code>, проверяющий допустимый возраст.</li>
+<li>Создайте объект <code>is_eligible</code>, объединяющий все три критерия.</li>
+<li>Измените возраст на <code>70</code>, повторите проверки и объясните результат.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb253"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb253-1"><a href="#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Проверка возраста</span></span>
+<span id="cb253-2"><a href="#cb253-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-3"><a href="#cb253-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-4"><a href="#cb253-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Итоговая проверка</span></span>
+<span id="cb253-5"><a href="#cb253-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-6"><a href="#cb253-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-7"><a href="#cb253-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Повторная проверка после изменения возраста</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-service-syntax" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Служебный синтаксис</h1>
+<section id="конец-выражения-и-точка-с-запятой" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="конец-выражения-и-точка-с-запятой"><span class="header-section-number">6.1</span> Конец выражения и точка с запятой</h2>
+<p>Перевод строки завершает синтаксически законченное выражение:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb254"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb254-1"><a href="#cb254-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb254-2"><a href="#cb254-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb254-3"><a href="#cb254-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+<p>Если по синтаксису выражение ещё не закончено, его можно продолжить на следующих строках:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb256"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb256-1"><a href="#cb256-1" aria-hidden="true" tabindex="-1"></a>total_volume <span class="ot">&lt;-</span> sample_count <span class="sc">*</span></span>
+<span id="cb256-2"><a href="#cb256-2" aria-hidden="true" tabindex="-1"></a>  volume_per_sample</span>
+<span id="cb256-3"><a href="#cb256-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-4"><a href="#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(</span>
+<span id="cb256-5"><a href="#cb256-5" aria-hidden="true" tabindex="-1"></a>  <span class="fl">3.14159</span>,</span>
+<span id="cb256-6"><a href="#cb256-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb256-7"><a href="#cb256-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+</div>
+<p>Точка с запятой позволяет записать несколько выражений в одной строке:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb258"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb258-1"><a href="#cb258-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>; y <span class="ot">&lt;-</span> <span class="dv">6</span>; x <span class="sc">+</span> y</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+<p>Обе записи работают одинаково. Отдельные строки легче читать и исправлять, поэтому точку с запятой в обычном коде используют редко.</p>
+</section>
+<section id="фигурные-скобки" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="фигурные-скобки"><span class="header-section-number">6.2</span> Фигурные скобки</h2>
+<p>Фигурные скобки объединяют несколько выражений в один блок:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb260"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb260-1"><a href="#cb260-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb260-2"><a href="#cb260-2" aria-hidden="true" tabindex="-1"></a>  sample_count <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb260-3"><a href="#cb260-3" aria-hidden="true" tabindex="-1"></a>  replicate_count <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb260-4"><a href="#cb260-4" aria-hidden="true" tabindex="-1"></a>  sample_count <span class="sc">*</span> replicate_count</span>
+<span id="cb260-5"><a href="#cb260-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48</code></pre>
+</div>
+</div>
+<p>R выполняет выражения по порядку и возвращает результат последнего. Блоки в фигурных скобках понадобятся при изучении условий, циклов и собственных функций.</p>
+</section>
+<section id="практика-блок-выражений" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="практика-блок-выражений">Практика: блок выражений</h2>
+<p>Создайте блок, который:</p>
+<ol type="1">
+<li>сохраняет число образцов <code>24</code></li>
+<li>сохраняет объём на один образец <code>20</code> мкл</li>
+<li>последней строкой вычисляет общий объём.</li>
+</ol>
+</section>
+<section id="ошибки-и-предупреждения" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="ошибки-и-предупреждения"><span class="header-section-number">6.3</span> Ошибки и предупреждения</h2>
+<p><strong>Ошибка</strong> (<em>error</em>) означает, что R не смог вычислить текущее выражение и не получил результат:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb262"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb262-1"><a href="#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="st">"9"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in sqrt("9"): non-numeric argument to mathematical function</code></pre>
+</div>
+</div>
+<p><strong>Предупреждение</strong> (<em>warning</em>) означает, что R получил результат, но сообщает о возможной проблеме:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb264"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb264-1"><a href="#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">"три"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>Во втором примере результатом будет <code>NA</code>: функцию удалось выполнить, но текст нельзя преобразовать в число. Сообщения R стоит читать с первой строки и проверять на небольшом понятном примере.</p>
+</section>
+<section id="практика-найдите-и-исправьте-ошибки" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="практика-найдите-и-исправьте-ошибки">Практика: найдите и исправьте ошибки</h2>
+<p>В каждой строке есть ошибка. Определите её, перепишите выражение и затем выполните исправленный вариант.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb267"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb267-1"><a href="#cb267-1" aria-hidden="true" tabindex="-1"></a>new value <span class="ot">&lt;-</span> <span class="st">'text"</span></span>
+<span id="cb267-2"><a href="#cb267-2" aria-hidden="true" tabindex="-1"></a><span class="st">_x &lt;- 2,14</span></span>
+<span id="cb267-3"><a href="#cb267-3" aria-hidden="true" tabindex="-1"></a><span class="st">floor(1.2345 digits = 2)</span></span>
+<span id="cb267-4"><a href="#cb267-4" aria-hidden="true" tabindex="-1"></a><span class="st">18 &gt; age &gt; 65</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="зарезервированные-слова" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="зарезервированные-слова"><span class="header-section-number">6.4</span> Зарезервированные слова</h2>
+<p>Некоторые слова имеют специальное значение в синтаксисе R и не могут использоваться как обычные имена объектов.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Некоторые зарезервированные слова">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Некоторые зарезервированные слова
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>if else repeat while function for in next break
+TRUE FALSE NULL Inf NaN NA</code></pre>
+<p>Например, запись <code>if &lt;- 10</code> приводит к синтаксической ошибке. Полный список открывается командой <code>?Reserved</code>.</p>
+</div>
+</div>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Если что-то непонятно">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Если что-то непонятно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если имя функции известно, начните со встроенной справки. Если неизвестно – сформулируйте нужное действие обычными словами и добавьте к поисковому запросу язык R. Сообщение об ошибке также можно искать по его ключевой части. Найденную идею сначала проверьте на маленьком понятном примере.</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/r-lang-vladissta\.github\.io\/r-course\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

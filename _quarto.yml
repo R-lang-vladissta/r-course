@@ -3,13 +3,13 @@ project:
   output-dir: docs
   resources:
     - .nojekyll
-    - R-lecture-01-repl.pdf
-    - R-lecture-01-repl.pptx
-    - logo.png
+    - assets/images/course-logo.png
+    - downloads/**
   render:
     - index.qmd
     - installation.qmd
     - practices/01-rstudio-project/rstudio-lecture.qmd
+    - lessons/02-sintaksis-i-vychislenie.qmd
 
 website:
   title: "Язык R"

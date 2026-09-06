@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://r-lang-vladissta.github.io/r-course/practices/01-rstudio-project/rstudio-lecture.html</loc>
-    <lastmod>2026-09-03T21:28:08.765Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r-lang-vladissta.github.io/r-course/index.html</loc>
-    <lastmod>2026-09-03T21:28:52.022Z</lastmod>
+    <loc>https://r-lang-vladissta.github.io/r-course/lessons/02-sintaksis-i-vychislenie.html</loc>
+    <lastmod>2026-09-06T20:37:34.356Z</lastmod>
   </url>
   <url>
     <loc>https://r-lang-vladissta.github.io/r-course/installation.html</loc>
     <lastmod>2026-09-02T14:01:20.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r-lang-vladissta.github.io/r-course/index.html</loc>
+    <lastmod>2026-09-06T20:51:29.812Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r-lang-vladissta.github.io/r-course/practices/01-rstudio-project/rstudio-lecture.html</loc>
+    <lastmod>2026-09-03T21:28:08.765Z</lastmod>
   </url>
 </urlset>
