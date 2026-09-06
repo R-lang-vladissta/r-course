@@ -163,6 +163,37 @@ main.content h2 {
   font-size: 0.88rem;
 }
 
+.resource-action {
+  flex: 0 0 auto;
+}
+
+.resource-download {
+  display: inline-block;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--course-accent);
+  border-radius: 0.55rem;
+  background: var(--course-accent);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.resource-download:hover,
+.resource-download:focus-visible {
+  border-color: var(--course-accent-dark);
+  background: var(--course-accent-dark);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.resource-download:focus-visible {
+  outline: 3px solid rgba(44, 116, 103, 0.25);
+  outline-offset: 3px;
+}
+
 .resource-title:focus-visible {
   outline: 3px solid rgba(44, 116, 103, 0.25);
   outline-offset: 3px;
@@ -175,6 +206,8 @@ main.content h2 {
   }
 
   .resource-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
     min-height: auto;
     padding: 1rem;
   }
@@ -182,5 +215,9 @@ main.content h2 {
   .resource-info {
     align-items: flex-start;
     gap: 0.75rem;
+  }
+
+  .resource-action {
+    margin-left: 3.1rem;
   }
 }

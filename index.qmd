@@ -29,9 +29,11 @@ toc-title: "На странице"
 ::: resource-copy
 [Введение в R](downloads/01-vvedenie-v-r/R-lecture-01-repl.pdf){.resource-title target="_blank"}
 
-<span class="resource-meta">PDF для просмотра · <a href="downloads/01-vvedenie-v-r/R-lecture-01-repl.pptx" download>PPTX скачать</a></span>
+[PDF для просмотра]{.resource-meta}
 :::
 :::
+
+<div class="resource-action"><a class="resource-download" href="downloads/01-vvedenie-v-r/R-lecture-01-repl.pptx" download>PPTX скачать</a></div>
 ::::
 :::::
 
@@ -61,7 +63,7 @@ toc-title: "На странице"
 ::: resource-copy
 [Знакомство с RStudio](practices/01-rstudio-project/rstudio-lecture.qmd){.resource-title}
 
-<span class="resource-meta">Интерфейс, консоль, проекты, скрипты и сессия R · <a href="downloads/01-rstudio-project/practice-01.qmd" download>QMD</a> · <a href="downloads/01-rstudio-project/practice-01.Rmd" download>Rmd</a> · <a href="downloads/01-rstudio-project/practice-01.R" download>R-скрипт</a></span>
+[Интерфейс, консоль, проекты, скрипты и сессия R]{.resource-meta}
 :::
 :::
 ::::
@@ -73,9 +75,11 @@ toc-title: "На странице"
 ::: resource-copy
 [Синтаксис и вычисление в R](lessons/02-sintaksis-i-vychislenie.qmd){.resource-title}
 
-<span class="resource-meta">Конспект и задания · <a href="downloads/02-sintaksis-i-vychislenie.qmd" download>QMD для работы</a></span>
+[Конспект и задания]{.resource-meta}
 :::
 :::
+
+<div class="resource-action"><a class="resource-download" href="downloads/02-sintaksis-i-vychislenie.qmd" download>QMD скачать</a></div>
 ::::
 :::::
 
