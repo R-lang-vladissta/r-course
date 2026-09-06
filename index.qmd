@@ -33,7 +33,7 @@ toc-title: "На странице"
 :::
 :::
 
-<div class="resource-action"><a class="resource-download" href="downloads/01-vvedenie-v-r/R-lecture-01-repl.pptx" download>PPTX скачать</a></div>
+<div class="resource-action"><a class="resource-download" href="downloads/01-vvedenie-v-r/R-lecture-01-repl.pdf" download>PDF скачать</a></div>
 ::::
 :::::
 
@@ -75,11 +75,11 @@ toc-title: "На странице"
 ::: resource-copy
 [Синтаксис и вычисление в R](lessons/02-sintaksis-i-vychislenie.qmd){.resource-title}
 
-[Конспект и задания]{.resource-meta}
+[Конспект]{.resource-meta}
 :::
 :::
 
-<div class="resource-action"><a class="resource-download" href="downloads/02-sintaksis-i-vychislenie.qmd" download>QMD скачать</a></div>
+<div class="resource-action"><a class="resource-download" href="downloads/02-sintaksis-i-vychislenie.qmd" download>Скачать .qmd для практики</a></div>
 ::::
 :::::
 
