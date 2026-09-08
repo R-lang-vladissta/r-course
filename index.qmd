@@ -37,25 +37,13 @@ toc-title: "На странице"
 ::::
 :::::
 
-## Материалы
+## Материалы занятий
 
 ::: section-lead
-Конспекты, инструкции и файлы для работы на занятиях.
+Конспекты и файлы для работы на занятиях.
 :::
 
 ::::: resource-list
-:::: {.resource-row .resource-row-simple}
-::: resource-info
-[→]{.resource-number}
-
-::: resource-copy
-[Установка R и RStudio](installation.qmd){.resource-title}
-
-[Короткая инструкция для начала работы]{.resource-meta}
-:::
-:::
-::::
-
 :::: {.resource-row .resource-row-simple}
 ::: resource-info
 [01]{.resource-number}
@@ -80,6 +68,38 @@ toc-title: "На странице"
 :::
 
 <div class="resource-action"><a class="resource-download" href="downloads/02-sintaksis-i-vychislenie.qmd" download>Скачать .qmd для практики</a></div>
+::::
+:::::
+
+## Справочные материалы
+
+::: section-lead
+Установка программ и инструкции по рабочим форматам курса.
+:::
+
+::::: resource-list
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[→]{.resource-number}
+
+::: resource-copy
+[Установка R и RStudio](installation.qmd){.resource-title}
+
+[Короткая инструкция для начала работы]{.resource-meta}
+:::
+:::
+::::
+
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[→]{.resource-number}
+
+::: resource-copy
+[Отчёты в Quarto: формат QMD](lessons/quarto-markdown.qmd){.resource-title}
+
+[Текст, код R, результаты и сборка документа]{.resource-meta}
+:::
+:::
 ::::
 :::::
 
