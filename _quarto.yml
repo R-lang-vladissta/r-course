@@ -10,6 +10,7 @@ project:
     - installation.qmd
     - practices/01-rstudio-project/rstudio-lecture.qmd
     - lessons/02-sintaksis-i-vychislenie.qmd
+    - lessons/03-vektory.qmd
     - lessons/quarto-markdown.qmd
 
 website:

@@ -69,6 +69,20 @@ toc-title: "На странице"
 
 <div class="resource-action"><a class="resource-download" href="downloads/02-sintaksis-i-vychislenie.qmd" download>Скачать .qmd для практики</a></div>
 ::::
+
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[03]{.resource-number}
+
+::: resource-copy
+[Векторы](lessons/03-vektory.qmd){.resource-title}
+
+[Создание, вычисления и отбор элементов]{.resource-meta}
+:::
+:::
+
+<div class="resource-action"><a class="resource-download" href="downloads/03-vektory/03-vektory-student.R" download>Скачать .R для практики</a></div>
+::::
 :::::
 
 ## Справочные материалы
