@@ -174,15 +174,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#изменение-элементов" id="toc-изменение-элементов" class="nav-link" data-scroll-target="#изменение-элементов"><span class="header-section-number">4.1</span> Изменение элементов</a></li>
   <li><a href="#именованный-вектор" id="toc-именованный-вектор" class="nav-link" data-scroll-target="#именованный-вектор"><span class="header-section-number">4.2</span> Именованный вектор</a></li>
   </ul></li>
-  <li><a href="#sec-ordering" id="toc-sec-ordering" class="nav-link" data-scroll-target="#sec-ordering"><span class="header-section-number">5</span> Сортировка значений</a></li>
-  <li><a href="#sec-logical-vectors" id="toc-sec-logical-vectors" class="nav-link" data-scroll-target="#sec-logical-vectors"><span class="header-section-number">6</span> Логические векторы</a>
-  <ul class="collapse">
-  <li><a href="#логическое-индексирование" id="toc-логическое-индексирование" class="nav-link" data-scroll-target="#логическое-индексирование"><span class="header-section-number">6.1</span> Логическое индексирование</a></li>
-  <li><a href="#функции-для-логических-векторов" id="toc-функции-для-логических-векторов" class="nav-link" data-scroll-target="#функции-для-логических-векторов"><span class="header-section-number">6.2</span> Функции для логических векторов</a></li>
-  <li><a href="#оператор-in" id="toc-оператор-in" class="nav-link" data-scroll-target="#оператор-in"><span class="header-section-number">6.3</span> Оператор <code>%in%</code></a></li>
-  <li><a href="#повторяющиеся-и-уникальные-значения" id="toc-повторяющиеся-и-уникальные-значения" class="nav-link" data-scroll-target="#повторяющиеся-и-уникальные-значения"><span class="header-section-number">6.4</span> Повторяющиеся и уникальные значения</a></li>
-  <li><a href="#пропущенные-значения" id="toc-пропущенные-значения" class="nav-link" data-scroll-target="#пропущенные-значения"><span class="header-section-number">6.5</span> Пропущенные значения</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -403,6 +394,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <p><strong>ИТОГ: Основные способы создания векторов</strong></p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 48%">
+<col style="width: 39%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Способ</th>
@@ -586,7 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sec-vectorization" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Векторизованные вычисления</h1>
 <p><strong>Одно из важнейших свойств векторов и языка R</strong> – возможность выполнять вычисления сразу для целой серии наблюдений. Не нужно повторять одну и ту же операцию для каждого элемента.</p>
-<p><strong>Такое свойство называется <strong>векторизованность</strong></strong>.</p>
+<p><strong>Такое свойство называется векторизованность</strong>.</p>
 <ul>
 <li>Арифметическая операция применяется к каждому элементу:</li>
 </ul>
@@ -699,77 +695,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1]  8 18 28 38</code></pre>
 </div>
 </div>
-<table class="table table-bordered text-center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
 <thead>
-<tr>
-<th>
-Шаг / номер элемента
-</th>
-<th>
-1
-</th>
-<th>
-2
-</th>
-<th>
-3
-</th>
-<th>
-4
-</th>
+<tr class="header">
+<th>Шаг / номер элемента</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>
-Исходное измерение
-</th>
-<td>
-10
-</td>
-<td>
-20
-</td>
-<td>
-30
-</td>
-<td>
-40
-</td>
+<tr class="odd">
+<td>Исходное измерение</td>
+<td>10</td>
+<td>20</td>
+<td>30</td>
+<td>40</td>
 </tr>
-<tr>
-<th>
-Вычитаемый фон
-</th>
-<td>
-2
-</td>
-<td>
-2
-</td>
-<td>
-2
-</td>
-<td>
-2
-</td>
+<tr class="even">
+<td>Вычитаемый фон</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
 </tr>
-<tr>
-<th>
-Исправленное измерение
-</th>
-<td>
-8
-</td>
-<td>
-18
-</td>
-<td>
-28
-</td>
-<td>
-38
-</td>
+<tr class="odd">
+<td>Исправленное измерение</td>
+<td>8</td>
+<td>18</td>
+<td>28</td>
+<td>38</td>
 </tr>
 </tbody>
 </table>
@@ -783,77 +746,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 11 22 31 42</code></pre>
 </div>
 </div>
-<table class="table table-bordered text-center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
 <thead>
-<tr>
-<th>
-Вектор / номер элемента
-</th>
-<th>
-1
-</th>
-<th>
-2
-</th>
-<th>
-3
-</th>
-<th>
-4
-</th>
+<tr class="header">
+<th>Вектор / номер элемента</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>
-<code>measurement</code>
-</th>
-<td>
-10
-</td>
-<td>
-20
-</td>
-<td>
-30
-</td>
-<td>
-40
-</td>
+<tr class="odd">
+<td><code>measurement</code></td>
+<td>10</td>
+<td>20</td>
+<td>30</td>
+<td>40</td>
 </tr>
-<tr>
-<th>
-<code>c(1, 2)</code>
-</th>
-<td>
-1
-</td>
-<td>
-2
-</td>
-<td>
-1
-</td>
-<td>
-2
-</td>
+<tr class="even">
+<td><code>c(1, 2)</code></td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
 </tr>
-<tr>
-<th>
-Сумма
-</th>
-<td>
-11
-</td>
-<td>
-22
-</td>
-<td>
-31
-</td>
-<td>
-42
-</td>
+<tr class="odd">
+<td>Сумма</td>
+<td>11</td>
+<td>22</td>
+<td>31</td>
+<td>42</td>
 </tr>
 </tbody>
 </table>
@@ -871,77 +801,44 @@ shorter object length</code></pre>
 <pre><code>[1] 11 22 33 41</code></pre>
 </div>
 </div>
-<table class="table table-bordered text-center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 23%">
+</colgroup>
 <thead>
-<tr>
-<th>
-Вектор / номер элемента
-</th>
-<th>
-1
-</th>
-<th>
-2
-</th>
-<th>
-3
-</th>
-<th>
-4
-</th>
+<tr class="header">
+<th>Вектор / номер элемента</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>
-<code>measurement</code>
-</th>
-<td>
-10
-</td>
-<td>
-20
-</td>
-<td>
-30
-</td>
-<td>
-40
-</td>
+<tr class="odd">
+<td><code>measurement</code></td>
+<td>10</td>
+<td>20</td>
+<td>30</td>
+<td>40</td>
 </tr>
-<tr>
-<th>
-<code>c(1, 2, 3)</code>
-</th>
-<td>
-1
-</td>
-<td>
-2
-</td>
-<td>
-3
-</td>
-<td>
-<strong>1 (повтор)</strong>
-</td>
+<tr class="even">
+<td><code>c(1, 2, 3)</code></td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td><strong>1 (повтор)</strong></td>
 </tr>
-<tr>
-<th>
-Сумма
-</th>
-<td>
-11
-</td>
-<td>
-22
-</td>
-<td>
-33
-</td>
-<td>
-41
-</td>
+<tr class="odd">
+<td>Сумма</td>
+<td>11</td>
+<td>22</td>
+<td>33</td>
+<td>41</td>
 </tr>
 </tbody>
 </table>
@@ -989,49 +886,33 @@ shorter object length</code></pre>
 <p><strong>В R индексация начинается с 1!!!</strong></p>
 </div>
 </div>
-<table class="table table-bordered text-center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
 <thead>
-<tr>
-<th>
-Индекс
-</th>
-<th>
-1
-</th>
-<th>
-2
-</th>
-<th>
-3
-</th>
-<th>
-4
-</th>
-<th>
-5
-</th>
+<tr class="header">
+<th>Индекс</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>
-Значение
-</th>
-<td>
-12.4
-</td>
-<td>
-15.1
-</td>
-<td>
-13.8
-</td>
-<td>
-14.6
-</td>
-<td>
-11.9
-</td>
+<tr class="odd">
+<td>Значение</td>
+<td>12.4</td>
+<td>15.1</td>
+<td>13.8</td>
+<td>14.6</td>
+<td>11.9</td>
 </tr>
 </tbody>
 </table>
@@ -1239,554 +1120,6 @@ names()
 <li>Присвойте элементам <code>ph</code> имена из <code>sample_id</code>.</li>
 <li>Извлеките pH образца <code>S5</code> по имени.</li>
 <li>Найдите максимальный pH <!-- его позицию с помощью `which.max()` и имя соответствующего образца. --></li>
-</ol>
-</section>
-</section>
-<section id="sec-ordering" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Сортировка значений</h1>
-<p><strong>Элементы в векторе можно упорядочивать по их значению.</strong></p>
-<p>Для этого удобны функции <code>sort()</code> и <code>order()</code>, которые несмотря на схожесть названий решают разные задачи.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>signal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.72</span>, <span class="fl">0.31</span>, <span class="fl">0.56</span>, <span class="fl">0.44</span>, <span class="fl">0.83</span>)</span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(signal)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.31 0.44 0.56 0.72 0.83</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(signal, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.83 0.72 0.56 0.44 0.31</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(signal)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 4 3 1 5</code></pre>
-</div>
-</div>
-<ul>
-<li><code>sort(signal)</code> возвращает значения, расположенные по возрастанию.</li>
-<li><code>sort(signal, decreasing = TRUE)</code> возвращает значения по убыванию.</li>
-<li><code>order(signal)</code> возвращает индексы: в каком порядке нужно взять исходные элементы.</li>
-</ul>
-<p>Эти два выражения ниже дают одинаковый результат:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(signal)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.31 0.44 0.56 0.72 0.83</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>signal[<span class="fu">order</span>(signal)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.31 0.44 0.56 0.72 0.83</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled" title="order() возвращает не значения, а индексы">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-order() возвращает не значения, а индексы
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Индексы из <code>order()</code> можно применить не только к самому <code>signal</code>, но и к другому связанному вектору. Так можно одинаково переставить измерения и имена образцов.</p>
-<p>Отсортируем студентов по росту:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>students_height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">168</span>, <span class="dv">181</span>, <span class="dv">174</span>, <span class="dv">177</span>)</span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>students_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Anna"</span>, <span class="st">"Boris"</span>, <span class="st">"Elena"</span>, <span class="st">"Pavel"</span>)</span>
-<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>students_order <span class="ot">&lt;-</span> <span class="fu">order</span>(students_height)</span>
-<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a>students_names[students_order]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Anna"  "Elena" "Pavel" "Boris"</code></pre>
-</div>
-</div>
-</div>
-</div>
-<section id="задание-образцы-по-возрастанию-сигнала" class="level2 unnumbered unlisted">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="задание-образцы-по-возрастанию-сигнала">Задание: образцы по возрастанию сигнала</h2>
-<p>Идентификаторы образцов и их сигналы хранятся в двух векторах. Значения на одинаковых позициях относятся к одному образцу.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>sample_id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"S1"</span>, <span class="st">"S2"</span>, <span class="st">"S3"</span>, <span class="st">"S4"</span>, <span class="st">"S5"</span>)</span>
-<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>signal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.72</span>, <span class="fl">0.31</span>, <span class="fl">0.56</span>, <span class="fl">0.44</span>, <span class="fl">0.83</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol type="1">
-<li>Отсортируйте сигналы по возрастанию.</li>
-<li>Сохраните индексы, которые упорядочивают сигнал, в объект <code>signal_order</code>.</li>
-<li>Используйте <code>signal_order</code>, чтобы расположить <code>sample_id</code> и <code>signal</code> в одинаковом порядке.</li>
-<li>Присвойте элементам <code>signal</code> имена из <code>sample_id</code> и отсортируйте именованный вектор по убыванию.</li>
-<li>Найдите максимальный сигнал <!-- , его позицию с помощью `which.max()` и имя соответствующего образца. --></li>
-</ol>
-</section>
-</section>
-<section id="sec-logical-vectors" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Логические векторы</h1>
-<p>Для векторов подходят те же операторы сравнения и логические операторы: <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>&amp;</code>, <code>|</code> и <code>!</code>.</p>
-<ul>
-<li><strong>Операция выполняется для каждого элемента, поэтому результатом становится логический вектор той же длины:</strong></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">36.4</span>, <span class="fl">37.1</span>, <span class="fl">38.2</span>, <span class="fl">36.8</span>)</span>
-<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>temperature <span class="sc">&gt;=</span> <span class="dv">37</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE  TRUE  TRUE FALSE</code></pre>
-</div>
-</div>
-<p>Каждое <code>TRUE</code> или <code>FALSE</code> относится к значению на той же позиции.</p>
-<ul>
-<li>Условия тоже можно объединять</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>is_normal <span class="ot">&lt;-</span> (temperature <span class="sc">&gt;=</span> <span class="fl">36.5</span>) <span class="sc">&amp;</span> (temperature <span class="sc">&lt;=</span> <span class="fl">37.2</span>)</span>
-<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>is_normal</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE  TRUE FALSE  TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>is_fever <span class="ot">&lt;-</span> temperature <span class="sc">&gt;</span> <span class="dv">38</span> <span class="sc">|</span> temperature <span class="sc">&lt;</span> <span class="dv">36</span></span>
-<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>is_fever</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  TRUE  TRUE FALSE  TRUE</code></pre>
-</div>
-</div>
-<ul>
-<li>Логический вектор можно использовать и при сравнении текста:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treatment"</span>, <span class="st">"control"</span>, <span class="st">"placebo"</span>)</span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>group <span class="sc">==</span> <span class="st">"control"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  TRUE FALSE  TRUE FALSE</code></pre>
-</div>
-</div>
-<section id="логическое-индексирование" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="логическое-индексирование"><span class="header-section-number">6.1</span> Логическое индексирование</h2>
-<p><strong>Логический вектор можно поместить внутрь квадратных скобок <code>[]</code>, чтобы отфильтровать элементы.</strong></p>
-<p>Такой логический вектор часто называют <strong>маской</strong>: <code>TRUE</code> оставляет элемент на данной позиции, а <code>FALSE</code> его не пропускает.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.2</span>, <span class="fl">8.1</span>, <span class="fl">3.7</span>, <span class="fl">6.4</span>)</span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>is_high <span class="ot">&lt;-</span> measurements <span class="sc">&gt;=</span> <span class="dv">5</span> <span class="co"># маска</span></span>
-<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a>is_high <span class="co"># маска</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE  TRUE FALSE  TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>measurements[is_high]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.1 6.4</code></pre>
-</div>
-</div>
-<table class="table table-bordered text-center">
-<thead>
-<tr>
-<th>
-Позиция
-</th>
-<th>
-1
-</th>
-<th>
-2
-</th>
-<th>
-3
-</th>
-<th>
-4
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>
-Исходный вектор
-</th>
-<td>
-4.2
-</td>
-<td>
-8.1
-</td>
-<td>
-3.7
-</td>
-<td>
-6.4
-</td>
-</tr>
-<tr>
-<th>
-Проверка <code>&gt;= 5</code> (маска)
-</th>
-<td>
-<code>FALSE</code>
-</td>
-<td>
-<code>TRUE</code>
-</td>
-<td>
-<code>FALSE</code>
-</td>
-<td>
-<code>TRUE</code>
-</td>
-</tr>
-<tr>
-<th>
-Действие
-</th>
-<td>
-не брать
-</td>
-<td>
-<strong>взять</strong>
-</td>
-<td>
-не брать
-</td>
-<td>
-<strong>взять</strong>
-</td>
-</tr>
-<tr>
-<th>
-Результат
-</th>
-<td>
-–
-</td>
-<td>
-<strong>8.1</strong>
-</td>
-<td>
-–
-</td>
-<td>
-<strong>6.4</strong>
-</td>
-</tr>
-</tbody>
-</table>
-<blockquote class="blockquote">
-<p>Второе значение 8.1 проходит проверку, поэтому второй элемент попадает в результат. Первый не проходит проверку и не отбирается.</p>
-</blockquote>
-<ul>
-<li>То же действие можно записать одной строкой:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>measurements[measurements <span class="sc">&gt;=</span> <span class="dv">5</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.1 6.4</code></pre>
-</div>
-</div>
-<ul>
-<li>Одна маска может отбирать связанные элементы из нескольких векторов:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>student_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Daniel"</span>, <span class="st">"Sasha"</span>, <span class="st">"Robert"</span>, <span class="st">"Alice"</span>)</span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">32</span>, <span class="dv">18</span>, <span class="dv">8</span>)</span>
-<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>is_adult <span class="ot">&lt;-</span> age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="co"># Маска</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>student_name[is_adult]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Sasha"  "Robert"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>age[is_adult]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 32 18</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled" title="Маска должна соответствовать исходному вектору">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Маска должна соответствовать исходному вектору
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Обычно длина маски должна совпадать с длиной отбираемого вектора. Более короткая логическая маска будет повторена по правилу ресайклинга. <strong>Это может незаметно отобрать не те значения</strong>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Логическое индексирование можно поместить слева от присваивания">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Логическое индексирование можно поместить слева от присваивания
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Тогда заменяются все элементы, удовлетворяющие условию:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.2</span>, <span class="fl">8.1</span>, <span class="fl">3.7</span>, <span class="fl">6.4</span>)</span>
-<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a>measurements[measurements <span class="sc">&lt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a>measurements</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.2 8.1  NA 6.4</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li>Функция <code>which()</code> превращает логическую маску в индексы тех позиций, где стоит <code>TRUE</code>:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>is_high <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(is_high)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 4</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Как найти имя, связанное с максимальным значением">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Как найти имя, связанное с максимальным значением
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Имя студента с наибольшим ростом можно найти поэтапно:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(height)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 181</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(height)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Boris 
-    2 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(height)[<span class="fu">which.max</span>(height)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Boris"</code></pre>
-</div>
-</div>
-<p><code>which.max(height)</code> возвращает позицию первого максимального значения. Затем эта позиция используется для извлечения имени.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="функции-для-логических-векторов" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="функции-для-логических-векторов"><span class="header-section-number">6.2</span> Функции для логических векторов</h2>
-<p><strong>В арифметических вычислениях <code>TRUE</code> преобразуется в 1, а <code>FALSE</code> – в 0</strong>.</p>
-<ul>
-<li>Поэтому <code>sum()</code> считает количество <code>TRUE</code>:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>quality_check <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(quality_check)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
-<ul>
-<li>А <code>mean()</code> считает долю <code>TRUE</code></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(quality_check)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6666667</code></pre>
-</div>
-</div>
-<ul>
-<li><code>any()</code> проверяет, есть ли хотя бы один <code>TRUE</code>:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(quality_check)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
-<ul>
-<li><code>all()</code> – все ли элементы равны <code>TRUE</code></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb164"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(quality_check)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-</div>
-</section>
-<section id="задание-контроль-качества" class="level2 unnumbered unlisted">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="задание-контроль-качества">Задание: контроль качества</h2>
-<p>Допустимый диапазон концентрации калибровочного раствора составляет от 95 до 105 мг/л включительно.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>sample_id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"S1"</span>, <span class="st">"S2"</span>, <span class="st">"S3"</span>, <span class="st">"S4"</span>, <span class="st">"S5"</span>, <span class="st">"S6"</span>)</span>
-<span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a>calibration <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">98</span>, <span class="dv">107</span>, <span class="dv">101</span>, <span class="dv">94</span>, <span class="dv">105</span>, <span class="dv">99</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol type="1">
-<li>Создайте логический вектор <code>is_valid</code>, показывающий, какие измерения попадают в диапазон.</li>
-<li>Извлеките значения и имена образцов, прошедших контроль.</li>
-<li>Извлеките значения и имена образцов, не прошедших контроль.</li>
-<li>Посчитайте число и долю прошедших контроль образцов.</li>
-<li>Проверьте, прошли ли контроль все образцы и есть ли хотя бы один прошедший.</li>
-<li>Замените не прошедшие контроль значения на <code>NA</code>.</li>
-</ol>
-<hr>
-</section>
-<section id="оператор-in" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="оператор-in"><span class="header-section-number">6.3</span> Оператор <code>%in%</code></h2>
-<p><strong>Иногда нужно проверить, входят ли значения вектора в заданный набор.</strong></p>
-<p>Оператор <code>%in%</code> возвращает для каждого элемента слева, найден ли он среди значений справа:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>sample_group <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>, <span class="st">"placebo"</span>, <span class="st">"treated"</span>, <span class="st">"excluded"</span>)</span>
-<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a>allowed_group <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"placebo"</span>)</span>
-<span id="cb167-3"><a href="#cb167-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb167-4"><a href="#cb167-4" aria-hidden="true" tabindex="-1"></a>sample_group <span class="sc">%in%</span> allowed_group</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  TRUE FALSE  TRUE FALSE FALSE</code></pre>
-</div>
-</div>
-<ul>
-<li>Удобно использовать для логического индексирования</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>sample_group[sample_group <span class="sc">%in%</span> allowed_group]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "control" "placebo"</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled" title="Не путайте == и %in%">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Не путайте == и %in%
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Выражение <code>sample_group == c("control", "placebo")</code> попарно сравнивает два вектора (<em>учитывая ресайклинг</em>).</p>
-<p>Результат может выглядеть правдоподобно, но это не проверка принадлежности элементов набору, для которой нужен <code>%in%</code>.</p>
-</div>
-</div>
-</section>
-<section id="повторяющиеся-и-уникальные-значения" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="повторяющиеся-и-уникальные-значения"><span class="header-section-number">6.4</span> Повторяющиеся и уникальные значения</h2>
-<ul>
-<li>Функция <code>unique()</code> возвращает вектор уникальных значений, сохраняя порядок их первого появления:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>sample_id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"S01"</span>, <span class="st">"S02"</span>, <span class="st">"S03"</span>, <span class="st">"S02"</span>, <span class="st">"S04"</span>, <span class="st">"S01"</span>)</span>
-<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(sample_id)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "S01" "S02" "S03" "S04"</code></pre>
-</div>
-</div>
-<ul>
-<li>Функция <code>duplicated()</code> возвращает логическую маску, где <code>FALSE</code> значит, что значение встретилось впервые, а <code>TRUE</code> – что оно уже появлялось раньше:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">duplicated</span>(sample_id)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
-</div>
-</div>
-<ul>
-<li><em>Удобно для поиска дубликатов</em></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a>sample_id[<span class="fu">duplicated</span>(sample_id)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "S02" "S01"</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled" title="duplicated() не отмечает первое появление">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-duplicated() не отмечает первое появление
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Для <code>c("A", "A")</code> результатом будет <code>c(FALSE, TRUE)</code>. Функция отмечает второе и последующие появления уже встречавшегося значения.</p>
-</div>
-</div>
-</section>
-<section id="пропущенные-значения" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="пропущенные-значения"><span class="header-section-number">6.5</span> Пропущенные значения</h2>
-<p><strong>Пропущенное значение обозначают <code>NA</code></strong>.</p>
-<ul>
-<li>Функция <code>is.na()</code> показывает, какие элементы вектора пропущены:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.2</span>, <span class="cn">NA</span>, <span class="fl">5.7</span>, <span class="fl">6.3</span>)</span>
-<span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-3"><a href="#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(measurements)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE  TRUE FALSE FALSE</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled" title="NA нельзя искать с помощью ==">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-NA нельзя искать с помощью ==
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Выражение <code>measurements == NA</code> не проверяет наличие пропусков. Для этого используют <code>is.na(measurements)</code>.</p>
-</div>
-</div>
-<ul>
-<li>Если пропуск участвует в вычислении, результат обычно тоже неизвестен:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(measurements)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
-</div>
-</div>
-<p><strong>У подобных функций есть аргумент <code>na.rm = TRUE</code></strong> (по умолчанию <code>FALSE</code>), который сообщает функции, что перед вычислением пропущенные значения нужно исключить:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb181"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(measurements, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.4</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled" title="Как na.rm = TRUE влияет на среднее">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Как na.rm = TRUE влияет на среднее
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Без <code>na.rm = TRUE</code> функция <code>mean()</code> возвращает <code>NA</code>: среднее неизвестно, если среди исходных значений есть пропуск.</p>
-<p>С <code>na.rm = TRUE</code> среднее считается только по трём известным значениям, то есть <strong>количество участвующих в расчёте элементов уменьшается</strong>.</p>
-<p>Сам исходный вектор не меняется, и <code>NA</code> остаётся внутри <code>measurements</code>.</p>
-</div>
-</div>
-</section>
-<section id="задание-проверка-идентификаторов-и-измерений" class="level2 unnumbered unlisted">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="задание-проверка-идентификаторов-и-измерений">Задание: проверка идентификаторов и измерений</h2>
-<p>После объединения двух файлов в списке образцов появились повторы, а в части измерений есть пропуски.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb183"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a>sample_id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"S01"</span>, <span class="st">"S02"</span>, <span class="st">"S03"</span>, <span class="st">"S04"</span>, <span class="st">"S03"</span>, <span class="st">"S05"</span>, <span class="st">"S06"</span>, <span class="st">"S02"</span>)</span>
-<span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a>concentration <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.2</span>, <span class="fl">21.4</span>, <span class="cn">NA</span>, <span class="fl">19.7</span>, <span class="fl">24.1</span>, <span class="fl">17.9</span>, <span class="cn">NA</span>, <span class="fl">20.3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol type="1">
-<li>Получите вектор уникальных идентификаторов.</li>
-<li>Найдите повторные появления идентификаторов.</li>
-<li>С помощью <code>is.na()</code> проверьте, какие измерения пропущены.</li>
-<li>Рассчитайте среднюю концентрацию сначала обычным способом, а затем с <code>na.rm = TRUE</code>. Объясните различие результатов.</li>
 </ol>
 
 
