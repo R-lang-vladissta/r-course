@@ -1,0 +1,39 @@
+---
+title: "document"
+---
+
+# comm
+
+```{r}
+#| echo: true
+a = 2
+```
+
+```{r}
+
+```
+
+| Col1 | Col2 | Col3 |
+|------|------|------|
+| gd   | dw   |      |
+|      |      |      |
+|      | dw   |      |
+
+*text*
+
+
+
+```{r}
+measure = 2
+```
+
+У меня икс равен `r measure`
+
+```{r}
+
+```
+
+
+$E = mc^4$
+
+`r measure`
