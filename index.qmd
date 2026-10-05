@@ -83,6 +83,18 @@ toc-title: "На странице"
 
 <div class="resource-action"><a class="resource-download" href="downloads/03-vektory/03-vektory-student.R" download>Скачать .R для практики</a></div>
 ::::
+
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[04]{.resource-number}
+
+::: resource-copy
+[Матрицы, массивы и факторы](lessons/04-struktury-dannykh.qmd){.resource-title}
+
+[Создание, индексирование и категории данных]{.resource-meta}
+:::
+:::
+::::
 :::::
 
 ## Справочные материалы

@@ -5,12 +5,15 @@ project:
     - .nojekyll
     - assets/images/course-logo.png
     - downloads/**
+    - "!downloads/03-vektory/03-vektory-zadaniya.R"
+    - "!downloads/04-struktury-dannykh/**"
   render:
     - index.qmd
     - installation.qmd
     - practices/01-rstudio-project/rstudio-lecture.qmd
     - lessons/02-sintaksis-i-vychislenie.qmd
     - lessons/03-vektory.qmd
+    - lessons/04-struktury-dannykh.qmd
     - lessons/quarto-markdown.qmd
 
 website:
