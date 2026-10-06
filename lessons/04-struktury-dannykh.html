@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Занятие 4. Матрицы, массивы и факторы – Язык R</title>
+<title>Занятие 4. Матрицы, массивы, факторы и списки – Язык R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Занятие 4. Матрицы, массивы и факторы – Язык R">
+<meta property="og:title" content="Занятие 4. Матрицы, массивы, факторы и списки – Язык R">
 <meta property="og:description" content="Как хранить разные виды данных до работы с таблицами">
 <meta property="og:site_name" content="Язык R">
 </head>
@@ -182,6 +182,18 @@ window.Quarto = {
   </ul></li>
   <li><a href="#массивы" id="toc-массивы" class="nav-link" data-scroll-target="#массивы"><span class="header-section-number">2</span> Массивы</a></li>
   <li><a href="#факторы" id="toc-факторы" class="nav-link" data-scroll-target="#факторы"><span class="header-section-number">3</span> Факторы</a></li>
+  <li><a href="#списки" id="toc-списки" class="nav-link" data-scroll-target="#списки"><span class="header-section-number">4</span> Списки</a>
+  <ul class="collapse">
+  <li><a href="#зачем-нужен-список" id="toc-зачем-нужен-список" class="nav-link" data-scroll-target="#зачем-нужен-список"><span class="header-section-number">4.1</span> Зачем нужен список</a></li>
+  <li><a href="#как-извлечь-компоненту" id="toc-как-извлечь-компоненту" class="nav-link" data-scroll-target="#как-извлечь-компоненту"><span class="header-section-number">4.2</span> Как извлечь компоненту</a></li>
+  <li><a href="#как-изменить-список" id="toc-как-изменить-список" class="nav-link" data-scroll-target="#как-изменить-список"><span class="header-section-number">4.3</span> Как изменить список</a></li>
+  <li><a href="#задания-на-списки" id="toc-задания-на-списки" class="nav-link" data-scroll-target="#задания-на-списки"><span class="header-section-number">4.4</span> Задания на списки</a>
+  <ul class="collapse">
+  <li><a href="#карточка-образца" id="toc-карточка-образца" class="nav-link" data-scroll-target="#карточка-образца"><span class="header-section-number">4.4.1</span> Карточка образца</a></li>
+  <li><a href="#связанные-векторы" id="toc-связанные-векторы" class="nav-link" data-scroll-target="#связанные-векторы"><span class="header-section-number">4.4.2</span> Связанные векторы</a></li>
+  <li><a href="#матрица-внутри-списка" id="toc-матрица-внутри-списка" class="nav-link" data-scroll-target="#матрица-внутри-списка"><span class="header-section-number">4.4.3</span> Матрица внутри списка</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -190,7 +202,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Занятие 4. Матрицы, массивы и факторы</h1>
+<h1 class="title">Занятие 4. Матрицы, массивы, факторы и списки</h1>
 <p class="subtitle lead">Как хранить разные виды данных до работы с таблицами</p>
 </div>
 
@@ -466,9 +478,217 @@ Levels: low medium high</code></pre>
 <li>Создайте матрицу <code>signal</code> из четырёх строк. В каждой строке должны стоять измерения одного образца до и после обработки. Назовите строки по <code>sample_id</code>, а столбцы <code>before</code> и <code>after</code>.</li>
 <li>С помощью одной логической маски извлеките из матрицы сигналы <strong>после</strong> обработки для группы <code>treated</code>. Вычислите их среднее.</li>
 </ol>
-<p>Матрица хранит измерения, а фактор – категории образцов. Чтобы выбирать измерения по группе, нужно следить за соответствием позиций в факторе и строк матрицы. К таблицам, которые связывают такие данные в строках, перейдём на следующем занятии.</p>
+<p>Матрица хранит измерения, а фактор – категории образцов. Чтобы выбирать измерения по группе, нужно следить за соответствием позиций в факторе и строк матрицы.</p>
+</section>
+<section id="списки" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Списки</h1>
+<section id="зачем-нужен-список" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="зачем-нужен-список"><span class="header-section-number">4.1</span> Зачем нужен список</h2>
+<p>Числовой вектор хранит числа, а текстовый – текст. Если объединить измерения и идентификатор с помощью <code>c()</code>, числа превратятся в текст:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fl">18.2</span>, <span class="fl">21.4</span>, <span class="st">"S1"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "18.2" "21.4" "S1"  </code></pre>
+</div>
+</div>
+<p><strong>Список</strong> (<em>list</em>) хранит вместе объекты разных типов и размеров. Каждая его часть называется <strong>компонентой</strong>. Например, в карточке образца могут находиться текстовый идентификатор, вектор измерений концентрации в мг/л и логический результат проверки качества.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>sample_record <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"S1"</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">concentration =</span> <span class="fu">c</span>(<span class="fl">18.2</span>, <span class="fl">21.4</span>, <span class="cn">NA</span>, <span class="fl">20.3</span>),</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">passed_qc =</span> <span class="cn">TRUE</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>sample_record</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$id
+[1] "S1"
+
+$concentration
+[1] 18.2 21.4   NA 20.3
+
+$passed_qc
+[1] TRUE</code></pre>
+</div>
+</div>
+<p>Функция <code>list()</code> сохраняет переданные объекты как отдельные компоненты. Здесь их три: <code>id</code>, <code>concentration</code> и <code>passed_qc</code>. Вектор из четырёх измерений остаётся одной компонентой списка.</p>
+<p>Посмотрим на устройство объекта:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sample_record)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 3
+ $ id           : chr "S1"
+ $ concentration: num [1:4] 18.2 21.4 NA 20.3
+ $ passed_qc    : logi TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sample_record)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "id"            "concentration" "passed_qc"    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(sample_record)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p><code>str()</code> кратко показывает структуру: <code>List of 3</code> означает список из трёх компонент, а далее видны их имена, типы и содержимое. Сокращения <code>chr</code>, <code>num</code> и <code>logi</code> обозначают текстовые, числовые и логические значения. <code>names()</code> возвращает имена компонент, <code>length()</code> – их количество.</p>
+<p>Компонентой может быть и матрица. Например, для двух образцов сохраним измерения до и после обработки, в условных единицах:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(measurements) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"before"</span>, <span class="st">"after"</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>experiment_record <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"EXP01"</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">signal =</span> measurements</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(experiment_record)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 2
+ $ id    : chr "EXP01"
+ $ signal: num [1:2, 1:2] 4 7 5 9
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : NULL
+  .. ..$ : chr [1:2] "before" "after"</code></pre>
+</div>
+</div>
+<p>В списке две компоненты, хотя внутри <code>signal</code> находится четыре числа.</p>
+</section>
+<section id="как-извлечь-компоненту" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="как-извлечь-компоненту"><span class="header-section-number">4.2</span> Как извлечь компоненту</h2>
+<p>Одинарные квадратные скобки <code>[]</code> выбирают часть списка и оставляют результат списком. Двойные квадратные скобки <code>[[]]</code> извлекают сам объект из одной компоненты:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>sample_record[<span class="st">"concentration"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$concentration
+[1] 18.2 21.4   NA 20.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>sample_record[[<span class="st">"concentration"</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.2 21.4   NA 20.3</code></pre>
+</div>
+</div>
+<p>В первом случае получается список с одной компонентой, во втором – числовой вектор. Выбрать компоненту можно и по её позиции:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>sample_record[[<span class="dv">2</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.2 21.4   NA 20.3</code></pre>
+</div>
+</div>
+<p>Если имя известно заранее, удобно использовать <code>$</code>: после него пишут имя компоненты без кавычек.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>sample_record<span class="sc">$</span>concentration</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.2 21.4   NA 20.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sample_record<span class="sc">$</span>concentration, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.96667</code></pre>
+</div>
+</div>
+<p><code>$concentration</code> и <code>[["concentration"]]</code> извлекают один и тот же вектор. Среднее вычисляется по трём известным измерениям; <code>na.rm = TRUE</code> исключает пропуск из расчёта, но не меняет исходный вектор.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Список и вектор внутри него -- разные объекты">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Список и вектор внутри него – разные объекты
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mean(sample_record["concentration"])</code> получает список вместо числового вектора и возвращает <code>NA</code> с предупреждением. Для расчёта извлеките измерения через <code>[[ ]]</code> или <code>$</code>.</p>
+</div>
+</div>
+<p>Различается и смысл длины:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(sample_record)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(sample_record<span class="sc">$</span>concentration)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>Первое выражение считает три компоненты, второе – четыре измерения внутри одной из них.</p>
+</section>
+<section id="как-изменить-список" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="как-изменить-список"><span class="header-section-number">4.3</span> Как изменить список</h2>
+<p>После извлечения компоненты к ней применяются знакомые операции. Например, после <code>$concentration</code> можно поставить индекс нужного измерения:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>sample_record<span class="sc">$</span>concentration[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fl">21.1</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>sample_record<span class="sc">$</span>concentration</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.2 21.1   NA 20.3</code></pre>
+</div>
+</div>
+<p>Изменено только второе измерение. Чтобы добавить компоненту, присвойте значение новому имени после <code>$</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>sample_record<span class="sc">$</span>mean_concentration <span class="ot">&lt;-</span> <span class="fu">mean</span>(</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  sample_record<span class="sc">$</span>concentration, <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>sample_record</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$id
+[1] "S1"
+
+$concentration
+[1] 18.2 21.1   NA 20.3
+
+$passed_qc
+[1] TRUE
+
+$mean_concentration
+[1] 19.86667</code></pre>
+</div>
+</div>
+<p>Теперь в списке четыре компоненты. Среднее сохранено как отдельный результат расчёта: если позднее исправить измерения, строку с вычислением среднего нужно выполнить заново.</p>
+</section>
+<section id="задания-на-списки" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="задания-на-списки"><span class="header-section-number">4.4</span> Задания на списки</h2>
+<p>Эти три задания находятся также в <a href="../downloads/05-spiski/05-spiski-zadaniya.R">отдельном файле для работы в R</a> под номерами 3–5.</p>
+<section id="карточка-образца" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="карточка-образца"><span class="header-section-number">4.4.1</span> Карточка образца</h3>
+<p>Создайте список <code>specimen</code> для образца <code>B07</code>:</p>
+<ul>
+<li><code>id</code> – строка <code>"B07"</code>;</li>
+<li><code>ph</code> – вектор измерений pH <code>c(7.1, 7.3, NA, 7.2)</code>;</li>
+<li><code>control</code> – логическое значение <code>FALSE</code>.</li>
+</ul>
+<p>Извлеките <code>ph</code> как числовой вектор двумя способами. Проверьте типы результатов <code>specimen["ph"]</code> и <code>specimen[["ph"]]</code>. Покажите количество компонент списка и количество измерений pH. Затем замените пропущенное третье измерение на <code>7.0</code>, добавьте компоненту <code>mean_ph</code> со средним pH и покажите обновлённый список.</p>
+</section>
+<section id="связанные-векторы" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="связанные-векторы"><span class="header-section-number">4.4.2</span> Связанные векторы</h3>
+<p>В списке <code>experiment</code> хранятся идентификаторы четырёх образцов и измерения сигнала в условных единицах. Значения с одинаковыми позициями относятся к одному образцу.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>experiment <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_id =</span> <span class="fu">c</span>(<span class="st">"S1"</span>, <span class="st">"S2"</span>, <span class="st">"S3"</span>, <span class="st">"S4"</span>),</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">signal =</span> <span class="fu">c</span>(<span class="fl">0.42</span>, <span class="fl">0.81</span>, <span class="fl">0.37</span>, <span class="fl">0.64</span>)</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Отберите образцы с сигналом не ниже <code>0.60</code>: получите отдельно их идентификаторы и значения сигнала, используя одну логическую маску. Соберите отобранные идентификаторы и сигналы в новый список <code>selected</code>. Исходный список должен сохранить все четыре образца.</p>
+</section>
+<section id="матрица-внутри-списка" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="матрица-внутри-списка"><span class="header-section-number">4.4.3</span> Матрица внутри списка</h3>
+<p>Для трёх образцов измерили концентрацию до и после обработки. Строки матрицы соответствуют образцам, столбцы – моментам измерения. Концентрация дана в мг/л.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>study_id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span>)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>study_group <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>, <span class="st">"treated"</span>),</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>)</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>study_measurements <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">14</span>, <span class="dv">18</span>, <span class="dv">12</span>, <span class="dv">15</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(study_measurements) <span class="ot">&lt;-</span> study_id</span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(study_measurements) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"before"</span>, <span class="st">"after"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Соберите список <code>study</code> с компонентами <code>sample_id</code>, <code>group</code> и <code>concentration</code>. Работая через список, извлеките измерение <code>C2</code> после обработки. Оно внесено неверно: замените его на <code>17</code> мг/л. Добавьте компоненту <code>change</code> с разностью «после минус до» для каждого образца. Найдите среднее изменение концентрации только для группы <code>treated</code>. Покажите список и объясните, что считают <code>length(study)</code> и <code>nrow(study$concentration)</code>.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
