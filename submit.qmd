@@ -1,0 +1,22 @@
+---
+title: "Сдать домашнее задание № 1"
+---
+
+[← Вернуться к заданиям](index.qmd#домашние-задания)
+
+Прикрепите выполненный файл **.qmd** и собранный отчёт **.html**. 
+Назовите файлы в формате **ФамилияИО_ДЗ1**.
+
+После нажатия «Отправить» дождитесь сообщения об успешной отправке работы.
+
+Если форма снизу не появилась, то [откройте её в отдельной вкладке](https://forms.yandex.ru/u/6ac4e95d95add5223f150ae2){target="_blank" rel="noopener"}
+
+```{=html}
+<div class="yandex-form-container">
+  <script src="https://forms.yandex.ru/_static/embed.js"></script>
+  <iframe src="https://forms.yandex.ru/u/6ac4e95d95add5223f150ae2?iframe=1"
+          name="ya-form-6ac4e95d95add5223f150ae2"
+          title="Форма сдачи домашнего задания № 1"
+          width="650" height="900" style="border: 0; width: 100%;"></iframe>
+</div>
+```

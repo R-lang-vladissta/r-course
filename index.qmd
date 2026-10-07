@@ -81,7 +81,10 @@ toc-title: "На странице"
 :::
 :::
 
-<div class="resource-action"><a class="resource-download" href="downloads/03-vektory/03-vektory-student.R" download>Скачать .R для практики</a></div>
+<div class="resource-action resource-actions-vertical">
+<a class="resource-download" href="downloads/03-vektory/03-vektory-student.R" download>Скачать .R к лекции</a>
+<a class="resource-download" href="downloads/03-vektory/03-vektory-praktika-6-zadaniy.R" download>Скачать 6 задач</a>
+</div>
 ::::
 
 :::: {.resource-row .resource-row-simple}
@@ -89,9 +92,23 @@ toc-title: "На странице"
 [04]{.resource-number}
 
 ::: resource-copy
-[Матрицы, массивы и факторы](lessons/04-struktury-dannykh.qmd){.resource-title}
+[Матрицы, массивы, факторы и списки](lessons/04-struktury-dannykh.qmd){.resource-title}
 
-[Создание, индексирование и категории данных]{.resource-meta}
+[Создание, индексирование, категории и составные объекты]{.resource-meta}
+:::
+:::
+
+<div class="resource-action"><a class="resource-download" href="downloads/05-spiski/05-spiski-zadaniya.R" download>Скачать 5 задач</a></div>
+::::
+
+:::: {.resource-row .resource-row-simple}
+::: resource-info
+[05]{.resource-number}
+
+::: resource-copy
+[Таблицы данных: data.frame](lessons/05-data-frame.qmd){.resource-title}
+
+[Строки, столбцы, создание и связь со списками]{.resource-meta}
 :::
 :::
 ::::
@@ -132,17 +149,24 @@ toc-title: "На странице"
 ## Домашние задания
 
 ::: section-lead
-Задания для самостоятельной работы.
+Скачайте задание, выполните его индивидуально и прикрепите работу через кнопку «Сдать работу».
 :::
 
 ::::: resource-list
 :::: {.resource-row .resource-row-simple}
 ::: resource-info
-[—]{.resource-number}
+[01]{.resource-number}
 
 ::: resource-copy
-[Материалы будут добавлены]{.resource-title .resource-title-muted}
+[Программы для расчётов](downloads/homework-01/homework-01.html){.resource-title target="_blank"}
+
+[Домашнее задание № 1 · Дедлайн: 18.10, 23:59]{.resource-meta}
 :::
 :::
+
+<div class="resource-action homework-actions">
+<a class="resource-download" href="downloads/homework-01/homework-01.qmd" download>Скачать задание .qmd</a>
+<a class="resource-download resource-secondary" href="submit.qmd">Сдать работу</a>
+</div>
 ::::
 :::::
