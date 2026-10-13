@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://r-lang-vladissta.github.io/r-course/lessons/02-sintaksis-i-vychislenie.html</loc>
-    <lastmod>2026-09-21T23:41:42.008Z</lastmod>
+    <loc>https://r-lang-vladissta.github.io/r-course/lessons/05-data-frame.html</loc>
+    <lastmod>2026-10-13T12:32:36.210Z</lastmod>
   </url>
   <url>
-    <loc>https://r-lang-vladissta.github.io/r-course/lessons/04-struktury-dannykh.html</loc>
-    <lastmod>2026-10-06T14:58:53.757Z</lastmod>
+    <loc>https://r-lang-vladissta.github.io/r-course/lessons/02-sintaksis-i-vychislenie.html</loc>
+    <lastmod>2026-09-21T23:41:42.008Z</lastmod>
   </url>
   <url>
     <loc>https://r-lang-vladissta.github.io/r-course/lessons/quarto-markdown.html</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://r-lang-vladissta.github.io/r-course/index.html</loc>
-    <lastmod>2026-10-07T11:11:26.332Z</lastmod>
+    <lastmod>2026-10-13T12:43:35.761Z</lastmod>
   </url>
   <url>
     <loc>https://r-lang-vladissta.github.io/r-course/installation.html</loc>
@@ -29,11 +29,11 @@
     <lastmod>2026-10-07T11:29:04.135Z</lastmod>
   </url>
   <url>
-    <loc>https://r-lang-vladissta.github.io/r-course/lessons/05-data-frame.html</loc>
-    <lastmod>2026-10-06T15:14:53.077Z</lastmod>
-  </url>
-  <url>
     <loc>https://r-lang-vladissta.github.io/r-course/lessons/03-vektory.html</loc>
     <lastmod>2026-10-06T15:01:09.687Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r-lang-vladissta.github.io/r-course/lessons/04-struktury-dannykh.html</loc>
+    <lastmod>2026-10-13T10:14:04.990Z</lastmod>
   </url>
 </urlset>

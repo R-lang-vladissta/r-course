@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Занятие 5. Таблицы данных: data.frame – Язык R">
-<meta property="og:description" content="Устройство, создание и связь со списками">
+<meta property="og:description" content="Создание, выбор и изменение данных, импорт и сохранение">
 <meta property="og:site_name" content="Язык R">
 </head>
 
@@ -145,18 +145,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#таблицы-данных-data.frame" id="toc-таблицы-данных-data.frame" class="nav-link active" data-scroll-target="#таблицы-данных-data.frame"><span class="header-section-number">1</span> Таблицы данных: <code>data.frame</code></a>
+  <li><a href="#от-списка-к-таблице" id="toc-от-списка-к-таблице" class="nav-link active" data-scroll-target="#от-списка-к-таблице"><span class="header-section-number">1</span> От списка к таблице</a>
   <ul class="collapse">
-  <li><a href="#от-списка-к-таблице" id="toc-от-списка-к-таблице" class="nav-link" data-scroll-target="#от-списка-к-таблице"><span class="header-section-number">1.1</span> От списка к таблице</a></li>
-  <li><a href="#как-создать-таблицу" id="toc-как-создать-таблицу" class="nav-link" data-scroll-target="#как-создать-таблицу"><span class="header-section-number">1.2</span> Как создать таблицу</a>
+  <li><a href="#создание-таблицы" id="toc-создание-таблицы" class="nav-link" data-scroll-target="#создание-таблицы"><span class="header-section-number">1.1</span> Создание таблицы</a>
   <ul class="collapse">
-  <li><a href="#из-готового-списка" id="toc-из-готового-списка" class="nav-link" data-scroll-target="#из-готового-списка"><span class="header-section-number">1.2.1</span> Из готового списка</a></li>
-  <li><a href="#если-векторы-разной-длины" id="toc-если-векторы-разной-длины" class="nav-link" data-scroll-target="#если-векторы-разной-длины"><span class="header-section-number">1.2.2</span> Если векторы разной длины</a></li>
+  <li><a href="#создание-таблицы-из-списка-или-матрицы" id="toc-создание-таблицы-из-списка-или-матрицы" class="nav-link" data-scroll-target="#создание-таблицы-из-списка-или-матрицы"><span class="header-section-number">1.1.1</span> Создание таблицы из списка или матрицы</a></li>
+  <li><a href="#разная-длина-исходных-векторов" id="toc-разная-длина-исходных-векторов" class="nav-link" data-scroll-target="#разная-длина-исходных-векторов"><span class="header-section-number">1.1.2</span> Разная длина исходных векторов</a></li>
   </ul></li>
-  <li><a href="#структура-таблицы" id="toc-структура-таблицы" class="nav-link" data-scroll-target="#структура-таблицы"><span class="header-section-number">1.3</span> Структура таблицы</a></li>
-  <li><a href="#столбцы-и-строки" id="toc-столбцы-и-строки" class="nav-link" data-scroll-target="#столбцы-и-строки"><span class="header-section-number">1.4</span> Столбцы и строки</a></li>
-  <li><a href="#сравнение-матрицы-списка-и-data.frame" id="toc-сравнение-матрицы-списка-и-data.frame" class="nav-link" data-scroll-target="#сравнение-матрицы-списка-и-data.frame"><span class="header-section-number">1.5</span> Сравнение матрицы, списка и data.frame</a></li>
   </ul></li>
+  <li><a href="#выбор-и-изменение-данных" id="toc-выбор-и-изменение-данных" class="nav-link" data-scroll-target="#выбор-и-изменение-данных"><span class="header-section-number">2</span> Выбор и изменение данных</a>
+  <ul class="collapse">
+  <li><a href="#извлечение-столбцов" id="toc-извлечение-столбцов" class="nav-link" data-scroll-target="#извлечение-столбцов"><span class="header-section-number">2.1</span> Извлечение столбцов</a></li>
+  <li><a href="#извлечение-строк-и-столбцов" id="toc-извлечение-строк-и-столбцов" class="nav-link" data-scroll-target="#извлечение-строк-и-столбцов"><span class="header-section-number">2.2</span> Извлечение строк И столбцов</a></li>
+  <li><a href="#отбор-строк-по-условию-фильтрация-таблиц." id="toc-отбор-строк-по-условию-фильтрация-таблиц." class="nav-link" data-scroll-target="#отбор-строк-по-условию-фильтрация-таблиц."><span class="header-section-number">2.3</span> Отбор строк по условию, фильтрация таблиц.</a></li>
+  <li><a href="#изменение-значений" id="toc-изменение-значений" class="nav-link" data-scroll-target="#изменение-значений"><span class="header-section-number">2.4</span> Изменение значений</a></li>
+  <li><a href="#добавление-и-удаление-столбцов" id="toc-добавление-и-удаление-столбцов" class="nav-link" data-scroll-target="#добавление-и-удаление-столбцов"><span class="header-section-number">2.5</span> Добавление и удаление столбцов</a></li>
+  </ul></li>
+  <li><a href="#полезные-функции" id="toc-полезные-функции" class="nav-link" data-scroll-target="#полезные-функции"><span class="header-section-number">3</span> Полезные функции</a>
+  <ul class="collapse">
+  <li><a href="#размеры-и-имена" id="toc-размеры-и-имена" class="nav-link" data-scroll-target="#размеры-и-имена"><span class="header-section-number">3.1</span> Размеры и имена</a></li>
+  <li><a href="#структура" id="toc-структура" class="nav-link" data-scroll-target="#структура"><span class="header-section-number">3.2</span> Структура</a></li>
+  <li><a href="#сводные-показатели" id="toc-сводные-показатели" class="nav-link" data-scroll-target="#сводные-показатели"><span class="header-section-number">3.3</span> Сводные показатели</a></li>
+  <li><a href="#сортировка-строк" id="toc-сортировка-строк" class="nav-link" data-scroll-target="#сортировка-строк"><span class="header-section-number">3.4</span> Сортировка строк</a></li>
+  <li><a href="#вычисления" id="toc-вычисления" class="nav-link" data-scroll-target="#вычисления"><span class="header-section-number">3.5</span> Вычисления</a></li>
+  </ul></li>
+  <li><a href="#импорт-таблиц" id="toc-импорт-таблиц" class="nav-link" data-scroll-target="#импорт-таблиц"><span class="header-section-number">4</span> Импорт таблиц</a>
+  <ul class="collapse">
+  <li><a href="#функции-чтения" id="toc-функции-чтения" class="nav-link" data-scroll-target="#функции-чтения"><span class="header-section-number">4.1</span> Функции чтения</a></li>
+  <li><a href="#основные-параметры" id="toc-основные-параметры" class="nav-link" data-scroll-target="#основные-параметры"><span class="header-section-number">4.2</span> Основные параметры</a></li>
+  </ul></li>
+  <li><a href="#сохранение-таблиц" id="toc-сохранение-таблиц" class="nav-link" data-scroll-target="#сохранение-таблиц"><span class="header-section-number">5</span> Сохранение таблиц</a></li>
+  <li><a href="#особые-форматы-файлов" id="toc-особые-форматы-файлов" class="nav-link" data-scroll-target="#особые-форматы-файлов"><span class="header-section-number">6</span> Особые форматы файлов</a>
+  <ul class="collapse">
+  <li><a href="#rds" id="toc-rds" class="nav-link" data-scroll-target="#rds"><span class="header-section-number">6.1</span> RDS</a></li>
+  <li><a href="#excel" id="toc-excel" class="nav-link" data-scroll-target="#excel"><span class="header-section-number">6.2</span> Excel</a></li>
+  </ul></li>
+  <li><a href="#сравнение-матрицы-списка-и-data.frame" id="toc-сравнение-матрицы-списка-и-data.frame" class="nav-link" data-scroll-target="#сравнение-матрицы-списка-и-data.frame"><span class="header-section-number">7</span> Сравнение матрицы, списка и data.frame</a></li>
   </ul>
 </nav>
     </div>
@@ -166,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Занятие 5. Таблицы данных: data.frame</h1>
-<p class="subtitle lead">Устройство, создание и связь со списками</p>
+<p class="subtitle lead">Создание, выбор и изменение данных, импорт и сохранение</p>
 </div>
 
 
@@ -183,92 +207,127 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="таблицы-данных-data.frame" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Таблицы данных: <code>data.frame</code></h1>
-<section id="от-списка-к-таблице" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="от-списка-к-таблице"><span class="header-section-number">1.1</span> От списка к таблице</h2>
-<p>Список позволяет хранить вместе разные объекты: например, идентификаторы образцов, группы и результаты измерений. Компоненты имеют имена, и к каждой можно обратиться отдельно. Это удобно, когда нужно собрать всю информацию в одном объекте.</p>
-<p>Но обычный список допускает компоненты любой длины. Сам по себе он не задаёт общие строки: соответствие между первым идентификатором и первым измерением приходится поддерживать самостоятельно. Когда все компоненты описывают одни и те же образцы, полезна более определённая структура – таблица.</p>
-<p><strong>Таблица данных</strong>, или <strong>датафрейм</strong> (<em>data frame</em>), – объект R со строками и столбцами. Обычно строка соответствует одному наблюдению, а столбец – одной переменной. Например, каждая строка описывает образец, а столбцы содержат его идентификатор, группу, концентрацию в мг/л и результат проверки качества:</p>
+<section id="от-списка-к-таблице" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> От списка к таблице</h1>
+<p>Список объединяет разные объекты: идентификаторы образцов, группы и результаты измерений. К каждой именованной компоненте можно обратиться отдельно. Это удобно, когда объекты различаются по устройству или размеру.</p>
+<p>Однако обычный список не задаёт соответствия между элементами разных компонент. Его компоненты могут иметь разную длину, а соответствие между идентификаторами и измерениями приходится поддерживать самостоятельно. Если все компоненты описывают одни и те же образцы, удобно организовать их в <strong>таблицу</strong>.</p>
+<p><strong>Таблица данных</strong>, или <strong>датафрейм</strong> (<em>data frame</em>), – объект со строками и столбцами. Обычно строка соответствует одному наблюдению, а столбец – одной переменной. Датафрейм устроен <strong>как особый список</strong>: его компоненты являются столбцами с одинаковым числом элементов – строк. Он хранит сведения об одном наблюдении вместе <em>(но только вы знаете, верно ли они сопоставлены)</em>.</p>
+<p>Например, для шести образцов записаны группа, концентрация до и после обработки и результат проверки качества:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th>sample_id</th>
 <th>group</th>
-<th style="text-align: right;">concentration</th>
+<th style="text-align: right;">before</th>
+<th style="text-align: right;">after</th>
 <th>passed_qc</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>D1</td>
+<td>S1</td>
 <td>control</td>
-<td style="text-align: right;">12.4</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">11</td>
 <td>TRUE</td>
 </tr>
 <tr class="even">
-<td>D2</td>
+<td>S2</td>
 <td>treated</td>
-<td style="text-align: right;">15.1</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">15</td>
 <td>TRUE</td>
 </tr>
 <tr class="odd">
-<td>D3</td>
-<td>treated</td>
+<td>S3</td>
+<td>control</td>
+<td style="text-align: right;">11</td>
 <td style="text-align: right;">NA</td>
+<td>FALSE</td>
+</tr>
+<tr class="even">
+<td>S4</td>
+<td>treated</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">18</td>
+<td>TRUE</td>
+</tr>
+<tr class="odd">
+<td>S5</td>
+<td>control</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">14</td>
+<td>TRUE</td>
+</tr>
+<tr class="even">
+<td>S6</td>
+<td>treated</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">19</td>
 <td>FALSE</td>
 </tr>
 </tbody>
 </table>
-<p>У третьего образца концентрация неизвестна. Значение <code>NA</code> сохраняет место для измерения: образец остаётся в таблице, а остальные значения не сдвигаются.</p>
-<p>По устройству <code>data.frame</code> – особый список, компоненты которого являются столбцами. В этой таблице столбцы – векторы и фактор одинаковой длины. У всех столбцов общее число строк, поэтому сведения об одном образце можно рассматривать вместе.</p>
-<p>От списка сохраняются имена компонент и возможность хранить разные данные: текстовые идентификаторы, числовые измерения, фактор и логические значения. Внутри обычного числового или текстового столбца сохраняются свойства вектора: порядок элементов, общий тип значений и возможность обозначить пропуск через <code>NA</code>. Однако вся таблица не обязана иметь один общий тип, как числовой или текстовый вектор.</p>
-</section>
-<section id="как-создать-таблицу" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="как-создать-таблицу"><span class="header-section-number">1.2</span> Как создать таблицу</h2>
-<p>Функция <code>data.frame()</code> получает пары «имя столбца = значения». Запись похожа на создание именованного списка:</p>
+<p>Столбцы содержат <strong>данные разного типа</strong>: текст, фактор, числа и логические значения.</p>
+<ul>
+<li>Как у вектора, внутри обычного столбца сохраняются порядок элементов и общий тип значений.</li>
+<li>Как у списка, столбцы имеют имена и могут различаться по типу. <strong>Но у таблицы – одинаковое число строк</strong>.</li>
+</ul>
+<section id="создание-таблицы" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="создание-таблицы"><span class="header-section-number">1.1</span> Создание таблицы</h2>
+<p>Для создания датафрейма понадобится функция <code>data.frame()</code>, которая получает пары <strong>«имя столбца = значения»</strong>, <em>так же, как это делает функция <code>list()</code> для создания списка</em>.</p>
+<p>Создадим показанную сверху таблицу:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_id =</span> <span class="fu">c</span>(<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">factor</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>, <span class="st">"treated"</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">concentration =</span> <span class="fu">c</span>(<span class="fl">12.4</span>, <span class="fl">15.1</span>, <span class="cn">NA</span>),</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">passed_qc =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>samples</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_id =</span> <span class="fu">c</span>(<span class="st">"S1"</span>, <span class="st">"S2"</span>, <span class="st">"S3"</span>, <span class="st">"S4"</span>, <span class="st">"S5"</span>, <span class="st">"S6"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>, <span class="st">"control"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"treated"</span>, <span class="st">"control"</span>, <span class="st">"treated"</span>)),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">before =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">15</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">after =</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">18</span>, <span class="dv">14</span>, <span class="dv">19</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">passed_qc =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>samples</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  sample_id   group concentration passed_qc
-1        D1 control          12.4      TRUE
-2        D2 treated          15.1      TRUE
-3        D3 treated            NA     FALSE</code></pre>
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+2        S2 treated     12    15      TRUE
+3        S3 control     11    NA     FALSE
+4        S4 treated     14    18      TRUE
+5        S5 control     13    14      TRUE
+6        S6 treated     15    19     FALSE</code></pre>
 </div>
 </div>
-<p>Получилась таблица из трёх строк и четырёх столбцов. Числа слева – автоматически заданные имена строк, а не дополнительный столбец. Идентификаторы образцов находятся в <code>sample_id</code>.</p>
-<p>Текстовые идентификаторы сохраняются как текст. Для столбца <code>group</code> фактор создан явно через <code>factor()</code>. Соседство с текстовым столбцом не превращает числовые концентрации в текст.</p>
-<p><code>data.frame()</code> соединяет значения по позициям: первые элементы образуют первую строку, вторые – вторую. Он не проверяет, действительно ли измерение относится к указанному образцу. Поэтому исходные векторы должны описывать образцы в одном порядке.</p>
-<section id="из-готового-списка" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="из-готового-списка"><span class="header-section-number">1.2.1</span> Из готового списка</h3>
-<p>Функция <code>as.data.frame()</code> преобразует подходящий объект в таблицу. Например, у списка с векторами одинаковой длины компоненты становятся столбцами, а их имена – именами столбцов:</p>
+<p>Получилась таблица из шести строк и пяти столбцов.</p>
+<ul>
+<li>Числа слева – автоматически заданные имена строк, а не дополнительный столбец. Идентификаторы находятся в <code>sample_id</code>.</li>
+<li>Неизвестное измерение S3 обозначено через <code>NA</code>: строка сохраняется, остальные значения не сдвигаются.</li>
+<li><code>data.frame()</code> соединяет значения по позициям: первые элементы образуют первую строку, вторые – вторую. Подготовьте исходные векторы в одном порядке.</li>
+</ul>
+<section id="создание-таблицы-из-списка-или-матрицы" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="создание-таблицы-из-списка-или-матрицы"><span class="header-section-number">1.1.1</span> Создание таблицы из списка или матрицы</h3>
+<p>Функция <code>as.data.frame()</code> преобразует <em>подходящий</em> объект в датафрейм.</p>
+<ul>
+<li>Компоненты списка с векторами одинаковой длины становятся столбцами:</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sample_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_id =</span> <span class="fu">c</span>(<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">concentration =</span> <span class="fu">c</span>(<span class="fl">12.4</span>, <span class="fl">15.1</span>, <span class="cn">NA</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_id =</span> <span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">concentration =</span> <span class="fu">c</span>(<span class="fl">12.4</span>, <span class="fl">15.1</span>, <span class="fl">13.8</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sample_table <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sample_list)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>sample_table</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sample_id concentration
-1        D1          12.4
-2        D2          15.1
-3        D3            NA</code></pre>
+1        A1          12.4
+2        A2          15.1
+3        A3          13.8</code></pre>
 </div>
 </div>
-<p>Исходный <code>sample_list</code> остаётся списком. Таблица сохранена в новом объекте <code>sample_table</code>.</p>
-<p>Эта же функция преобразует матрицу в таблицу, сохраняя её строки и столбцы:</p>
+<ul>
+<li>Для матрицы функция сохраняет её строки и столбцы:</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">20</span>, <span class="dv">23</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(measurements) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"before"</span>, <span class="st">"after"</span>)</span>
@@ -279,170 +338,1153 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2     20    23</code></pre>
 </div>
 </div>
-<p>Здесь каждая строка содержит измерения одного образца до и после обработки, в мг/л. Если числа в исходной матрице уже превратились в текст, преобразование в <code>data.frame</code> само по себе не сделает их числовыми снова.</p>
-</section>
-<section id="если-векторы-разной-длины" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="если-векторы-разной-длины"><span class="header-section-number">1.2.2</span> Если векторы разной длины</h3>
-<p>У готовой таблицы все столбцы имеют одинаковое число строк. Однако при создании R может повторить короткий вектор – применить знакомый ресайклинг.</p>
-<p>Одно значение повторяется для всех строк. Например, все три образца относятся к контрольной группе:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">sample_id =</span> <span class="fu">c</span>(<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>), <span class="at">group =</span> <span class="st">"control"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  sample_id   group
-1        D1 control
-2        D2 control
-3        D3 control</code></pre>
-</div>
-</div>
-<p>Если короткий вектор укладывается в длинный целое число раз, он повторяется целиком:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">sample_id =</span> <span class="fu">c</span>(<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>, <span class="st">"D4"</span>),</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  sample_id   group
-1        D1 control
-2        D2 treated
-3        D3 control
-4        D4 treated</code></pre>
-</div>
-</div>
-<p>Получается порядок <code>control</code>, <code>treated</code>, <code>control</code>, <code>treated</code>. R выполняет такое повторение без предупреждения.</p>
-<p>Если целое число повторений невозможно, таблица не создаётся. В следующем примере три идентификатора и только две группы:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">sample_id =</span> <span class="fu">c</span>(<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>),</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in data.frame(sample_id = c("D1", "D2", "D3"), group = c("control", : arguments imply differing number of rows: 3, 2</code></pre>
-</div>
-</div>
-<p>Сообщение <code>arguments imply differing number of rows: 3, 2</code> указывает на несовместимые длины 3 и 2. В отличие от некоторых поэлементных операций с векторами, здесь выполнение заканчивается ошибкой.</p>
-<div class="callout callout-style-default callout-warning callout-titled" title="Повторение значений не заменяет пропуски">
+<p>Строки здесь – образцы, столбцы – концентрации до и после обработки.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Сохранение типов">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Повторение значений не заменяет пропуски
+Сохранение типов
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>R не дополняет короткий вектор значениями <code>NA</code> автоматически. Если значение неизвестно, поставьте <code>NA</code> на его место. Для отдельных измерений безопаснее заранее подготовить векторы одинаковой длины; повторение одного общего значения используйте осознанно.</p>
+<p>Преобразование в таблицу сохранит типы данных компонент списка или матрицы, из которых создаётся таблица.</p>
 </div>
 </div>
 </section>
+<section id="разная-длина-исходных-векторов" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="разная-длина-исходных-векторов"><span class="header-section-number">1.1.2</span> Разная длина исходных векторов</h3>
+<p>У таблицы <strong>всегда</strong> одинаковое число строк во всех столбцах.</p>
+<ol type="1">
+<li>При создании таблицы короткий вектор может повториться целиком, если длина самого длинного вектора-столбца кратна его длине:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>, <span class="st">"A4"</span>),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id   group
+1 A1 control
+2 A2 treated
+3 A3 control
+4 A4 treated</code></pre>
+</div>
+</div>
+<p>Группы повторяются в порядке <code>control</code>, <code>treated</code>, <code>control</code>, <code>treated</code>, без предупреждения.</p>
+<ol start="2" type="1">
+<li>Если вместо вектора вписать одно значение, то оно повторится для всех строк:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">group =</span> <span class="st">"control"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id   group
+1 A1 control
+2 A2 control
+3 A3 control</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>При несовместимых длинах <strong>таблица не создаётся</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>),</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treated"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in data.frame(id = c("A1", "A2", "A3"), group = c("control", "treated")): arguments imply differing number of rows: 3, 2</code></pre>
+</div>
+</div>
+<p>Ошибка сообщает о разных количествах строк: 3 и 2. <strong>Ресайклинг не происходит и R не дополняет короткий вектор пропусками автоматически!</strong></p>
 </section>
-<section id="структура-таблицы" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="структура-таблицы"><span class="header-section-number">1.3</span> Структура таблицы</h2>
+</section>
+</section>
+<section id="выбор-и-изменение-данных" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Выбор и изменение данных</h1>
+<section id="извлечение-столбцов" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="извлечение-столбцов"><span class="header-section-number">2.1</span> Извлечение столбцов</h2>
+<p><strong>Одинарные скобки</strong> <code>[]</code> с одним индексом выбирают столбцы и <strong>сохраняют таблицу</strong>.</p>
+<ul>
+<li>Выберем столбец <code>before</code> по имени:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">"before"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  before
+1     10
+2     12
+3     11
+4     14
+5     13
+6     15</code></pre>
+</div>
+</div>
+<ul>
+<li>По позиции результат такой же: <code>before</code> – третий столбец.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  before
+1     10
+2     12
+3     11
+4     14
+5     13
+6     15</code></pre>
+</div>
+</div>
+<ul>
+<li>Несколько столбцов можно выбрать вектором имён. Их порядок в результате определяется порядком имён:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="fu">c</span>(<span class="st">"sample_id"</span>, <span class="st">"after"</span>, <span class="st">"before"</span>)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id after before
+1        S1    11     10
+2        S2    15     12
+3        S3    NA     11
+4        S4    18     14
+5        S5    14     13
+6        S6    19     15</code></pre>
+</div>
+</div>
+<p><strong>Двойные скобки</strong> <code>[[]]</code> извлекают содержимое одного столбца в виде вектора.</p>
+<ul>
+<li>Подойдут имя или номер:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>samples[[<span class="st">"before"</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 12 11 14 13 15</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>samples[[<span class="dv">3</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 12 11 14 13 15</code></pre>
+</div>
+</div>
+<p>Если имя известно заранее, <strong>удобна запись с <code>$</code></strong>, которая также возвращает вектор:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>samples<span class="sc">$</span>before</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 12 11 14 13 15</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Имя столбца в переменной">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Имя столбца в переменной
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Как у списка, двойные скобки позволяют использовать имя из переменной:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>column_name <span class="ot">&lt;-</span> <span class="st">"before"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>samples[[column_name]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 12 11 14 13 15</code></pre>
+</div>
+</div>
+<p>Запись <code>samples$column_name</code> ищет буквальное имя <code>column_name</code>, а не подставляет значение переменной.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Столбец как таблица и как вектор">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Столбец как таблица и как вектор
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>samples["before"]</code> возвращает таблицу с одним столбцом.</strong></p>
+<p>Так, функция <code>mean()</code> не умеет вычислять среднее для такого объекта:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples[<span class="st">"before"</span>])</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in mean.default(samples["before"]): argument is not numeric or logical:
+returning NA</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>Чтобы вычислить среднее, извлеките числовой вектор через <code>$</code> или двойные скобки:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples<span class="sc">$</span>before)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples[[<span class="st">"before"</span>]])</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.5</code></pre>
+</div>
+</div>
+<p>Не все функции ведут себя одинаково: <code>sum()</code>, <code>min()</code> и <code>max()</code> работают и с полностью числовой таблицей. При этом они вычисляют сумму, минимум или максимум по всем значениям переданной таблицы, а не отдельно по каждому столбцу. Чтобы получить результат для конкретного столбца, сначала извлеките его. Для <code>mean()</code> нужно извлечь числовой вектор, как в примерах выше.</p>
+</div>
+</div>
+</section>
+<section id="извлечение-строк-и-столбцов" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="извлечение-строк-и-столбцов"><span class="header-section-number">2.2</span> Извлечение строк И столбцов</h2>
+<p><strong>Два индекса работают как и у матрицы: <code>таблица[строки, столбцы]</code>.</strong></p>
+<ul>
+<li>Выберем измерение второго образца после обработки по номеру строки и имени столбца:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">2</span>, <span class="st">"after"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<ul>
+<li>Ту же ячейку можно выбрать по номерам:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">2</span>, <span class="dv">4</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<ul>
+<li>Пустой второй индекс оставляет все столбцы выбранных строк:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+2        S2 treated     12    15      TRUE
+4        S4 treated     14    18      TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>Выберем одновременно строки и столбцы:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">"sample_id"</span>, <span class="st">"before"</span>, <span class="st">"after"</span>)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id before after
+1        S1     10    11
+2        S2     12    15
+3        S3     11    NA</code></pre>
+</div>
+</div>
+<ul>
+<li>Чтобы сохранить результат, <strong>не забывайте присвоить его новому имени</strong>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>first_samples <span class="ot">&lt;-</span> samples[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">"sample_id"</span>, <span class="st">"before"</span>, <span class="st">"after"</span>)]</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>first_samples</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id before after
+1        S1     10    11
+2        S2     12    15
+3        S3     11    NA</code></pre>
+</div>
+</div>
+<ul>
+<li>Автоматически созданные имена строк тоже можно использовать как текстовые индексы:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">"2"</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+2        S2 treated     12    15      TRUE</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><code>"2"</code> – имя строки, а <code>S2</code> – значение в столбце <code>sample_id</code>. Для выбора по идентификатору образца используйте отбор строк по условию, которое рассмотрено ниже.</p>
+</blockquote>
+<div class="callout callout-style-default callout-important callout-titled" title="Запятая меняет способ индексирования!">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Запятая меняет способ индексирования!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>При использовании двух индексов выбор одного столбца возвращает вектор:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>samples[, <span class="st">"before"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 12 11 14 13 15</code></pre>
+</div>
+</div>
+<p>Чтобы сохранить таблицу, можно добавить <code>drop = FALSE</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>samples[, <span class="st">"before"</span>, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  before
+1     10
+2     12
+3     11
+4     14
+5     13
+6     15</code></pre>
+</div>
+</div>
+<p>Или лучше просто использовать индекс без запятой: <code>samples["before"]</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">"before"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  before
+1     10
+2     12
+3     11
+4     14
+5     13
+6     15</code></pre>
+</div>
+</div>
+<p><strong>Запятая меняет способ индексирования: один индекс выбирает столбцы, а два – задают строки и столбцы.</strong></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Несуществующая строка и несуществующий столбец">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Несуществующая строка и несуществующий столбец
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В нашей таблице 6 строк и 5 столбцов.</p>
+<ul>
+<li>При выборе десятой строки R возвращает строку с пропусками:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">10</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   sample_id group before after passed_qc
+NA      &lt;NA&gt;  &lt;NA&gt;     NA    NA        NA</code></pre>
+</div>
+</div>
+<p><em>Поведение, как у векторов, т.к. каждый столбец содержит вектор</em></p>
+<ul>
+<li>Но попытка выбрать десятый столбец, которого нет, заканчивается ошибкой:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>samples[, <span class="dv">10</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `[.data.frame`(samples, , 10): undefined columns selected</code></pre>
+</div>
+</div>
+<ul>
+<li>Обращение через <code>$</code> или <code>[[ ]]</code> к отсутствующему имени возвращает <code>NULL</code> – отсутствие столбца:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>samples<span class="sc">$</span>unknown</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+<p><em>Попытка вытащить вектор, который не существует –&gt; пустота <code>NULL</code></em></p>
+</div>
+</div>
+</section>
+<section id="отбор-строк-по-условию-фильтрация-таблиц." class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="отбор-строк-по-условию-фильтрация-таблиц."><span class="header-section-number">2.3</span> Отбор строк по условию, фильтрация таблиц.</h2>
+<p><strong>Логическая маска работает так же, как при выборе значений вектора.</strong></p>
+<ul>
+<li>Сначала сравним группы с категорией <code>treated</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>is_treated <span class="ot">&lt;-</span> samples<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"treated"</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>is_treated</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+</div>
+</div>
+<p>Маска содержит по одному значению на строку: <code>TRUE</code> для строк 2, 4 и 6.</p>
+<ul>
+<li><strong>Подставим её на место индекса строк:</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>samples[is_treated, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+2        S2 treated     12    15      TRUE
+4        S4 treated     14    18      TRUE
+6        S6 treated     15    19     FALSE</code></pre>
+</div>
+</div>
+<p>–&gt; Маска выбирает строки, на месте которых в маске находится <code>TRUE</code>.</p>
+<ul>
+<li>Условие можно записать прямо внутри скобок:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>samples[samples<span class="sc">$</span>sample_id <span class="sc">==</span> <span class="st">"S4"</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+4        S4 treated     14    18      TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>Для нескольких условий используйте знакомые <code>&amp;</code> и <code>|</code>.</li>
+</ul>
+<p>Выберем обработанные образцы, прошедшие проверку качества:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>samples[samples<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"treated"</span> <span class="sc">&amp;</span> samples<span class="sc">$</span>passed_qc, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+2        S2 treated     12    15      TRUE
+4        S4 treated     14    18      TRUE</code></pre>
+</div>
+</div>
+<p>По условию выберем образцы с исходной концентрацией от 12 до 14 включительно:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>samples[samples<span class="sc">$</span>before <span class="sc">&gt;=</span> <span class="dv">12</span> <span class="sc">&amp;</span> samples<span class="sc">$</span>before <span class="sc">&lt;=</span> <span class="dv">14</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+2        S2 treated     12    15      TRUE
+4        S4 treated     14    18      TRUE
+5        S5 control     13    14      TRUE</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Как найти строки с пропусками">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Как найти строки с пропусками
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Напомню, что для проверки, является ли значение <code>NA</code>, операторы <code>==</code>, <code>!=</code> <strong>не подходят</strong>. Для этого используется функция <code>is.na()</code>.</p>
+<ul>
+<li>Выберем образцы с NA после обработки:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="fu">is.na</span>(samples<span class="sc">$</span>after), ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+3        S3 control     11    NA     FALSE</code></pre>
+</div>
+</div>
+<p>Чтобы выбрать строки с известными измерениями, отрицайте условие через <code>!</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="sc">!</span><span class="fu">is.na</span>(samples<span class="sc">$</span>after), ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+2        S2 treated     12    15      TRUE
+4        S4 treated     14    18      TRUE
+5        S5 control     13    14      TRUE
+6        S6 treated     15    19     FALSE</code></pre>
+</div>
+</div>
+<p>Если в маске для выбора строк есть <code>NA</code>, R не может определить, выбирать ли эту строку, и вернёт строку с <code>NA</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>samples[samples<span class="sc">$</span>after <span class="sc">&gt;</span> <span class="dv">15</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   sample_id   group before after passed_qc
+NA      &lt;NA&gt;    &lt;NA&gt;     NA    NA        NA
+4         S4 treated     14    18      TRUE
+6         S6 treated     15    19     FALSE</code></pre>
+</div>
+</div>
+<p>Для отбора известных измерений выше порога явно исключите неизвестные значения:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="sc">!</span><span class="fu">is.na</span>(samples<span class="sc">$</span>after) <span class="sc">&amp;</span> samples<span class="sc">$</span>after <span class="sc">&gt;</span> <span class="dv">15</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+4        S4 treated     14    18      TRUE
+6        S6 treated     15    19     FALSE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="изменение-значений" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="изменение-значений"><span class="header-section-number">2.4</span> Изменение значений</h2>
+<ul>
+<li>Для изменения используйте те же индексы слева от присваивания.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">2</span>, <span class="st">"after"</span>] <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">2</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+2        S2 treated     12    16      TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>Можно изменить элемент извлечённого столбца через <code>$</code> или двойные скобки:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>samples<span class="sc">$</span>after[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">16</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>samples[[<span class="st">"after"</span>]][<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">16</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Все три записи изменяют одну и ту же ячейку.</p>
+<ul>
+<li>Для выбора строк удобно использовать условие:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>samples[samples<span class="sc">$</span>sample_id <span class="sc">==</span> <span class="st">"S2"</span>, <span class="st">"after"</span>] <span class="ot">&lt;-</span> <span class="dv">16</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="добавление-и-удаление-столбцов" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="добавление-и-удаление-столбцов"><span class="header-section-number">2.5</span> Добавление и удаление столбцов</h2>
+<ul>
+<li>Чтобы добавить столбец, присвойте значения новому имени.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>samples<span class="sc">$</span>change <span class="ot">&lt;-</span> samples<span class="sc">$</span>after <span class="sc">-</span> samples<span class="sc">$</span>before</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>samples</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc change
+1        S1 control     10    11      TRUE      1
+2        S2 treated     12    16      TRUE      4
+3        S3 control     11    NA     FALSE     NA
+4        S4 treated     14    18      TRUE      4
+5        S5 control     13    14      TRUE      1
+6        S6 treated     15    19     FALSE      4</code></pre>
+</div>
+</div>
+<p>Новый столбец содержит изменения для каждого образца. <strong>В случае изменения столбцов <code>before</code> и <code>after</code>, <code>change</code> не изменится автоматически – вычисление нужно выполнить заново.</strong></p>
+<p>Для нового столбца подойдут и двойные или одинарные скобки.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>samples[[<span class="st">"reviewed"</span>]] <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">"reviewed"</span>] <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>samples</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc change reviewed
+1        S1 control     10    11      TRUE      1     TRUE
+2        S2 treated     12    16      TRUE      4     TRUE
+3        S3 control     11    NA     FALSE     NA     TRUE
+4        S4 treated     14    18      TRUE      4     TRUE
+5        S5 control     13    14      TRUE      1     TRUE
+6        S6 treated     15    19     FALSE      4     TRUE</code></pre>
+</div>
+</div>
+<p>Одно общее значение повторяется для всех строк. Для индивидуальных значений нужен вектор, соответствующий строкам таблицы; случайный ресайклинг может исказить данные.</p>
+<p>Присваивание <code>NULL</code> удаляет столбец. Уберём временную отметку:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>samples<span class="sc">$</span>reviewed <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>samples<span class="sc">$</span>change <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>samples</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+2        S2 treated     12    16      TRUE
+3        S3 control     11    NA     FALSE
+4        S4 treated     14    18      TRUE
+5        S5 control     13    14      TRUE
+6        S6 treated     15    19     FALSE</code></pre>
+</div>
+</div>
+<p>Тот же приём удаления работает с <code>samples[["reviewed"]] &lt;- NULL</code> или <code>samples["reviewed"] &lt;- NULL</code>.</p>
+</section>
+<section id="задание-проверка-калибровки" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="задание-проверка-калибровки">Задание: проверка калибровки</h2>
+<p>Шесть растворов должны иметь концентрацию от 95 до 105 мг/л включительно. Измеренные концентрации – <code>98, 107, 101, 94, 105, 99</code>, идентификаторы – <code>K1, K2, K3, K4, K5, K6</code>. Повторные измерения – <code>100, 104, 100, 96, 105, 98</code> мг/л.</p>
+<ol type="1">
+<li>Создайте таблицу <code>calibration</code> со столбцами <code>id</code>, <code>first</code> и <code>second</code>.</li>
+<li>Извлеките <code>first</code> как вектор и как таблицу с одним столбцом.</li>
+<li>Исправьте первое измерение K4: верное значение – 97 мг/л.</li>
+<li>Добавьте логический столбец <code>passed</code>: прошло ли первое измерение проверку диапазона.</li>
+<li>Добавьте столбец <code>difference</code>: повторное измерение минус первое.</li>
+<li>Сохраните в <code>valid_calibration</code> строки, прошедшие проверку, оставив идентификатор и оба измерения.</li>
+</ol>
+</section>
+</section>
+<section id="полезные-функции" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Полезные функции</h1>
+<section id="размеры-и-имена" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="размеры-и-имена"><span class="header-section-number">3.1</span> Размеры и имена</h2>
 <ul>
 <li><strong><code>names()</code></strong> – возвращает имена столбцов.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "sample_id"     "group"         "concentration" "passed_qc"    </code></pre>
+<pre><code>[1] "sample_id" "group"     "before"    "after"     "passed_qc"</code></pre>
 </div>
 </div>
 <ul>
-<li><strong><code>dim()</code></strong> – возвращает число строк и число столбцов, именно в таком порядке.</li>
+<li><strong><code>colnames()</code></strong> и <strong><code>rownames()</code></strong> – возвращают имена столбцов и строк соответственно.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3 4</code></pre>
+<pre><code>[1] "sample_id" "group"     "before"    "after"     "passed_qc"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1" "2" "3" "4" "5" "6"</code></pre>
 </div>
 </div>
-<p>Результат <code>3 4</code> означает три строки и четыре столбца.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Переименование столбца">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Переименование столбца
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>names()</code> можно использовать слева от присваивания.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>renamed_samples <span class="ot">&lt;-</span> samples</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(renamed_samples)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"concentration_before"</span></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(renamed_samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sample_id"            "group"                "concentration_before"
+[4] "after"                "passed_qc"           </code></pre>
+</div>
+</div>
+</div>
+</div>
 <ul>
-<li><strong><code>nrow()</code></strong> – возвращает число строк.</li>
+<li><strong><code>dim()</code></strong> – возвращает число строк, затем число столбцов.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<pre><code>[1] 6 5</code></pre>
 </div>
 </div>
-<p>В таблице три наблюдения – три образца.</p>
 <ul>
-<li><strong><code>ncol()</code></strong> – возвращает число столбцов.</li>
+<li><strong><code>ncol()</code></strong> и <strong><code>nrow()</code></strong> – возвращают число столбцов и строк соответственно.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
 </div>
 </div>
-<p>Для каждого образца записаны четыре переменные.</p>
 <ul>
-<li><strong><code>str()</code></strong> – кратко показывает структуру таблицы и содержимое столбцов.</li>
+<li><strong><code>length()</code></strong> – считает компоненты, то есть столбцы таблицы.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   3 obs. of  4 variables:
- $ sample_id    : chr  "D1" "D2" "D3"
- $ group        : Factor w/ 2 levels "control","treated": 1 2 2
- $ concentration: num  12.4 15.1 NA
- $ passed_qc    : logi  TRUE TRUE FALSE</code></pre>
+<pre><code>[1] 5</code></pre>
 </div>
 </div>
-<p>Запись <code>3 obs. of 4 variables</code> означает три наблюдения и четыре переменные. Сокращения <code>chr</code>, <code>num</code> и <code>logi</code> обозначают текстовые, числовые и логические значения; <code>Factor</code> – фактор.</p>
-<ul>
-<li><strong><code>length()</code></strong> – возвращает число компонент, то есть столбцов таблицы.</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
-<p>Как и у списка, длина считает компоненты. Здесь результат равен 4: это не число строк и не общее число ячеек. Для количества наблюдений используйте <code>nrow()</code>.</p>
 </section>
-<section id="столбцы-и-строки" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="столбцы-и-строки"><span class="header-section-number">1.4</span> Столбцы и строки</h2>
-<p>Как у списка, <code>$</code> и двойные квадратные скобки извлекают содержимое одной компоненты. Для таблицы это столбец:</p>
+<section id="структура" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="структура"><span class="header-section-number">3.2</span> Структура</h2>
+<ul>
+<li><strong><code>str()</code></strong> – кратко показывает устройство таблицы и содержимое столбцов.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>samples<span class="sc">$</span>concentration</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.4 15.1   NA</code></pre>
+<pre><code>'data.frame':   6 obs. of  5 variables:
+ $ sample_id: chr  "S1" "S2" "S3" "S4" ...
+ $ group    : Factor w/ 2 levels "control","treated": 1 2 1 2 1 2
+ $ before   : num  10 12 11 14 13 15
+ $ after    : num  11 16 NA 18 14 19
+ $ passed_qc: logi  TRUE TRUE FALSE TRUE TRUE FALSE</code></pre>
 </div>
 </div>
-<p>Получается числовой вектор из трёх измерений. Тот же столбец можно извлечь по имени через двойные скобки:</p>
+<ul>
+<li><strong><code>head()</code></strong> – показывает первые <code>n</code> строк (<code>n = 6</code> по умолчанию).</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>samples[[<span class="st">"concentration"</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(samples, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.4 15.1   NA</code></pre>
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+2        S2 treated     12    16      TRUE
+3        S3 control     11    NA     FALSE</code></pre>
 </div>
 </div>
-<p>Одинарные скобки с одним индексом сохраняют табличную структуру:</p>
+<ul>
+<li><strong><code>tail()</code></strong> – показывает последние <code>n</code> строк (<code>n = 6</code> по умолчанию).</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="st">"concentration"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(samples, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  concentration
-1          12.4
-2          15.1
-3            NA</code></pre>
+<pre><code>  sample_id   group before after passed_qc
+5        S5 control     13    14      TRUE
+6        S6 treated     15    19     FALSE</code></pre>
 </div>
 </div>
-<p>Результат – таблица из трёх строк и одного столбца.</p>
-<p>Как у матрицы, два индекса задают строку и столбец:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">2</span>, <span class="st">"concentration"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.1</code></pre>
-</div>
-</div>
-<p>Это концентрация второго образца – 15.1 мг/л. Пустой второй индекс выбирает все столбцы нужной строки:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">2</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  sample_id   group concentration passed_qc
-2        D2 treated          15.1      TRUE</code></pre>
-</div>
-</div>
-<p>Получается строка со всей информацией об образце <code>D2</code>.</p>
+<p><strong>Для больших таблиц это удобнее вывода всего объекта.</strong></p>
 </section>
-<section id="сравнение-матрицы-списка-и-data.frame" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="сравнение-матрицы-списка-и-data.frame"><span class="header-section-number">1.5</span> Сравнение матрицы, списка и data.frame</h2>
+<section id="сводные-показатели" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="сводные-показатели"><span class="header-section-number">3.3</span> Сводные показатели</h2>
+<ul>
+<li><strong><code>table()</code></strong> – подсчитывает, сколько раз встретилась каждая <strong>категория</strong> <em>(фактор, строка, значение)</em>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(samples<span class="sc">$</span>group)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+control treated 
+      3       3 </code></pre>
+</div>
+</div>
+<p>Если передать два столбца, получится таблица сочетаний категорий.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(samples<span class="sc">$</span>group, samples<span class="sc">$</span>passed_qc)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         
+          FALSE TRUE
+  control     1    2
+  treated     1    2</code></pre>
+</div>
+</div>
+<ul>
+<li><strong><code>summary()</code></strong> – выводит краткую сводку по каждому столбцу.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id             group       before          after      passed_qc      
+ Length:6           control:3   Min.   :10.00   Min.   :11.0   Mode :logical  
+ Class :character   treated:3   1st Qu.:11.25   1st Qu.:14.0   FALSE:2        
+ Mode  :character               Median :12.50   Median :16.0   TRUE :4        
+                                Mean   :12.50   Mean   :15.6                  
+                                3rd Qu.:13.75   3rd Qu.:18.0                  
+                                Max.   :15.00   Max.   :19.0                  
+                                                NA's   :1                     </code></pre>
+</div>
+</div>
+<p>Для числовых столбцов показаны минимум (<code>Min.</code>), максимум (<code>Max.</code>), медиана (<code>Median</code>), среднее (<code>Mean</code>) и квартильные границы (<code>1st Qu.</code>, <code>3rd Qu.</code>). Первая квартильная граница соответствует 25%, третья – 75% распределения значений. Для фактора видны количества по уровням; для логического столбца – количества <code>TRUE</code> и <code>FALSE</code>. <code>NA's</code> указывает число пропусков.</p>
+</section>
+<section id="сортировка-строк" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="сортировка-строк"><span class="header-section-number">3.4</span> Сортировка строк</h2>
+<ul>
+<li><strong><code>order()</code></strong> – возвращает порядок индексов; применяем его ко всем строкам таблицы.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>row_order <span class="ot">&lt;-</span> <span class="fu">order</span>(samples<span class="sc">$</span>before)</span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>row_order</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 3 2 5 4 6</code></pre>
+</div>
+</div>
+<p>Получается порядок строк <code>1, 3, 2, 5, 4, 6</code>.</p>
+<p>Используем его перед запятой, сохранив все столбцы:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>sorted_samples <span class="ot">&lt;-</span> samples[row_order, ]</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>sorted_samples</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+3        S3 control     11    NA     FALSE
+2        S2 treated     12    16      TRUE
+5        S5 control     13    14      TRUE
+4        S4 treated     14    18      TRUE
+6        S6 treated     15    19     FALSE</code></pre>
+</div>
+</div>
+<p>Для убывания задайте <code>decreasing = TRUE</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="fu">order</span>(samples<span class="sc">$</span>before, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+6        S6 treated     15    19     FALSE
+4        S4 treated     14    18      TRUE
+5        S5 control     13    14      TRUE
+2        S2 treated     12    16      TRUE
+3        S3 control     11    NA     FALSE
+1        S1 control     10    11      TRUE</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Сортируйте строки целиком">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Сортируйте строки целиком
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>sort(samples$before)</code> сортирует только вектор измерений. Если записать этот результат в исходный столбец, остальные столбцы останутся на прежних местах и связь с идентификаторами нарушится. Чтобы перемещать всю информацию об образце вместе, используйте <code>order()</code> как индекс строк.</p>
+</div>
+</div>
+</section>
+<section id="вычисления" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="вычисления"><span class="header-section-number">3.5</span> Вычисления</h2>
+<p>К числовому столбцу, извлечённому как вектор, применяются те же функции, что и раньше: <code>sum()</code>, <code>mean()</code>, <code>median()</code>, <code>min()</code>, <code>max()</code> и другие. При необходимости сначала отберите нужные значения.</p>
+<p>Например, найдём среднюю исходную концентрацию для обработанной группы:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples<span class="sc">$</span>before[samples<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"treated"</span>])</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13.66667</code></pre>
+</div>
+</div>
+<p>Здесь извлекается числовой вектор, отбираются значения группы <code>treated</code>, затем вычисляется среднее.</p>
+</section>
+</section>
+<section id="импорт-таблиц" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Импорт таблиц</h1>
+<p>Таблицу можно получить из файла вместо ручного ввода векторов. Текстовые табличные файлы хранят значения строками, поля разделяются запятой, точкой с запятой, табуляцией или другим знаком. Расширение <code>.csv</code>, <code>.tsv</code> или <code>.txt</code> помогает узнать формат, но узнать точно можно только заглянув в сам файл.</p>
+<blockquote class="blockquote">
+<p>Для примеров можете скачать три файла с одинаковыми исходными измерениями: <a href="data/samples.csv">CSV</a>, <a href="data/samples-semicolon.csv">CSV с точкой с запятой</a> и <a href="data/samples.tsv">TSV</a>. Скачайте их в папку <code>data</code> своего RStudio-проекта. Путь <code>data/samples.csv</code> отсчитывается от рабочей папки проекта. Функция <code>getwd()</code> покажет эту папку.</p>
+</blockquote>
+<section id="функции-чтения" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="функции-чтения"><span class="header-section-number">4.1</span> Функции чтения</h2>
+<p>Функции ниже возвращают <code>data.frame</code>. Они используют один механизм чтения, но разные значения параметров по умолчанию:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Функция</th>
+<th>Разделитель <code>sep</code></th>
+<th>Десятичный знак <code>dec</code></th>
+<th>Заголовки <code>header</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read.table()</code></td>
+<td>Пробельные символы</td>
+<td><code>.</code></td>
+<td><code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td><code>read.csv()</code></td>
+<td><code>,</code></td>
+<td><code>.</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td><code>read.csv2()</code></td>
+<td><code>;</code></td>
+<td><code>,</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td><code>read.delim()</code></td>
+<td>Табуляция</td>
+<td><code>.</code></td>
+<td><code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong><code>read.csv()</code></strong> – читает вариант CSV с запятой между полями (столбцами).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>imported_samples <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/samples.csv"</span>)</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(imported_samples, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+2        S2 treated     12    15      TRUE</code></pre>
+</div>
+</div>
+<p>Имена столбцов взяты из первой строки файла. <strong><code>group</code> прочитана как текст</strong>: т.к. любой текстовый файл не сохраняет сведения об уровнях фактора.</p>
+<ul>
+<li><strong><code>read.csv2()</code></strong> – читает вариант с <code>;</code> между полями и <code>,</code> внутри десятичных чисел.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>semicolon_samples <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"data/samples-semicolon.csv"</span>)</span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(semicolon_samples, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+2        S2 treated     12    15      TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li><strong><code>read.delim()</code></strong> – читает поля, разделённые табуляцией.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>tsv_samples <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/samples.tsv"</span>)</span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tsv_samples, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+2        S2 treated     12    15      TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li><strong><code>read.table()</code></strong> – позволяет явно задать правила текстового формата. Тот же CSV можно прочитать так:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">"data/samples.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">dec =</span> <span class="st">"."</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample_id   group before after passed_qc
+1        S1 control     10    11      TRUE
+2        S2 treated     12    15      TRUE
+3        S3 control     11    NA     FALSE
+4        S4 treated     14    18      TRUE
+5        S5 control     13    14      TRUE
+6        S6 treated     15    19     FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="основные-параметры" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="основные-параметры"><span class="header-section-number">4.2</span> Основные параметры</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Параметр</th>
+<th>Назначение</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>file</code></td>
+<td>Путь к файлу</td>
+<td><code>file = "data/samples.csv"</code></td>
+</tr>
+<tr class="even">
+<td><code>header</code></td>
+<td>Есть ли имена столбцов в первой строке</td>
+<td><code>header = TRUE</code></td>
+</tr>
+<tr class="odd">
+<td><code>sep</code></td>
+<td>Знак между полями</td>
+<td><code>sep = ";"</code>, <code>sep = "\t"</code></td>
+</tr>
+<tr class="even">
+<td><code>dec</code></td>
+<td>Десятичный знак</td>
+<td><code>dec = ","</code></td>
+</tr>
+<tr class="odd">
+<td><code>na.strings</code></td>
+<td>Текстовые обозначения пропусков</td>
+<td><code>na.strings = c("NA", "")</code></td>
+</tr>
+<tr class="even">
+<td><code>fileEncoding</code></td>
+<td>Кодировка текстового файла</td>
+<td><code>fileEncoding = "UTF-8"</code></td>
+</tr>
+<tr class="odd">
+<td><code>colClasses</code></td>
+<td>Типы столбцов при чтении</td>
+<td><code>colClasses = c(sample_id = 'character',  group = "factor")</code></td>
+</tr>
+<tr class="even">
+<td><code>skip</code></td>
+<td>Число строк в начале файла, которые нужно пропустить</td>
+<td><code>skip = 2</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>"\t"</code> обозначает табуляцию.</li>
+<li>Для <code>read.table()</code> значение <code>sep = ""</code> означает разделение по пробельным символам.</li>
+<li><code>UTF-8</code> – распространённая кодировка текста. Если файл использует другую кодировку, её нужно указать верно.</li>
+<li><code>colClasses</code> полезен для идентификаторов: значение <code>"001"</code> должно остаться текстом, иначе при распознавании числа ведущие нули исчезнут.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled" title="Чтение без ошибки ещё не означает правильный импорт">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Чтение без ошибки ещё не означает правильный импорт
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Если все данные оказались в одном столбце, проверьте разделитель.</li>
+<li>Если первая строка попала в данные, проверьте <code>header</code>. Заголовки могут превратить числовые столбцы в текст.</li>
+<li>Если числа прочитаны как текст, проверьте:
+<ul>
+<li>десятичный знак (параметр <code>dec</code>)</li>
+<li>посторонние текстовые записи в столбце</li>
+<li>пустые значения, которые не обработались как <code>NA</code> (параметр <code>na.strings</code>)</li>
+</ul></li>
+</ol>
+<ul>
+<li>После чтения используйте знакомые функции:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(imported_samples)</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(imported_samples)</span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(imported_samples)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>Если R не находит файл, проверьте рабочую папку, путь, имя и расширение файла.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Таблицу можно прочитать по ссылке">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Таблицу можно прочитать по ссылке
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В <code>file</code> можно передать прямой адрес текстового файла.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>iris_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/vincentarelbundock/"</span>,</span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Rdatasets/master/csv/datasets/iris.csv"</span></span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>iris_from_web <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(iris_url)</span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris_from_web, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Для этого примера нужен доступ к интернету.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="сохранение-таблиц" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Сохранение таблиц</h1>
+<p><strong>Таблицы можно не только читать, но и сохранять в файл нужного формата.</strong></p>
+<p>Функция записи получает объект и путь к выходному файлу.</p>
+<ul>
+<li><strong><code>write.csv()</code></strong> – записывает CSV с запятой между полями и точкой в десятичных числах.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(samples, <span class="at">file =</span> <span class="st">"data/samples-result.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong><code>write.csv2()</code></strong> – записывает вариант с точкой с запятой между полями и десятичной запятой.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(samples, <span class="at">file =</span> <span class="st">"data/samples-result-semicolon.csv"</span>,</span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong><code>write.table()</code></strong> – позволяет выбрать разделитель и другие параметры. Сохраним TSV:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(samples, <span class="at">file =</span> <span class="st">"data/samples-result.tsv"</span>,</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">dec =</span> <span class="st">"."</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Основные параметры записи:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Параметр</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x</code></td>
+<td>Сохраняемый объект; обычно первый аргумент</td>
+</tr>
+<tr class="even">
+<td><code>file</code></td>
+<td>Путь и имя выходного файла</td>
+</tr>
+<tr class="odd">
+<td><code>row.names</code></td>
+<td>Записывать ли имена строк; <code>FALSE</code> исключает дополнительное поле</td>
+</tr>
+<tr class="even">
+<td><code>col.names</code></td>
+<td>Записывать ли имена столбцов</td>
+</tr>
+<tr class="odd">
+<td><code>sep</code>, <code>dec</code></td>
+<td>Разделитель и десятичный знак для <code>write.table()</code></td>
+</tr>
+<tr class="even">
+<td><code>na</code></td>
+<td>Текстовое обозначение пропуска; по умолчанию <code>"NA"</code></td>
+</tr>
+<tr class="odd">
+<td><code>quote</code></td>
+<td>Заключать ли текстовые поля в кавычки</td>
+</tr>
+<tr class="even">
+<td><code>fileEncoding</code></td>
+<td>Кодировка выходного файла</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>У <code>write.csv()</code> и <code>write.csv2()</code> разделители, десятичный знак и запись заголовков заданы самой функцией. Если нужно менять <code>sep</code>, <code>dec</code> или <code>col.names</code>, используйте <code>write.table()</code>.</p>
+</blockquote>
+<p>Кавычки защищают текст, внутри которого встречается разделитель. В нашем TSV нет табуляций внутри текстовых значений, поэтому <code>quote = FALSE</code> подходит.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Осторожно">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Осторожно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Файл с тем же именем будет перезаписан. Для результата выберите новое имя, если нужно сохранить исходный файл.</p></li>
+<li><p>Функции записи не создают отсутствующие папки автоматически.</p></li>
+<li><p>После сохранения можно прочитать результат обратно и проверить его размеры и содержимое.</p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="особые-форматы-файлов" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Особые форматы файлов</h1>
+<section id="rds" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="rds"><span class="header-section-number">6.1</span> RDS</h2>
+<p>Текстовые форматы сохраняют значения и заголовки, но не всё устройство объекта R: например, уровни факторов не сохраняются.</p>
+<p><strong>Для сохранения самого объекта можно использовать:</strong></p>
+<ul>
+<li><strong><code>saveRDS()</code></strong> – записывает один объект R в файл <code>.rds</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(samples, <span class="at">file =</span> <span class="st">"data/samples-result.rds"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong><code>readRDS()</code></strong> – восстанавливает объект; результат присваивают выбранному имени.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>restored_samples <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/samples-result.rds"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>RDS сохраняет типы столбцов и уровни факторов. Для обмена обычной таблицей с другими программами удобнее текстовый формат, а для продолжения работы с тем же объектом в R – RDS.</p>
+</section>
+<section id="excel" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="excel"><span class="header-section-number">6.2</span> Excel</h2>
+<p>Файлы <code>.xlsx</code> и <code>.xls</code> нельзя прочитать с помощью <code>read.csv()</code>, просто изменив расширение. Для них есть функции из дополнительных пакетов, например <code>read_excel()</code> из пакета <code>readxl</code>. Для записи Excel-файлов тоже используются пакеты. Установку и подключение пакетов рассмотрим на следующих занятиях. Однако данные из Excel можно экспортировать в CSV и прочитать знакомыми функциями.</p>
+</section>
+<section id="задание-результаты-выращивания" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="задание-результаты-выращивания">Задание: результаты выращивания</h2>
+<p>Скачайте <a href="data/growth.tsv">таблицу измерений массы растений</a>{download} в папку <code>data</code>. Каждая строка – одно растение, <code>id</code> – идентификатор, <code>watering</code> – режим полива (<code>normal</code> или <code>reduced</code>), <code>mass_start</code> и <code>mass_end</code> – масса в граммах в начале и конце наблюдения.</p>
+<ol type="1">
+<li>Прочитайте TSV и проверьте число строк, имена и типы столбцов.</li>
+<li>Добавьте столбец прироста массы <code>gain</code>.</li>
+<li>Выберите растения с уменьшенным поливом, у которых прирост не меньше 2 г; сохраните всю информацию о них в отдельную таблицу.</li>
+<li>Упорядочите выбранные строки по приросту от большего к меньшему.</li>
+<li>Получите средний прирост отдельно для каждого режима полива в исходной таблице.</li>
+<li>Сохраните отобранную таблицу в CSV без дополнительного поля с именами строк.</li>
+</ol>
+</section>
+</section>
+<section id="сравнение-матрицы-списка-и-data.frame" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Сравнение матрицы, списка и data.frame</h1>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -466,41 +1508,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Столбцы с общими строками</td>
 </tr>
 <tr class="even">
-<td>Содержимое в наших примерах</td>
+<td>Содержимое</td>
 <td>Значения одного общего типа</td>
-<td>Разные объекты</td>
-<td>Столбцы с разными видами данных</td>
+<td>Разные компоненты разного типа</td>
+<td>Столбцы разных типов</td>
 </tr>
 <tr class="odd">
 <td>Размеры частей</td>
-<td>Во всех столбцах одинаковое число строк</td>
+<td>Одинаковое число строк в столбцах</td>
 <td>Длины компонент могут различаться</td>
-<td>Во всех столбцах одинаковое число строк</td>
+<td>Одинаковое число строк в столбцах</td>
 </tr>
 <tr class="even">
 <td>Что считает <code>length()</code></td>
-<td>Все элементы матрицы</td>
+<td>Все элементы</td>
 <td>Компоненты списка</td>
 <td>Столбцы таблицы</td>
 </tr>
 <tr class="odd">
-<td>Доступ к данным</td>
+<td>Выбор данных</td>
 <td>По строке и столбцу</td>
 <td>По имени или позиции компоненты</td>
-<td>По столбцу либо по строке и столбцу</td>
+<td>По столбцу, по строке или по обоим</td>
 </tr>
 <tr class="even">
 <td>Когда удобно использовать</td>
-<td>Однородные измерения в прямоугольной форме</td>
-<td>Несколько связанных объектов разного устройства</td>
-<td>Наблюдения, описанные общим набором переменных</td>
+<td>Однородные измерения небольшого формата</td>
+<td>Объекты разного устройства и размера</td>
+<td>Наблюдения с общим набором переменных</td>
 </tr>
 </tbody>
 </table>
-<p>Датафрейм сочетает устройство списка с табличной организацией матрицы: столбцы могут содержать разные данные, а общие строки связывают сведения об одном наблюдении.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

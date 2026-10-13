@@ -1,0 +1,7 @@
+sample_id	group	before	after	passed_qc
+S1	control	10	11	TRUE
+S2	treated	12	15	TRUE
+S3	control	11	NA	FALSE
+S4	treated	14	18	TRUE
+S5	control	13	14	TRUE
+S6	treated	15	19	FALSE
