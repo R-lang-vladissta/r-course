@@ -1,0 +1,29 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Язык R — вход</title><link rel="stylesheet" href="login.css"></head><body><header class="topbar"><span class="brand-mark">R</span>Материалы курса</header><main><section class="login-card" aria-labelledby="login-title"><img class="course-logo" src="au/assets/images/course-logo.png" alt="Логотип курса «Язык R»"><p class="eyebrow">Язык R</p><h1 id="login-title">Добро пожаловать</h1><p class="intro">Лекции, практики и задания — в одном месте. Введите пароль вашей группы, чтобы открыть материалы.</p>
+<form id="login"><label for="password">Пароль доступа</label><input id="password" type="password" required autocomplete="current-password" autofocus placeholder="Введите пароль" aria-describedby="message"><button type="submit">Открыть курс <span aria-hidden="true">→</span></button><p id="message" role="status"></p></form><p class="hint">Пароль выдаёт преподаватель. Если у вас его пока нет, обратитесь к нему.</p>
+<script src="login-crypto.js"></script><script>
+const entries = [{"salt":"11111111111111111111111111111111","encrypted":"6544ffac67a5d2706badfd8d6ed1bec0d789476eda8d98db0d6975d3901d48ccb01276bacc344a9556538fecb46f05e354f6598e018833e0faff29a1ddc07dd9"},{"salt":"22222222222222222222222222222222","encrypted":"da3cfdffec725ab9884f61df5245b4e911c1a8c4848e9532757d028218644fbf1bfc035174928bfddb7c577de3539d5f69cfb5d674a486b6c9912e0f1b4967a8"}];
+const form = document.getElementById('login');
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  const button = form.querySelector('button');
+  const message = document.getElementById('message');
+  button.disabled = true;
+  message.textContent = 'Проверяем пароль…';
+  try {
+    const password = document.getElementById('password').value;
+    for (const entry of entries) {
+      const hash = await cryptoEngine.hashPassword(password, entry.salt);
+      const result = await codec.init(cryptoEngine).decode(entry.encrypted, hash, entry.salt);
+      if (result.success) {
+        localStorage.setItem('staticrypt_passphrase', hash);
+        localStorage.setItem('staticrypt_expiration', String(Date.now() + 86400000));
+        location.assign(result.decoded);
+        return;
+      }
+    }
+    message.textContent = 'Неверный пароль. Попробуйте ещё раз.';
+  } catch (error) {
+    message.textContent = 'Не удалось выполнить вход. Откройте сайт через HTTPS или localhost и разрешите хранение данных сайта.';
+  } finally { button.disabled = false; }
+});
+</script></section></main><footer>Курс по языку R</footer></body></html>
